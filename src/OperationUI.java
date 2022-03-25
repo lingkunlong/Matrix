@@ -1,3 +1,4 @@
+
 import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
@@ -38,14 +39,40 @@ class TripleMatrix {
 }
 
 public class OperationUI extends JFrame {
+    /*JPanel jp;
+    Main_Test.Background bgp;*/
     public TripleMatrix M=new TripleMatrix();
     public TripleMatrix M1=new TripleMatrix();
     private Component addTest;
-
     public OperationUI() {
+
         initComponents();
         setTitle("稀疏矩阵加法运算");
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        /*jp=(JPanel)this.getContentPane();
+        this.setLayout(null);
+        //在这里随便找一张400*300的照片既可以看到测试结果。
+        ImageIcon img=new ImageIcon("D:\\Java\\sparse matrix\\src_http___api.meisupic.com_getImg.php_imgurl_https___static9.depositphotos.com_1025323_1094_i_950_depositphotos_10949408-stock-photo-computing-backdrop.jpg&id_10949408&userid_1025323&imgfile_thumb_max&refer_http_.jpg");
+        bgp= new Main_Test.Background(img.getImage());
+        bgp.setBounds(0,0,img.getIconWidth(),img.getIconHeight());
+//创建按钮
+
+        jp.add(bgp);
+    }
+    class Background extends JPanel {
+        Image im;
+
+        public Background(Image im) {
+            this.im = im;
+            this.setOpaque(true);
+        }
+
+        //Draw the back ground.
+        @Override
+        public void paintComponent(Graphics g) {
+            super.paintComponents(g);
+            g.drawImage(im, 0, 0, this.getWidth(), this.getHeight(), this);
+        }*/
     }
 
     private void button1(ActionEvent e) {
@@ -134,20 +161,20 @@ public class OperationUI extends JFrame {
         int ii, jj;
         int index, index1;
         String s = "";
-        int[][] a = new int[M.m][M.n];
-        int[][] b = new int[M.m][M.n];
-        int[][] c = new int[M.m][M.n];
-        for (index = 0; index < M.num; index++) {
-            for (ii = 0; ii < M.m; ii++) {
+        int[][] a = new int[M1.m][M1.n];
+        int[][] b = new int[M1.m][M1.n];
+        int[][] c = new int[M1.m][M1.n];
+        for (index = 0; index < M1.num; index++) {
+            for (ii = 0; ii < M1.m; ii++) {
                 for (jj = 0; jj < M.n; jj++) {
-                    if (ii == M.data[index].x && jj == M.data[index].y) {
-                        a[ii][jj] = M.data[index].weight;
+                    if (ii == M1.data[index].x && jj == M1.data[index].y) {
+                        a[ii][jj] = M1.data[index].weight;
                     }
                 }
             }
         }
-        for (ii = 0; ii < M.m; ii++) {
-            for (jj = 0; jj < M.n; jj++) {
+        for (ii = 0; ii < M1.m; ii++) {
+            for (jj = 0; jj < M1.n; jj++) {
                 s = s + Integer.toString(a[ii][jj]) + " ";
             }
             s=s+"\n";
@@ -329,6 +356,9 @@ public class OperationUI extends JFrame {
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         ResourceBundle bundle = ResourceBundle.getBundle("form");
+        menuBar1 = new JMenuBar();
+        menu1 = new JMenu();
+        menu2 = new JMenu();
         label1 = new JLabel();
         label2 = new JLabel();
         textField1 = new JTextField();
@@ -355,26 +385,43 @@ public class OperationUI extends JFrame {
         Container contentPane = getContentPane();
         contentPane.setLayout(null);
 
+        //======== menuBar1 ========
+        {
+
+            //======== menu1 ========
+            {
+                menu1.setText(bundle.getString("menu1.text"));
+            }
+            menuBar1.add(menu1);
+
+            //======== menu2 ========
+            {
+                menu2.setText(bundle.getString("menu2.text"));
+            }
+            menuBar1.add(menu2);
+        }
+        setJMenuBar(menuBar1);
+
         //---- label1 ----
         label1.setText(bundle.getString("label1.text"));
         contentPane.add(label1);
-        label1.setBounds(25, 35, 165, 30);
+        label1.setBounds(25, 45, 180, 30);
 
         //---- label2 ----
         label2.setText(bundle.getString("label2.text"));
         contentPane.add(label2);
-        label2.setBounds(25, 80, 105, 30);
+        label2.setBounds(25, 90, 105, 30);
 
         //---- textField1 ----
         textField1.addActionListener(e -> textField1(e));
         contentPane.add(textField1);
-        textField1.setBounds(215, 30, 100, 35);
+        textField1.setBounds(205, 45, 100, 35);
 
         //---- button1 ----
         button1.setText(bundle.getString("button1.text_2"));
         button1.addActionListener(e -> button1(e));
         contentPane.add(button1);
-        button1.setBounds(350, 27, 78, 40);
+        button1.setBounds(350, 40, 78, 40);
 
         //---- button2 ----
         button2.setText(bundle.getString("button2.text_2"));
@@ -436,7 +483,7 @@ public class OperationUI extends JFrame {
             scrollPane2.setViewportView(textArea5);
         }
         contentPane.add(scrollPane2);
-        scrollPane2.setBounds(550, 140, 185, 450);
+        scrollPane2.setBounds(515, 135, 220, 480);
 
         //---- button6 ----
         button6.setText(bundle.getString("button6.text"));
@@ -463,6 +510,9 @@ public class OperationUI extends JFrame {
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
+    private JMenuBar menuBar1;
+    private JMenu menu1;
+    private JMenu menu2;
     private JLabel label1;
     private JLabel label2;
     private JTextField textField1;
