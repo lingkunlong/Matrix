@@ -44,7 +44,7 @@ new FormModel {
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "button1", true ) )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"x": 350
-				"y": 40
+				"y": 42
 				"height": 40
 				"width": 78
 			} )
@@ -111,7 +111,7 @@ new FormModel {
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "button5", true ) )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"x": 60
-				"y": 620
+				"y": 630
 				"height": 40
 				"width": 75
 			} )
@@ -168,7 +168,7 @@ new FormModel {
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "button6", true ) )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"x": 245
-				"y": 620
+				"y": 630
 				"height": 40
 				"width": 75
 			} )
@@ -178,7 +178,7 @@ new FormModel {
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "button7", true ) )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"x": 440
-				"y": 620
+				"y": 630
 				"height": 40
 				"width": 75
 			} )
@@ -188,7 +188,7 @@ new FormModel {
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "button8", true ) )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"x": 615
-				"y": 620
+				"y": 630
 				"height": 40
 				"width": 75
 			} )
@@ -205,7 +205,7 @@ new FormModel {
 			}
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 5 )
-			"size": new java.awt.Dimension( 765, 715 )
+			"size": new java.awt.Dimension( 765, 740 )
 		} )
 	}
 }

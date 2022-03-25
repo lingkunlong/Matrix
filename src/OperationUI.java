@@ -421,7 +421,7 @@ public class OperationUI extends JFrame {
         button1.setText(bundle.getString("button1.text_2"));
         button1.addActionListener(e -> button1(e));
         contentPane.add(button1);
-        button1.setBounds(350, 40, 78, 40);
+        button1.setBounds(350, 42, 78, 40);
 
         //---- button2 ----
         button2.setText(bundle.getString("button2.text_2"));
@@ -460,7 +460,7 @@ public class OperationUI extends JFrame {
 			button5(e);
 		});
         contentPane.add(button5);
-        button5.setBounds(60, 620, 75, 40);
+        button5.setBounds(60, 630, 75, 40);
 
         //======== scrollPane1 ========
         {
@@ -489,22 +489,22 @@ public class OperationUI extends JFrame {
         button6.setText(bundle.getString("button6.text"));
         button6.addActionListener(e -> button6(e));
         contentPane.add(button6);
-        button6.setBounds(245, 620, 75, 40);
+        button6.setBounds(245, 630, 75, 40);
 
         //---- button7 ----
         button7.setText(bundle.getString("button7.text"));
         button7.addActionListener(e -> button7(e));
         contentPane.add(button7);
-        button7.setBounds(440, 620, 75, 40);
+        button7.setBounds(440, 630, 75, 40);
 
         //---- button8 ----
         button8.setText(bundle.getString("button8.text"));
         button8.addActionListener(e -> button8(e));
         contentPane.add(button8);
-        button8.setBounds(615, 620, 75, 40);
+        button8.setBounds(615, 630, 75, 40);
 
-        contentPane.setPreferredSize(new Dimension(765, 715));
-        setSize(765, 715);
+        contentPane.setPreferredSize(new Dimension(765, 740));
+        setSize(765, 740);
         setLocationRelativeTo(null);
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
