@@ -1,6 +1,8 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.ResourceBundle;
 /*
  * Created by JFormDesigner on Tue Mar 22 18:49:52 CST 2022
@@ -41,6 +43,13 @@ public class Main_Test extends JFrame {
         new OperationUI().setVisible(true);
     }
 
+    private void button1KeyPressed(KeyEvent e) {
+        // TODO add your code her
+        if(e.getKeyChar() == '\n'){ //判断输入的是否是回车键
+            button1.doClick();
+        }
+    }
+
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         ResourceBundle bundle = ResourceBundle.getBundle("form");
@@ -58,6 +67,12 @@ public class Main_Test extends JFrame {
         button1.setForeground(Color.black);
         button1.setFont(button1.getFont().deriveFont(button1.getFont().getSize() + 9f));
         button1.addActionListener(e -> Add(e));
+        button1.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                button1KeyPressed(e);
+            }
+        });
         contentPane.add(button1);
         button1.setBounds(245, 40, 100, 50);
 

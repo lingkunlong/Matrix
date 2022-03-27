@@ -317,6 +317,12 @@ public class OperationUI extends JFrame {
         new Help().setVisible(true);
     }
 
+    private void button1KeyPressed(KeyEvent e) {
+        // TODO add your code here
+    }
+
+
+
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         ResourceBundle bundle = ResourceBundle.getBundle("form");
@@ -388,13 +394,15 @@ public class OperationUI extends JFrame {
         label1.setText(bundle.getString("label1.text"));
         label1.setBorder(null);
         label1.setForeground(Color.black);
+        label1.setFont(label1.getFont().deriveFont(label1.getFont().getSize() + 2f));
         contentPane.add(label1);
-        label1.setBounds(25, 45, 180, 30);
+        label1.setBounds(25, 45, 205, 30);
 
         //---- label2 ----
         label2.setText(bundle.getString("label2.text"));
         label2.setBorder(null);
         label2.setForeground(Color.black);
+        label2.setFont(label2.getFont().deriveFont(label2.getFont().getSize() + 2f));
         contentPane.add(label2);
         label2.setBounds(25, 90, 105, 30);
 
@@ -406,7 +414,7 @@ public class OperationUI extends JFrame {
         textField1.setOpaque(false);
         textField1.addActionListener(e -> textField1(e));
         contentPane.add(textField1);
-        textField1.setBounds(205, 45, 100, 35);
+        textField1.setBounds(245, 45, 100, 35);
 
         //---- button1 ----
         button1.setText(bundle.getString("button1.text_2"));
@@ -415,14 +423,21 @@ public class OperationUI extends JFrame {
         button1.setForeground(Color.black);
         button1.setFont(button1.getFont().deriveFont(button1.getFont().getSize() + 2f));
         button1.addActionListener(e -> button1(e));
+        button1.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                button1KeyPressed(e);
+            }
+        });
         contentPane.add(button1);
-        button1.setBounds(210, 95, 78, 40);
+        button1.setBounds(235, 95, 78, 40);
 
         //---- button2 ----
         button2.setText(bundle.getString("button2.text_2"));
         button2.setContentAreaFilled(false);
         button2.setBorder(new EtchedBorder());
         button2.setForeground(Color.black);
+        button2.setFont(button2.getFont().deriveFont(button2.getFont().getSize() + 2f));
         button2.addActionListener(e -> button2(e));
         contentPane.add(button2);
         button2.setBounds(215, 215, 78, 40);
@@ -430,14 +445,16 @@ public class OperationUI extends JFrame {
         //---- label3 ----
         label3.setText(bundle.getString("label3.text"));
         label3.setForeground(Color.black);
+        label3.setFont(label3.getFont().deriveFont(label3.getFont().getSize() + 2f));
         contentPane.add(label3);
-        label3.setBounds(25, 345, 165, 25);
+        label3.setBounds(25, 345, 210, 30);
 
         //---- label4 ----
         label4.setText(bundle.getString("label4.text"));
         label4.setForeground(Color.black);
+        label4.setFont(label4.getFont().deriveFont(label4.getFont().getSize() + 2f));
         contentPane.add(label4);
-        label4.setBounds(25, 385, 105, 17);
+        label4.setBounds(25, 385, 105, 30);
 
         //---- textField4 ----
         textField4.setBorder(new EtchedBorder());
@@ -446,7 +463,7 @@ public class OperationUI extends JFrame {
         textField4.setFont(textField4.getFont().deriveFont(textField4.getFont().getSize() + 1f));
         textField4.setOpaque(false);
         contentPane.add(textField4);
-        textField4.setBounds(215, 340, 100, 35);
+        textField4.setBounds(245, 340, 100, 35);
 
         //---- button3 ----
         button3.setText(bundle.getString("button3.text_2"));
@@ -456,13 +473,14 @@ public class OperationUI extends JFrame {
         button3.setFont(button3.getFont().deriveFont(button3.getFont().getSize() + 2f));
         button3.addActionListener(e -> button3(e));
         contentPane.add(button3);
-        button3.setBounds(210, 385, 78, 40);
+        button3.setBounds(235, 385, 78, 40);
 
         //---- button4 ----
         button4.setText(bundle.getString("button4.text_2"));
         button4.setContentAreaFilled(false);
         button4.setBorder(new EtchedBorder());
         button4.setForeground(Color.black);
+        button4.setFont(button4.getFont().deriveFont(button4.getFont().getSize() + 2f));
         button4.addActionListener(e -> button4(e));
         contentPane.add(button4);
         button4.setBounds(215, 505, 78, 40);
@@ -472,6 +490,7 @@ public class OperationUI extends JFrame {
         button5.setContentAreaFilled(false);
         button5.setBorder(new EtchedBorder());
         button5.setForeground(Color.black);
+        button5.setFont(button5.getFont().deriveFont(button5.getFont().getSize() + 2f));
         button5.addActionListener(e -> {
 			ResultA(e);
 			button5(e);
@@ -536,6 +555,7 @@ public class OperationUI extends JFrame {
         button6.setContentAreaFilled(false);
         button6.setBorder(new EtchedBorder());
         button6.setForeground(Color.black);
+        button6.setFont(button6.getFont().deriveFont(button6.getFont().getSize() + 2f));
         button6.addActionListener(e -> button6(e));
         contentPane.add(button6);
         button6.setBounds(245, 630, 75, 40);
@@ -545,6 +565,7 @@ public class OperationUI extends JFrame {
         button7.setContentAreaFilled(false);
         button7.setBorder(new EtchedBorder());
         button7.setForeground(Color.black);
+        button7.setFont(button7.getFont().deriveFont(button7.getFont().getSize() + 2f));
         button7.addActionListener(e -> button7(e));
         contentPane.add(button7);
         button7.setBounds(440, 630, 75, 40);
@@ -554,6 +575,7 @@ public class OperationUI extends JFrame {
         button8.setContentAreaFilled(false);
         button8.setBorder(new EtchedBorder());
         button8.setForeground(Color.black);
+        button8.setFont(button8.getFont().deriveFont(button8.getFont().getSize() + 2f));
         button8.addActionListener(e -> button8(e));
         contentPane.add(button8);
         button8.setBounds(615, 630, 75, 40);
