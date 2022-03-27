@@ -1,21 +1,16 @@
-import javafx.scene.layout.Background;
-
-import java.awt.*;
-import java.awt.event.*;
-import java.util.*;
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.util.ResourceBundle;
 /*
  * Created by JFormDesigner on Tue Mar 22 18:49:52 CST 2022
  */
-
-
 
 /**
  * @author unknown
  */
 public class Main_Test extends JFrame {
-    JPanel jp;
-    Background bgp;
+
     public static void main(String[] args) {
         new Main_Test();
     }
@@ -26,17 +21,6 @@ public class Main_Test extends JFrame {
         setTitle("稀疏矩阵运算器");
         setVisible(true);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        jp=(JPanel)this.getContentPane();
-        this.setLayout(null);
-        //在这里随便找一张400*300的照片既可以看到测试结果。
-        ImageIcon img=new ImageIcon("D:\\Java\\sparse matrix\\src_http___api.meisupic.com_getImg.php_imgurl_https___static9.depositphotos.com_1025323_1094_i_950_depositphotos_10949408-stock-photo-computing-backdrop.jpg&id_10949408&userid_1025323&imgfile_thumb_max&refer_http_.jpg");
-        bgp= new Background(img.getImage());
-        bgp.setBounds(0,0,img.getIconWidth(),img.getIconHeight());
-//创建按钮
-
-        jp.add(bgp);
-        jp.setOpaque(false);
-        this.setBounds(400, 200, 500, 500);
     }
     static class Background extends JPanel {
         Image im;
@@ -61,6 +45,8 @@ public class Main_Test extends JFrame {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         ResourceBundle bundle = ResourceBundle.getBundle("form");
         button1 = new JButton();
+        panel1 = new JPanel();
+        label1 = new JLabel();
 
         //======== this ========
         Container contentPane = getContentPane();
@@ -68,11 +54,42 @@ public class Main_Test extends JFrame {
 
         //---- button1 ----
         button1.setText(bundle.getString("button1.text"));
+        button1.setContentAreaFilled(false);
+        button1.setForeground(Color.black);
+        button1.setFont(button1.getFont().deriveFont(button1.getFont().getSize() + 9f));
         button1.addActionListener(e -> Add(e));
         contentPane.add(button1);
-        button1.setBounds(185, 190, 100, 50);
+        button1.setBounds(245, 40, 100, 50);
 
-        contentPane.setPreferredSize(new Dimension(340, 295));
+        //======== panel1 ========
+        {
+            panel1.setLayout(null);
+
+            {
+                // compute preferred size
+                Dimension preferredSize = new Dimension();
+                for(int i = 0; i < panel1.getComponentCount(); i++) {
+                    Rectangle bounds = panel1.getComponent(i).getBounds();
+                    preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
+                    preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
+                }
+                Insets insets = panel1.getInsets();
+                preferredSize.width += insets.right;
+                preferredSize.height += insets.bottom;
+                panel1.setMinimumSize(preferredSize);
+                panel1.setPreferredSize(preferredSize);
+            }
+        }
+        contentPane.add(panel1);
+        panel1.setBounds(5, 5, panel1.getPreferredSize().width, 0);
+
+        //---- label1 ----
+        label1.setText(bundle.getString("label1.text_3"));
+        label1.setIcon(new ImageIcon("D:\\\u5411\u65e5\u8475\\\u6781\u7b80\u80cc\u666f\u7684\u641c\u7d22\u7ed3\u679c_\u767e\u5ea6\u56fe\u7247\u641c\u7d22\\src_http___img9.51tietu.net_pic_2019-091121_cr4ljqssqgqcr4ljqssqgq.jpg&refer_http___img9.51tietu (1).jpg"));
+        contentPane.add(label1);
+        label1.setBounds(-770, -195, 1152, 850);
+
+        contentPane.setPreferredSize(new Dimension(370, 355));
         pack();
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
@@ -80,5 +97,7 @@ public class Main_Test extends JFrame {
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     private JButton button1;
+    private JPanel panel1;
+    private JLabel label1;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

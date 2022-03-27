@@ -1,9 +1,14 @@
 
 import java.awt.*;
 import java.awt.event.*;
+import java.security.interfaces.RSAKey;
 import java.util.*;
 import javax.swing.*;
+import javax.swing.border.*;
 import javax.swing.event.*;
+import javax.swing.plaf.*;
+//import com.jgoodies.forms.factories.*;
+//import com.jgoodies.forms.factories.*;
 /*
  * Created by JFormDesigner on Tue Mar 22 19:10:17 CST 2022
  */
@@ -48,31 +53,7 @@ public class OperationUI extends JFrame {
 
         initComponents();
         setTitle("稀疏矩阵加法运算");
-        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        /*jp=(JPanel)this.getContentPane();
-        this.setLayout(null);
-        //在这里随便找一张400*300的照片既可以看到测试结果。
-        ImageIcon img=new ImageIcon("D:\\Java\\sparse matrix\\src_http___api.meisupic.com_getImg.php_imgurl_https___static9.depositphotos.com_1025323_1094_i_950_depositphotos_10949408-stock-photo-computing-backdrop.jpg&id_10949408&userid_1025323&imgfile_thumb_max&refer_http_.jpg");
-        bgp= new Main_Test.Background(img.getImage());
-        bgp.setBounds(0,0,img.getIconWidth(),img.getIconHeight());
-//创建按钮
-
-        jp.add(bgp);
-    }
-    class Background extends JPanel {
-        Image im;
-
-        public Background(Image im) {
-            this.im = im;
-            this.setOpaque(true);
-        }
-
-        //Draw the back ground.
-        @Override
-        public void paintComponent(Graphics g) {
-            super.paintComponents(g);
-            g.drawImage(im, 0, 0, this.getWidth(), this.getHeight(), this);
-        }*/
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
 
     private void button1(ActionEvent e) {
@@ -127,7 +108,7 @@ public class OperationUI extends JFrame {
             s=s+"\n";
         }
         textArea2.setText(s);
-        JOptionPane.showMessageDialog(addTest,"输入成功");
+        JOptionPane.showMessageDialog(addTest,"创建成功");
 
     }
 
@@ -181,7 +162,7 @@ public class OperationUI extends JFrame {
         }
         textArea4.setText(s);
 
-        JOptionPane.showMessageDialog(addTest,"输入成功");
+        JOptionPane.showMessageDialog(addTest,"创建成功");
 
     }
 
@@ -323,34 +304,17 @@ public class OperationUI extends JFrame {
 
     private void button8(ActionEvent e) {
         // TODO add your code here
-        /*int ii,jj;
-        int index,index1;
-        String s = "";
-        int[][] Array = new int[M.m][M.n];
-        int[][] Array1=new int[M.n][M.m];
-
-        for(index=0;index<M.num;index++){
-            for(ii=0;ii<M.m;ii++){
-                for(jj=0;jj<M.n;jj++){
-                    if(ii==M.data[index].x&&jj==M.data[index].y){
-                        Array[ii][jj]=M.data[index].weight;}}}}
-
-        ii=0;
-        while (ii<M.n) {
-            for(jj=0;jj<M.m;jj++) {
-                Array1[ii][jj]=Array[jj][ii];
-            }
-            ii++;
-        }
-
-        for(ii=0;ii<M.n;ii++){
-            for(jj=0;jj<M.m;jj++){
-                s=s+Integer.toString(Array1[ii][jj])+" ";}
-
-            s=s+"\n";}
-
-        textArea5.setText(s);*/
         new Trans_Frame().setVisible(true);
+    }
+
+    private void menu1(ActionEvent e) {
+        // TODO add your code here
+
+    }
+
+    private void menu1MouseClicked(MouseEvent e) {
+        // TODO add your code here
+        new Help().setVisible(true);
     }
 
     private void initComponents() {
@@ -359,6 +323,7 @@ public class OperationUI extends JFrame {
         menuBar1 = new JMenuBar();
         menu1 = new JMenu();
         menu2 = new JMenu();
+        panel1 = new JPanel();
         label1 = new JLabel();
         label2 = new JLabel();
         textField1 = new JTextField();
@@ -375,11 +340,11 @@ public class OperationUI extends JFrame {
         textArea2 = new JTextArea();
         textArea3 = new JTextArea();
         textArea4 = new JTextArea();
-        scrollPane2 = new JScrollPane();
         textArea5 = new JTextArea();
         button6 = new JButton();
         button7 = new JButton();
         button8 = new JButton();
+        label5 = new JLabel();
 
         //======== this ========
         Container contentPane = getContentPane();
@@ -387,74 +352,126 @@ public class OperationUI extends JFrame {
 
         //======== menuBar1 ========
         {
+            menuBar1.setOpaque(false);
 
             //======== menu1 ========
             {
                 menu1.setText(bundle.getString("menu1.text"));
+                menu1.setOpaque(false);
+                menu1.addActionListener(e -> menu1(e));
+                menu1.addMouseListener(new MouseAdapter() {
+                    @Override
+                    public void mouseClicked(MouseEvent e) {
+                        menu1MouseClicked(e);
+                    }
+                });
             }
             menuBar1.add(menu1);
 
             //======== menu2 ========
             {
                 menu2.setText(bundle.getString("menu2.text"));
+                menu2.setOpaque(false);
             }
             menuBar1.add(menu2);
         }
         setJMenuBar(menuBar1);
 
+        //======== panel1 ========
+        {
+            panel1.setLayout(null);
+        }
+        contentPane.add(panel1);
+        panel1.setBounds(new Rectangle(new Point(0, 675), panel1.getPreferredSize()));
+
         //---- label1 ----
         label1.setText(bundle.getString("label1.text"));
+        label1.setBorder(null);
+        label1.setForeground(Color.black);
         contentPane.add(label1);
         label1.setBounds(25, 45, 180, 30);
 
         //---- label2 ----
         label2.setText(bundle.getString("label2.text"));
+        label2.setBorder(null);
+        label2.setForeground(Color.black);
         contentPane.add(label2);
         label2.setBounds(25, 90, 105, 30);
 
         //---- textField1 ----
+        textField1.setBorder(new EtchedBorder());
+        textField1.setBackground(new Color(204, 204, 204));
+        textField1.setForeground(Color.black);
+        textField1.setFont(textField1.getFont().deriveFont(textField1.getFont().getSize() + 1f));
+        textField1.setOpaque(false);
         textField1.addActionListener(e -> textField1(e));
         contentPane.add(textField1);
         textField1.setBounds(205, 45, 100, 35);
 
         //---- button1 ----
         button1.setText(bundle.getString("button1.text_2"));
+        button1.setContentAreaFilled(false);
+        button1.setBorder(new EtchedBorder());
+        button1.setForeground(Color.black);
+        button1.setFont(button1.getFont().deriveFont(button1.getFont().getSize() + 2f));
         button1.addActionListener(e -> button1(e));
         contentPane.add(button1);
-        button1.setBounds(350, 42, 78, 40);
+        button1.setBounds(210, 95, 78, 40);
 
         //---- button2 ----
         button2.setText(bundle.getString("button2.text_2"));
+        button2.setContentAreaFilled(false);
+        button2.setBorder(new EtchedBorder());
+        button2.setForeground(Color.black);
         button2.addActionListener(e -> button2(e));
         contentPane.add(button2);
         button2.setBounds(215, 215, 78, 40);
 
         //---- label3 ----
         label3.setText(bundle.getString("label3.text"));
+        label3.setForeground(Color.black);
         contentPane.add(label3);
         label3.setBounds(25, 345, 165, 25);
 
         //---- label4 ----
         label4.setText(bundle.getString("label4.text"));
+        label4.setForeground(Color.black);
         contentPane.add(label4);
         label4.setBounds(25, 385, 105, 17);
+
+        //---- textField4 ----
+        textField4.setBorder(new EtchedBorder());
+        textField4.setBackground(new Color(204, 204, 204));
+        textField4.setForeground(Color.black);
+        textField4.setFont(textField4.getFont().deriveFont(textField4.getFont().getSize() + 1f));
+        textField4.setOpaque(false);
         contentPane.add(textField4);
         textField4.setBounds(215, 340, 100, 35);
 
         //---- button3 ----
         button3.setText(bundle.getString("button3.text_2"));
+        button3.setContentAreaFilled(false);
+        button3.setBorder(new EtchedBorder());
+        button3.setForeground(Color.black);
+        button3.setFont(button3.getFont().deriveFont(button3.getFont().getSize() + 2f));
         button3.addActionListener(e -> button3(e));
         contentPane.add(button3);
-        button3.setBounds(350, 335, 78, 40);
+        button3.setBounds(210, 385, 78, 40);
 
         //---- button4 ----
         button4.setText(bundle.getString("button4.text_2"));
+        button4.setContentAreaFilled(false);
+        button4.setBorder(new EtchedBorder());
+        button4.setForeground(Color.black);
         button4.addActionListener(e -> button4(e));
         contentPane.add(button4);
         button4.setBounds(215, 505, 78, 40);
 
         //---- button5 ----
         button5.setText(bundle.getString("button5.text"));
+        button5.setContentAreaFilled(false);
+        button5.setBorder(new EtchedBorder());
+        button5.setForeground(Color.black);
         button5.addActionListener(e -> {
 			ResultA(e);
 			button5(e);
@@ -464,47 +481,92 @@ public class OperationUI extends JFrame {
 
         //======== scrollPane1 ========
         {
+            scrollPane1.setOpaque(false);
 
             //---- textArea1 ----
+            textArea1.setBorder(new EtchedBorder());
+            textArea1.setBackground(Color.white);
+            textArea1.setForeground(Color.black);
+            textArea1.setFont(textArea1.getFont().deriveFont(textArea1.getFont().getSize() + 6f));
+            textArea1.setOpaque(false);
             textArea1.addCaretListener(e -> textArea1CaretUpdate(e));
             scrollPane1.setViewportView(textArea1);
         }
         contentPane.add(scrollPane1);
         scrollPane1.setBounds(25, 135, 170, 195);
+
+        //---- textArea2 ----
+        textArea2.setBorder(new EtchedBorder());
+        textArea2.setBackground(new Color(204, 204, 204));
+        textArea2.setForeground(Color.black);
+        textArea2.setFont(textArea2.getFont().deriveFont(textArea2.getFont().getSize() + 6f));
+        textArea2.setOpaque(false);
         contentPane.add(textArea2);
         textArea2.setBounds(315, 135, 170, 195);
+
+        //---- textArea3 ----
+        textArea3.setBorder(new EtchedBorder());
+        textArea3.setBackground(new Color(204, 204, 204));
+        textArea3.setForeground(Color.black);
+        textArea3.setFont(textArea3.getFont().deriveFont(textArea3.getFont().getSize() + 6f));
+        textArea3.setOpaque(false);
         contentPane.add(textArea3);
         textArea3.setBounds(25, 420, 170, 195);
+
+        //---- textArea4 ----
+        textArea4.setBorder(new EtchedBorder());
+        textArea4.setBackground(new Color(204, 204, 204));
+        textArea4.setForeground(Color.black);
+        textArea4.setFont(textArea4.getFont().deriveFont(textArea4.getFont().getSize() + 6f));
+        textArea4.setOpaque(false);
         contentPane.add(textArea4);
         textArea4.setBounds(315, 420, 170, 195);
 
-        //======== scrollPane2 ========
-        {
-            scrollPane2.setViewportView(textArea5);
-        }
-        contentPane.add(scrollPane2);
-        scrollPane2.setBounds(515, 135, 220, 480);
+        //---- textArea5 ----
+        textArea5.setBorder(new EtchedBorder());
+        textArea5.setForeground(Color.black);
+        textArea5.setBackground(new Color(204, 204, 204));
+        textArea5.setFont(textArea5.getFont().deriveFont(textArea5.getFont().getSize() + 6f));
+        textArea5.setOpaque(false);
+        contentPane.add(textArea5);
+        textArea5.setBounds(520, 135, 218, 478);
 
         //---- button6 ----
         button6.setText(bundle.getString("button6.text"));
+        button6.setContentAreaFilled(false);
+        button6.setBorder(new EtchedBorder());
+        button6.setForeground(Color.black);
         button6.addActionListener(e -> button6(e));
         contentPane.add(button6);
         button6.setBounds(245, 630, 75, 40);
 
         //---- button7 ----
         button7.setText(bundle.getString("button7.text"));
+        button7.setContentAreaFilled(false);
+        button7.setBorder(new EtchedBorder());
+        button7.setForeground(Color.black);
         button7.addActionListener(e -> button7(e));
         contentPane.add(button7);
         button7.setBounds(440, 630, 75, 40);
 
         //---- button8 ----
         button8.setText(bundle.getString("button8.text"));
+        button8.setContentAreaFilled(false);
+        button8.setBorder(new EtchedBorder());
+        button8.setForeground(Color.black);
         button8.addActionListener(e -> button8(e));
         contentPane.add(button8);
         button8.setBounds(615, 630, 75, 40);
 
-        contentPane.setPreferredSize(new Dimension(765, 740));
-        setSize(765, 740);
+        //---- label5 ----
+        label5.setText(bundle.getString("label5.text"));
+        label5.setIcon(new ImageIcon("D:\\\u5411\u65e5\u8475\\\u6781\u7b80\u80cc\u666f\u7684\u641c\u7d22\u7ed3\u679c_\u767e\u5ea6\u56fe\u7247\u641c\u7d22\\src_http___img9.51tietu.net_pic_2019-091121_cr4ljqssqgqcr4ljqssqgq.jpg&refer_http___img9.51tietu.jpg"));
+        label5.setForeground(new Color(153, 153, 153));
+        contentPane.add(label5);
+        label5.setBounds(-440, -25, 1220, 725);
+
+        contentPane.setPreferredSize(new Dimension(780, 755));
+        setSize(780, 755);
         setLocationRelativeTo(null);
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
@@ -513,6 +575,7 @@ public class OperationUI extends JFrame {
     private JMenuBar menuBar1;
     private JMenu menu1;
     private JMenu menu2;
+    private JPanel panel1;
     private JLabel label1;
     private JLabel label2;
     private JTextField textField1;
@@ -529,10 +592,10 @@ public class OperationUI extends JFrame {
     private JTextArea textArea2;
     private JTextArea textArea3;
     private JTextArea textArea4;
-    private JScrollPane scrollPane2;
     private JTextArea textArea5;
     private JButton button6;
     private JButton button7;
     private JButton button8;
+    private JLabel label5;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

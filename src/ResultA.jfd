@@ -1,4 +1,4 @@
-JFDML JFormDesigner: "7.0.5.3.411" Java: "11.0.13" encoding: "UTF-8"
+JFDML JFormDesigner: "7.0.5.4.420" Java: "11.0.13" encoding: "UTF-8"
 
 new FormModel {
 	"i18n.autoExternalize": true
@@ -14,6 +14,10 @@ new FormModel {
 				name: "scrollPane1"
 				add( new FormComponent( "javax.swing.JTextArea" ) {
 					name: "textArea1"
+					"background": new java.awt.Color( 204, 204, 204, 255 )
+					"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 6, false )
+					"foreground": new java.awt.Color( 0, 0, 0, 255 )
+					"opaque": false
 					addEvent( new FormEvent( "javax.swing.event.CaretListener", "caretUpdate", "textArea1CaretUpdate", true ) )
 				} )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
@@ -22,9 +26,25 @@ new FormModel {
 				"width": 285
 				"height": 230
 			} )
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
+				name: "panel1"
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 0
+				"y": 260
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label1"
+				"text": new FormMessage( null, "label1.text_4" )
+				"icon": new com.jformdesigner.model.SwingIcon( 1, "D:\\向日葵\\极简背景的搜索结果_百度图片搜索\\src_http___img9.51tietu.net_pic_2019-091121_cr4ljqssqgqcr4ljqssqgq.jpg&refer_http___img9.51tietu.jpg" )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": -440
+				"y": 0
+				"width": 940
+				"height": 320
+			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 140, 20 )
-			"size": new java.awt.Dimension( 390, 335 )
+			"size": new java.awt.Dimension( 390, 320 )
 		} )
 	}
 }
