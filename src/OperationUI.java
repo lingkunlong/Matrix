@@ -7,7 +7,7 @@ import javax.swing.*;
 import javax.swing.border.*;
 import javax.swing.event.*;
 import javax.swing.plaf.*;
-//import com.jgoodies.forms.factories.*;
+
 //import com.jgoodies.forms.factories.*;
 /*
  * Created by JFormDesigner on Tue Mar 22 19:10:17 CST 2022
@@ -44,8 +44,7 @@ class TripleMatrix {
 }
 
 public class OperationUI extends JFrame {
-    /*JPanel jp;
-    Main_Test.Background bgp;*/
+
     public TripleMatrix M=new TripleMatrix();
     public TripleMatrix M1=new TripleMatrix();
     private Component addTest;
@@ -68,10 +67,6 @@ public class OperationUI extends JFrame {
 
     }
 
-    private void textField1(ActionEvent e) {
-        // TODO add your code here
-
-    }
 
     private void button2(ActionEvent e) {
         // TODO add your code here
@@ -90,8 +85,7 @@ public class OperationUI extends JFrame {
         int index, index1;
         String s = "";
         int[][] a = new int[M.m][M.n];
-        int[][] b = new int[M.m][M.n];
-        int[][] c = new int[M.m][M.n];
+
         for (index = 0; index < M.num; index++) {
             for (ii = 0; ii < M.m; ii++) {
                 for (jj = 0; jj < M.n; jj++) {
@@ -143,8 +137,7 @@ public class OperationUI extends JFrame {
         int index, index1;
         String s = "";
         int[][] a = new int[M1.m][M1.n];
-        int[][] b = new int[M1.m][M1.n];
-        int[][] c = new int[M1.m][M1.n];
+
         for (index = 0; index < M1.num; index++) {
             for (ii = 0; ii < M1.m; ii++) {
                 for (jj = 0; jj < M.n; jj++) {
@@ -171,11 +164,7 @@ public class OperationUI extends JFrame {
 
     }
 
-    private void textArea1CaretUpdate(CaretEvent e) {
-        // TODO add your code here
-
-    }
-
+    //执行加法操作
     private void button5(ActionEvent e) {
         // TODO add your code here
 
@@ -215,9 +204,9 @@ public class OperationUI extends JFrame {
             s=s+"\n";
         }
         textArea5.setText(s);
-        new ResultA(this.textArea5.getText()).setVisible(true);
+//        new ResultA(this.textArea5.getText()).setVisible(true);//将文本域中值传给另一个窗口来显示，不需要了
     }
-
+//执行减法操作
     private void button6(ActionEvent e) {
         // TODO add your code here
         int ii, jj;
@@ -244,6 +233,7 @@ public class OperationUI extends JFrame {
                 }
             }
         }
+        //两个矩阵的行数和列数要相同才能进行操作
         if (M.m == M1.m && M.n == M1.n) {
             for (ii = 0; ii < M.m; ii++)
                 for (jj = 0; jj < M.n; jj++)
@@ -257,7 +247,7 @@ public class OperationUI extends JFrame {
         }
         textArea5.setText(s);
     }
-
+//执行乘法操作
     private void button7(ActionEvent e) {
         // TODO add your code here
         int ii, jj;
@@ -301,15 +291,10 @@ public class OperationUI extends JFrame {
             s=s+"\n";}
         textArea5.setText(s);
     }
-
+//转置窗口
     private void button8(ActionEvent e) {
         // TODO add your code here
         new Trans_Frame().setVisible(true);
-    }
-
-    private void menu1(ActionEvent e) {
-        // TODO add your code here
-
     }
 
     private void menu1MouseClicked(MouseEvent e) {
@@ -317,12 +302,8 @@ public class OperationUI extends JFrame {
         new Help().setVisible(true);
     }
 
-    private void button1KeyPressed(KeyEvent e) {
-        // TODO add your code here
-    }
 
-
-
+//界面
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         ResourceBundle bundle = ResourceBundle.getBundle("form");
@@ -364,7 +345,7 @@ public class OperationUI extends JFrame {
             {
                 menu1.setText(bundle.getString("menu1.text"));
                 menu1.setOpaque(false);
-                menu1.addActionListener(e -> menu1(e));
+
                 menu1.addMouseListener(new MouseAdapter() {
                     @Override
                     public void mouseClicked(MouseEvent e) {
@@ -412,7 +393,7 @@ public class OperationUI extends JFrame {
         textField1.setForeground(Color.black);
         textField1.setFont(textField1.getFont().deriveFont(textField1.getFont().getSize() + 1f));
         textField1.setOpaque(false);
-        textField1.addActionListener(e -> textField1(e));
+
         contentPane.add(textField1);
         textField1.setBounds(245, 45, 100, 35);
 
@@ -423,12 +404,7 @@ public class OperationUI extends JFrame {
         button1.setForeground(Color.black);
         button1.setFont(button1.getFont().deriveFont(button1.getFont().getSize() + 2f));
         button1.addActionListener(e -> button1(e));
-        button1.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyPressed(KeyEvent e) {
-                button1KeyPressed(e);
-            }
-        });
+
         contentPane.add(button1);
         button1.setBounds(235, 95, 78, 40);
 
@@ -508,7 +484,7 @@ public class OperationUI extends JFrame {
             textArea1.setForeground(Color.black);
             textArea1.setFont(textArea1.getFont().deriveFont(textArea1.getFont().getSize() + 6f));
             textArea1.setOpaque(false);
-            textArea1.addCaretListener(e -> textArea1CaretUpdate(e));
+
             scrollPane1.setViewportView(textArea1);
         }
         contentPane.add(scrollPane1);
