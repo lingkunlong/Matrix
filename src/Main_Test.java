@@ -22,6 +22,7 @@ public class Main_Test extends JFrame {
         add(new JLayeredPane());
         setTitle("稀疏矩阵运算器");
         setVisible(true);
+        setResizable(false);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
     static class Background extends JPanel {

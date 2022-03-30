@@ -159,6 +159,7 @@ new FormModel {
 					name: "menu1"
 					"text": new FormMessage( null, "menu1.text_2" )
 					"opaque": false
+					"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 3, false )
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "menu1", true ) )
 					addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "menu1MouseClicked", true ) )
 				} )

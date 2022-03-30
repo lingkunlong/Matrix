@@ -53,6 +53,7 @@ public class Trans_Frame extends JFrame {
     public Trans_Frame() {
         initComponents();
         setVisible(true);
+        setResizable(false);
         setTitle("稀疏矩阵转置运算");
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
     }
@@ -178,6 +179,7 @@ public class Trans_Frame extends JFrame {
             {
                 menu1.setText(bundle.getString("menu1.text_2"));
                 menu1.setOpaque(false);
+                menu1.setFont(menu1.getFont().deriveFont(menu1.getFont().getSize() + 3f));
                 menu1.addActionListener(e -> menu1(e));
                 menu1.addMouseListener(new MouseAdapter() {
                     @Override
