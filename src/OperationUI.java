@@ -51,11 +51,12 @@ public class OperationUI extends JFrame {
     public OperationUI() {
 
         initComponents();
-        setTitle("稀疏矩阵加法运算");
+        setTitle("稀疏矩阵运算");
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
 
-    private void button1(ActionEvent e) {
+
+    private void button2(ActionEvent e) {
         // TODO add your code here
 
         String[] Array = textField1.getText().split(" ");
@@ -63,14 +64,6 @@ public class OperationUI extends JFrame {
         int a1 = Integer.parseInt(Array[1]);
         int a2 = Integer.parseInt(Array[2]);
         M = new TripleMatrix(a0,a1,a2);
-        JOptionPane.showMessageDialog(addTest,"输入成功");
-
-    }
-
-
-    private void button2(ActionEvent e) {
-        // TODO add your code here
-
         int i=0;
         String[] Array1 = textArea1.getText().split("\n");
         String[] Array2;
@@ -106,22 +99,13 @@ public class OperationUI extends JFrame {
 
     }
 
-    private void button3(ActionEvent e) {
+    private void button4(ActionEvent e) {
         // TODO add your code here
-
         String[] Array = textField4.getText().split(" ");
         int a0 = Integer.parseInt(Array[0]);
         int a1 = Integer.parseInt(Array[1]);
         int a2 = Integer.parseInt(Array[2]);
         M1 = new TripleMatrix(a0,a1,a2);
-
-        JOptionPane.showMessageDialog(addTest,"输入成功");
-
-    }
-
-    private void button4(ActionEvent e) {
-        // TODO add your code here
-
         int i=0;
         String[] Array1 = textArea3.getText().split("\n");
 
@@ -154,20 +138,11 @@ public class OperationUI extends JFrame {
             s=s+"\n";
         }
         textArea4.setText(s);
-
         JOptionPane.showMessageDialog(addTest,"创建成功");
-
     }
-
-    private void ResultA(ActionEvent e) {
-        // TODO add your code here
-
-    }
-
     //执行加法操作
     private void button5(ActionEvent e) {
         // TODO add your code here
-
         int ii, jj;
         int index, index1;
         String s = "";
@@ -196,15 +171,18 @@ public class OperationUI extends JFrame {
             for (ii = 0; ii < M.m; ii++)
                 for (jj = 0; jj < M.n; jj++)
                     Array2[ii][jj] = Array[ii][jj] + Array1[ii][jj];
-        }
-        for (ii = 0; ii < M.m; ii++) {
-            for (jj = 0; jj < M.n; jj++) {
-                s = s + Integer.toString(Array2[ii][jj]) + " ";
+            for (ii = 0; ii < M.m; ii++) {
+                for (jj = 0; jj < M.n; jj++) {
+                    s = s + Integer.toString(Array2[ii][jj]) + " ";
+                }
+                s=s+"\n";
+                textArea5.setText(s);
             }
-            s=s+"\n";
+
+        }else {
+            JOptionPane.showMessageDialog(addTest,"运算不合法，终止运算");
         }
-        textArea5.setText(s);
-//        new ResultA(this.textArea5.getText()).setVisible(true);//将文本域中值传给另一个窗口来显示，不需要了
+
     }
 //执行减法操作
     private void button6(ActionEvent e) {
@@ -238,14 +216,16 @@ public class OperationUI extends JFrame {
             for (ii = 0; ii < M.m; ii++)
                 for (jj = 0; jj < M.n; jj++)
                     Array2[ii][jj] = Array[ii][jj] - Array1[ii][jj];
-        }
-        for (ii = 0; ii < M.m; ii++) {
-            for (jj = 0; jj < M.n; jj++) {
-                s = s + Integer.toString(Array2[ii][jj]) + " ";
+            for (ii = 0; ii < M.m; ii++) {
+                for (jj = 0; jj < M.n; jj++) {
+                    s = s + Integer.toString(Array2[ii][jj]) + " ";
+                }
+                s=s+"\n";
+                textArea5.setText(s);
             }
-            s=s+"\n";
+        }else{
+            JOptionPane.showMessageDialog(addTest,"运算不合法，终止运算");
         }
-        textArea5.setText(s);
     }
 //执行乘法操作
     private void button7(ActionEvent e) {
@@ -275,21 +255,26 @@ public class OperationUI extends JFrame {
             }
         }
         if(M.n==M1.m){
-            for(ii=0;ii<M.m;ii++){
-                for(jj=0;jj<M1.n;jj++){
+            for(ii=0;ii<M.m;ii++)
+            {
+                for(jj=0;jj<M1.n;jj++)
+                {
                     int sum=0;
                     for(int k=0;k<M.n;k++){
                         sum+=Array[ii][k]*Array1[k][jj];}
-                    Array2[ii][jj]=sum;}}
-
+                        Array2[ii][jj]=sum;
+                }
+            }
+            for(ii=0;ii<M.m;ii++)
+            {
+                for(jj=0;jj<M1.n;jj++){
+                    s=s+Integer.toString(Array2[ii][jj])+" ";}
+                s=s+"\n";
+                textArea5.setText(s);
+            }
+        }else{
+            JOptionPane.showMessageDialog(addTest,"运算不合法，终止运算");
         }
-
-        for(ii=0;ii<M.m;ii++){
-            for(jj=0;jj<M1.n;jj++){
-                s=s+Integer.toString(Array2[ii][jj])+" ";}
-
-            s=s+"\n";}
-        textArea5.setText(s);
     }
 //转置窗口
     private void button8(ActionEvent e) {
@@ -314,12 +299,10 @@ public class OperationUI extends JFrame {
         label1 = new JLabel();
         label2 = new JLabel();
         textField1 = new JTextField();
-        button1 = new JButton();
         button2 = new JButton();
         label3 = new JLabel();
         label4 = new JLabel();
         textField4 = new JTextField();
-        button3 = new JButton();
         button4 = new JButton();
         button5 = new JButton();
         scrollPane1 = new JScrollPane();
@@ -393,20 +376,8 @@ public class OperationUI extends JFrame {
         textField1.setForeground(Color.black);
         textField1.setFont(textField1.getFont().deriveFont(textField1.getFont().getSize() + 1f));
         textField1.setOpaque(false);
-
         contentPane.add(textField1);
         textField1.setBounds(245, 45, 100, 35);
-
-        //---- button1 ----
-        button1.setText(bundle.getString("button1.text_2"));
-        button1.setContentAreaFilled(false);
-        button1.setBorder(new EtchedBorder());
-        button1.setForeground(Color.black);
-        button1.setFont(button1.getFont().deriveFont(button1.getFont().getSize() + 2f));
-        button1.addActionListener(e -> button1(e));
-
-        contentPane.add(button1);
-        button1.setBounds(235, 95, 78, 40);
 
         //---- button2 ----
         button2.setText(bundle.getString("button2.text_2"));
@@ -441,16 +412,6 @@ public class OperationUI extends JFrame {
         contentPane.add(textField4);
         textField4.setBounds(245, 340, 100, 35);
 
-        //---- button3 ----
-        button3.setText(bundle.getString("button3.text_2"));
-        button3.setContentAreaFilled(false);
-        button3.setBorder(new EtchedBorder());
-        button3.setForeground(Color.black);
-        button3.setFont(button3.getFont().deriveFont(button3.getFont().getSize() + 2f));
-        button3.addActionListener(e -> button3(e));
-        contentPane.add(button3);
-        button3.setBounds(235, 385, 78, 40);
-
         //---- button4 ----
         button4.setText(bundle.getString("button4.text_2"));
         button4.setContentAreaFilled(false);
@@ -468,7 +429,6 @@ public class OperationUI extends JFrame {
         button5.setForeground(Color.black);
         button5.setFont(button5.getFont().deriveFont(button5.getFont().getSize() + 2f));
         button5.addActionListener(e -> {
-			ResultA(e);
 			button5(e);
 		});
         contentPane.add(button5);
@@ -484,7 +444,6 @@ public class OperationUI extends JFrame {
             textArea1.setForeground(Color.black);
             textArea1.setFont(textArea1.getFont().deriveFont(textArea1.getFont().getSize() + 6f));
             textArea1.setOpaque(false);
-
             scrollPane1.setViewportView(textArea1);
         }
         contentPane.add(scrollPane1);
@@ -577,12 +536,10 @@ public class OperationUI extends JFrame {
     private JLabel label1;
     private JLabel label2;
     private JTextField textField1;
-    private JButton button1;
     private JButton button2;
     private JLabel label3;
     private JLabel label4;
     private JTextField textField4;
-    private JButton button3;
     private JButton button4;
     private JButton button5;
     private JScrollPane scrollPane1;

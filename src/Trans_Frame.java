@@ -53,7 +53,7 @@ public class Trans_Frame extends JFrame {
     public Trans_Frame() {
         initComponents();
         setVisible(true);
-        setTitle("转置运算");
+        setTitle("稀疏矩阵转置运算");
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
     }
 
