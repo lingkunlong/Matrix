@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ResourceBundle;
+//import com.jgoodies.forms.factories.*;
 /*
  * Created by JFormDesigner on Tue Mar 22 19:12:20 CST 2022
  */
@@ -14,18 +15,7 @@ import java.util.ResourceBundle;
 /**
  * @author unknown
  */
-class Triple1{
 
-    int x,y;
-    int weight;
-    public Triple1(){}
-    public Triple1(int x,int y,int weight){
-
-        this.x=x;
-        this.y=y;
-        this.weight=weight;
-    }
-}
 class TripleMatrix1 {
 
     int m, n;
@@ -58,18 +48,13 @@ public class Trans_Frame extends JFrame {
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
     }
 
-    private void button1(ActionEvent e) {
-        // TODO add your code here
+    private void button2(ActionEvent e) {
+
         String[] Array = textField1.getText().split(" ");
         int a0 = Integer.parseInt(Array[0]);
         int a1 = Integer.parseInt(Array[1]);
         int a2 = Integer.parseInt(Array[2]);
         M = new TripleMatrix1(a0,a1,a2);
-        JOptionPane.showMessageDialog(addTest,"输入成功");
-    }
-
-    private void button2(ActionEvent e) {
-
         int i=0;
         String[] Array1 = textArea1.getText().split("\n");
         String[] Array2;
@@ -153,7 +138,6 @@ public class Trans_Frame extends JFrame {
         menu1 = new JMenu();
         label1 = new JLabel();
         textField1 = new JTextField();
-        button1 = new JButton();
         label2 = new JLabel();
         scrollPane1 = new JScrollPane();
         textArea1 = new JTextArea();
@@ -195,30 +179,21 @@ public class Trans_Frame extends JFrame {
         //---- label1 ----
         label1.setText(bundle.getString("label1.text_2"));
         label1.setForeground(Color.black);
+        label1.setFont(label1.getFont().deriveFont(label1.getFont().getSize() + 3f));
         contentPane.add(label1);
-        label1.setBounds(15, 20, 160, 30);
+        label1.setBounds(15, 15, 215, 30);
 
         //---- textField1 ----
         textField1.setBackground(new Color(204, 204, 204));
         textField1.setOpaque(false);
         textField1.setForeground(Color.black);
         contentPane.add(textField1);
-        textField1.setBounds(20, 50, 190, textField1.getPreferredSize().height);
-
-        //---- button1 ----
-        button1.setText(bundle.getString("button1.text_3"));
-        button1.setOpaque(false);
-        button1.setBorder(new EtchedBorder());
-        button1.setContentAreaFilled(false);
-        button1.setBackground(Color.black);
-        button1.setForeground(Color.black);
-        button1.addActionListener(e -> button1(e));
-        contentPane.add(button1);
-        button1.setBounds(225, 50, button1.getPreferredSize().width, 35);
+        textField1.setBounds(20, 45, 190, 40);
 
         //---- label2 ----
         label2.setText(bundle.getString("label2.text_2"));
         label2.setForeground(Color.black);
+        label2.setFont(label2.getFont().deriveFont(label2.getFont().getSize() + 3f));
         contentPane.add(label2);
         label2.setBounds(20, 85, 135, 25);
 
@@ -250,26 +225,29 @@ public class Trans_Frame extends JFrame {
         //---- button2 ----
         button2.setText(bundle.getString("button2.text"));
         button2.setOpaque(false);
-        button2.setBorder(new EtchedBorder());
+        button2.setBorder(null);
         button2.setContentAreaFilled(false);
         button2.setBackground(Color.black);
         button2.setForeground(Color.black);
+        button2.setFont(button2.getFont().deriveFont(button2.getFont().getSize() + 5f));
         button2.addActionListener(e -> button2(e));
         contentPane.add(button2);
-        button2.setBounds(220, 150, 60, 50);
+        button2.setBounds(217, 155, 60, 50);
 
         //---- label3 ----
         label3.setText(bundle.getString("label3.text_2"));
         label3.setForeground(Color.black);
+        label3.setFont(label3.getFont().deriveFont(label3.getFont().getSize() + 3f));
         contentPane.add(label3);
         label3.setBounds(35, 285, 80, 20);
 
         //---- button3 ----
         button3.setText(bundle.getString("button3.text"));
         button3.setOpaque(false);
-        button3.setBorder(new EtchedBorder());
+        button3.setBorder(null);
         button3.setContentAreaFilled(false);
         button3.setForeground(Color.black);
+        button3.setFont(button3.getFont().deriveFont(button3.getFont().getSize() + 5f));
         button3.addActionListener(e -> button3(e));
         contentPane.add(button3);
         button3.setBounds(30, 310, 75, 45);
@@ -326,7 +304,6 @@ public class Trans_Frame extends JFrame {
     private JMenu menu1;
     private JLabel label1;
     private JTextField textField1;
-    private JButton button1;
     private JLabel label2;
     private JScrollPane scrollPane1;
     private JTextArea textArea1;
