@@ -33,9 +33,9 @@ new FormModel {
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "label3"
-				"text": new FormMessage( null, "label3.text_3" )
 				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 4, false )
 				"horizontalAlignment": 2
+				"text": new FormMessage( null, "label3.text_3" )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"width": 505
 				"height": 25
