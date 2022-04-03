@@ -415,7 +415,7 @@ public class OperationUI extends JFrame {
         button2.setContentAreaFilled(false);
         button2.setBorder(new EtchedBorder());
         button2.setForeground(Color.black);
-        button2.setFont(button2.getFont().deriveFont(button2.getFont().getSize() + 2f));
+        button2.setFont(button2.getFont().deriveFont(button2.getFont().getSize() + 4f));
         button2.addActionListener(e -> button2(e));
         contentPane.add(button2);
         button2.setBounds(215, 215, 78, 40);
@@ -448,7 +448,7 @@ public class OperationUI extends JFrame {
         button4.setContentAreaFilled(false);
         button4.setBorder(new EtchedBorder());
         button4.setForeground(Color.black);
-        button4.setFont(button4.getFont().deriveFont(button4.getFont().getSize() + 2f));
+        button4.setFont(button4.getFont().deriveFont(button4.getFont().getSize() + 4f));
         button4.addActionListener(e -> button4(e));
         contentPane.add(button4);
         button4.setBounds(215, 505, 78, 40);
@@ -458,7 +458,7 @@ public class OperationUI extends JFrame {
         button5.setContentAreaFilled(false);
         button5.setBorder(new EtchedBorder());
         button5.setForeground(Color.black);
-        button5.setFont(button5.getFont().deriveFont(button5.getFont().getSize() + 2f));
+        button5.setFont(button5.getFont().deriveFont(button5.getFont().getSize() + 4f));
         button5.addActionListener(e -> {
 			ResultA(e);
 			button5(e);
@@ -523,7 +523,7 @@ public class OperationUI extends JFrame {
         button6.setContentAreaFilled(false);
         button6.setBorder(new EtchedBorder());
         button6.setForeground(Color.black);
-        button6.setFont(button6.getFont().deriveFont(button6.getFont().getSize() + 2f));
+        button6.setFont(button6.getFont().deriveFont(button6.getFont().getSize() + 4f));
         button6.addActionListener(e -> button6(e));
         contentPane.add(button6);
         button6.setBounds(245, 630, 75, 40);
@@ -533,7 +533,7 @@ public class OperationUI extends JFrame {
         button7.setContentAreaFilled(false);
         button7.setBorder(new EtchedBorder());
         button7.setForeground(Color.black);
-        button7.setFont(button7.getFont().deriveFont(button7.getFont().getSize() + 2f));
+        button7.setFont(button7.getFont().deriveFont(button7.getFont().getSize() + 4f));
         button7.addActionListener(e -> button7(e));
         contentPane.add(button7);
         button7.setBounds(440, 630, 75, 40);
@@ -543,17 +543,17 @@ public class OperationUI extends JFrame {
         button8.setContentAreaFilled(false);
         button8.setBorder(new EtchedBorder());
         button8.setForeground(Color.black);
-        button8.setFont(button8.getFont().deriveFont(button8.getFont().getSize() + 2f));
+        button8.setFont(button8.getFont().deriveFont(button8.getFont().getSize() + 4f));
         button8.addActionListener(e -> button8(e));
         contentPane.add(button8);
         button8.setBounds(615, 630, 75, 40);
 
         //---- label5 ----
         label5.setText(bundle.getString("label5.text"));
-        label5.setIcon(new ImageIcon("D:\\\u5411\u65e5\u8475\\\u6781\u7b80\u80cc\u666f\u7684\u641c\u7d22\u7ed3\u679c_\u767e\u5ea6\u56fe\u7247\u641c\u7d22\\src_http___img9.51tietu.net_pic_2019-091121_cr4ljqssqgqcr4ljqssqgq.jpg&refer_http___img9.51tietu.jpg"));
+        label5.setIcon(new ImageIcon("D:\\\u5411\u65e5\u8475\\v2.jpg"));
         label5.setForeground(new Color(153, 153, 153));
         contentPane.add(label5);
-        label5.setBounds(-440, -25, 1220, 725);
+        label5.setBounds(-440, 0, 1255, 865);
 
         contentPane.setPreferredSize(new Dimension(780, 755));
         setSize(780, 755);

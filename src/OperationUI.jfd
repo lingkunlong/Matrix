@@ -62,8 +62,8 @@ new FormModel {
 				"text": new FormMessage( null, "button2.text_2" )
 				"contentAreaFilled": false
 				"border": &EtchedBorder1 new javax.swing.border.EtchedBorder( 1, null, null )
-				"foreground": new java.awt.Color( 0, 0, 0, 255 )
-				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 2, false )
+				"foreground": sfield java.awt.Color black
+				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 4, false )
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "button2", true ) )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"width": 78
@@ -111,8 +111,8 @@ new FormModel {
 				"text": new FormMessage( null, "button4.text_2" )
 				"contentAreaFilled": false
 				"border": #EtchedBorder1
-				"foreground": new java.awt.Color( 0, 0, 0, 255 )
-				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 2, false )
+				"foreground": sfield java.awt.Color black
+				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 4, false )
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "button4", true ) )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"width": 78
@@ -125,8 +125,8 @@ new FormModel {
 				"text": new FormMessage( null, "button5.text" )
 				"contentAreaFilled": false
 				"border": #EtchedBorder1
-				"foreground": new java.awt.Color( 0, 0, 0, 255 )
-				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 2, false )
+				"foreground": sfield java.awt.Color black
+				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 4, false )
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "ResultA", true ) )
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "button5", true ) )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
@@ -210,8 +210,8 @@ new FormModel {
 				"text": new FormMessage( null, "button6.text" )
 				"contentAreaFilled": false
 				"border": #EtchedBorder1
-				"foreground": new java.awt.Color( 0, 0, 0, 255 )
-				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 2, false )
+				"foreground": sfield java.awt.Color black
+				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 4, false )
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "button6", true ) )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"x": 245
@@ -224,8 +224,8 @@ new FormModel {
 				"text": new FormMessage( null, "button7.text" )
 				"contentAreaFilled": false
 				"border": #EtchedBorder1
-				"foreground": new java.awt.Color( 0, 0, 0, 255 )
-				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 2, false )
+				"foreground": sfield java.awt.Color black
+				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 4, false )
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "button7", true ) )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"x": 440
@@ -238,8 +238,8 @@ new FormModel {
 				"text": new FormMessage( null, "button8.text" )
 				"contentAreaFilled": false
 				"border": #EtchedBorder1
-				"foreground": new java.awt.Color( 0, 0, 0, 255 )
-				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 2, false )
+				"foreground": sfield java.awt.Color black
+				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 4, false )
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "button8", true ) )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"x": 615
@@ -250,13 +250,13 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "label5"
 				"text": new FormMessage( null, "label5.text" )
-				"icon": new com.jformdesigner.model.SwingIcon( 1, "D:\\向日葵\\极简背景的搜索结果_百度图片搜索\\src_http___img9.51tietu.net_pic_2019-091121_cr4ljqssqgqcr4ljqssqgq.jpg&refer_http___img9.51tietu.jpg" )
+				"icon": new com.jformdesigner.model.SwingIcon( 1, "D:\\向日葵\\v2.jpg" )
 				"foreground": new java.awt.Color( 153, 153, 153, 255 )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"x": -440
-				"y": -25
-				"width": 1220
-				"height": 725
+				"y": 0
+				"width": 1255
+				"height": 865
 			} )
 			menuBar: new FormContainer( "javax.swing.JMenuBar", new FormLayoutManager( class javax.swing.JMenuBar ) ) {
 				name: "menuBar1"

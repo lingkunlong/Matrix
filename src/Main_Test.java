@@ -101,9 +101,9 @@ public class Main_Test extends JFrame {
 
         //---- label1 ----
         label1.setText(bundle.getString("label1.text_3"));
-        label1.setIcon(new ImageIcon("D:\\\u5411\u65e5\u8475\\\u6781\u7b80\u80cc\u666f\u7684\u641c\u7d22\u7ed3\u679c_\u767e\u5ea6\u56fe\u7247\u641c\u7d22\\src_http___img9.51tietu.net_pic_2019-091121_cr4ljqssqgqcr4ljqssqgq.jpg&refer_http___img9.51tietu (1).jpg"));
+        label1.setIcon(new ImageIcon("D:\\\u5411\u65e5\u8475\\v2.jpg"));
         contentPane.add(label1);
-        label1.setBounds(-770, -195, 1152, 850);
+        label1.setBounds(-605, -150, 995, 505);
 
         contentPane.setPreferredSize(new Dimension(370, 355));
         pack();
