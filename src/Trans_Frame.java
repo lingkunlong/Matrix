@@ -40,6 +40,10 @@ public class Trans_Frame extends JFrame {
     public TripleMatrix1 M=new TripleMatrix1();
     public TripleMatrix1 M1=new TripleMatrix1();
     private Component addTest;
+
+    public static void main(String[] args) {
+        new Trans_Frame();
+    }
     public Trans_Frame() {
         initComponents();
         setVisible(true);
@@ -55,10 +59,10 @@ public class Trans_Frame extends JFrame {
         int a1 = Integer.parseInt(Array[1]);
         int a2 = Integer.parseInt(Array[2]);
         M = new TripleMatrix1(a0,a1,a2);
-        int i=0;
+        //int i=0;
         String[] Array1 = textArea1.getText().split("\n");
         String[] Array2;
-        for(i=0;i<M.num;i++){
+        for(int i=0;i<M.num;i++){
             Array2=Array1[i].split(" ");
             int aa0 = Integer.parseInt(Array2[0]);
             int aa1 = Integer.parseInt(Array2[1]);
@@ -66,11 +70,11 @@ public class Trans_Frame extends JFrame {
 
             M.data[i] = new Triple(aa0,aa1,aa2);}
         int ii, jj;
-        int index, index1;
+        int index;
         String s = "";
         int[][] a = new int[M.m][M.n];
-        int[][] b = new int[M.m][M.n];
-        int[][] c = new int[M.m][M.n];
+//        int[][] b = new int[M.m][M.n];
+//        int[][] c = new int[M.m][M.n];
         for (index = 0; index < M.num; index++) {
             for (ii = 0; ii < M.m; ii++) {
                 for (jj = 0; jj < M.n; jj++) {
@@ -82,42 +86,34 @@ public class Trans_Frame extends JFrame {
         }
         for (ii = 0; ii < M.m; ii++) {
             for (jj = 0; jj < M.n; jj++) {
-                s = s + Integer.toString(a[ii][jj]) + " ";
+                s = s + (a[ii][jj]) + " ";
             }
-            s=s+"\n";
+            s=s + "\n";
         }
         textArea2.setText(s);
         JOptionPane.showMessageDialog(addTest,"输入成功");
     }
 
     private void button3(ActionEvent e) {
-        // TODO add your code here
-        int ii,jj;
-        int index,index1;
         String s = "";
-        int[][] Array = new int[M.m][M.n];
-        int[][] Array1=new int[M.n][M.m];
-
-        for(index=0;index<M.num;index++){
-            for(ii=0;ii<M.m;ii++){
-                for(jj=0;jj<M.n;jj++){
-                    if(ii==M.data[index].x&&jj==M.data[index].y){
-                        Array[ii][jj]=M.data[index].weight;}}}}
-
-        ii=0;
-        while (ii<M.n) {
-            for(jj=0;jj<M.m;jj++) {
-                Array1[ii][jj]=Array[jj][ii];
-            }
-            ii++;
+        M1 = new TripleMatrix1(M.n,M.m,M.num);
+        for (int i = 0;i<M.num;i++){
+            M1.data[i] =  new Triple(M.data[i].y,M.data[i].x,M.data[i].weight);
         }
+        for(int ii=0;ii<M1.m;ii++){
+            for(int jj=0;jj<M1.n;jj++){
+                String p="";
+                for(int index1=0;index1<M1.num;index1++)
+                    if(ii==M1.data[index1].x&&jj==M1.data[index1].y)
+                    {
+                        p=Integer.toString(M1.data[index1].weight);
+                    }
+                if(p==""){p="0";}
+                s=s+p+" ";
+            }
+            s=s+"\n";
 
-        for(ii=0;ii<M.n;ii++){
-            for(jj=0;jj<M.m;jj++){
-                s=s+Integer.toString(Array1[ii][jj])+" ";}
-
-            s=s+"\n";}
-
+        }
         textArea3.setText(s);
     }
 
