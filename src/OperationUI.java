@@ -66,13 +66,20 @@ public class OperationUI extends JFrame {
             setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         }
 //创建第一个矩阵
-        private void button2(ActionEvent e) {
+        private void button2(ActionEvent e) throws Exception {
             //输入矩阵行数和列数和非零元个数
             String[] Array = textField1.getText().split(" ");
             int a0 = Integer.parseInt(Array[0]);
             int a1 = Integer.parseInt(Array[1]);
             int a2 = Integer.parseInt(Array[2]);
-            M = new TripleMatrix(a0, a1, a2);
+
+            if(a0<=0||a1<=0){
+                //JOptionPane.showMessageDialog(addTest, "输入非法，行数和列数必须为正数,请重新输入");
+                textField1.setText("");
+                throw new Exception("输入非法，行数和列数必须为正数,请重新输入");
+            }else {
+                M = new TripleMatrix(a0, a1, a2);
+            }
 
             //输入非零元位置
             int i = 0;
@@ -85,8 +92,18 @@ public class OperationUI extends JFrame {
                 int aa0 = Integer.parseInt(Array2[0]);
                 int aa1 = Integer.parseInt(Array2[1]);
                 int aa2 = Integer.parseInt(Array2[2]);
-
-                M.data[i] = new Triple(aa0, aa1, aa2);
+                if((aa0>M.m-1||aa0<0)||(aa1>M.n-1||aa1<0)){
+                    JOptionPane.showMessageDialog(addTest, "输入非法，行数和列数不能越界,请重新输入");
+                    textArea1.setText("");
+                    break;
+                }
+                else if (aa2 ==0){
+                    JOptionPane.showMessageDialog(addTest, "输入非法，非零元不能为零,请重新输入");
+                    textArea1.setText("");
+                    break;
+                }
+                else{
+                M.data[i] = new Triple(aa0, aa1, aa2);}
             }
 
             int ii, jj;
@@ -401,7 +418,13 @@ public class OperationUI extends JFrame {
             button2.setBorder(new EtchedBorder());
             button2.setForeground(Color.black);
             button2.setFont(button2.getFont().deriveFont(button2.getFont().getSize() + 4f));
-            button2.addActionListener(e -> button2(e));
+            button2.addActionListener(e -> {
+                try {
+                    button2(e);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            });
             contentPane.add(button2);
             button2.setBounds(215, 215, 78, 40);
 
