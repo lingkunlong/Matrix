@@ -8,7 +8,6 @@ import javax.swing.border.*;
 import javax.swing.event.*;
 import javax.swing.plaf.*;
 
-//import com.jgoodies.forms.factories.*;
 /*
  * Created by JFormDesigner on Tue Mar 22 19:10:17 CST 2022
  */
@@ -45,9 +44,10 @@ public class OperationUI extends JFrame {
         public TripleMatrix M = new TripleMatrix();
         public TripleMatrix M1 = new TripleMatrix();
         public TripleMatrix M2 = new TripleMatrix();
-
+        private Component addTest;
+        //构造方法
         public int Find(TripleMatrix M, int i, int j) {
-
+            //查找三元组内的非零元
             for (int t = 0; t < M.num; t++) {
                 if (M.data[t].x == i && M.data[t].y == j)
                     return M.data[t].weight;
@@ -55,11 +55,8 @@ public class OperationUI extends JFrame {
             return 0;
         }
 
-        public Triple triple = new Triple();
-        private Component addTest;
-
+        //public Triple triple = new Triple();
         public OperationUI() {
-
             initComponents();
             setTitle("稀疏矩阵运算");
             setResizable(false);
@@ -105,31 +102,30 @@ public class OperationUI extends JFrame {
                 else{
                 M.data[i] = new Triple(aa0, aa1, aa2);}
             }
-
-            int ii, jj;
-            int index, index1;
             String s = "";
-
-            int[][] a = new int[M.m][M.n];
-            //先将数据暂存入二维数组内
-            for (index = 0; index < M.num; index++) {
-                for (ii = 0; ii < M.m; ii++) {
-                    for (jj = 0; jj < M.n; jj++) {
-                        if (ii == M.data[index].x && jj == M.data[index].y) {
-                            a[ii][jj] = M.data[index].weight;
+            String ch = "";
+            int p = 0,k,h;
+            for (int row = 0; row < M.m; row++) {
+                for (int line = 0; line < M.n; line++) {
+                    for (k = 0, h = 0; k < M.num; k++) {
+                        if (M.data[k].x == row && M.data[k].y == line) {
+                            p = M.data[k].weight;
+                            h = 1;
+                            break;
                         }
                     }
-                }
-            }
-            for (ii = 0; ii < M.m; ii++) {
-                for (jj = 0; jj < M.n; jj++) {
-                    s = s + Integer.toString(a[ii][jj]) + " ";
+                    if (h == 0) {
+                        p = 0;}
+                    ch = Integer.toString(p);
+                    if (ch == "") {
+                        ch = "0";
+                    }
+                    s = s + ch + " ";
                 }
                 s = s + "\n";
             }
             textArea2.setText(s);
             JOptionPane.showMessageDialog(addTest, "创建成功");
-
         }
 //创建第二个矩阵
         private void button4(ActionEvent e) throws Exception {
@@ -167,7 +163,33 @@ public class OperationUI extends JFrame {
                 else{
                     M1.data[i] = new Triple(aa0, aa1, aa2);}
             }
-            int ii, jj;
+            String s = "";
+            String ch = "";
+            int p = 0,k,h;
+            for (int row = 0; row < M.m; row++) {
+                for (int line = 0; line < M.n; line++) {
+                    for (k = 0, h = 0; k < M.num; k++) {
+                        if (M.data[k].x == row && M.data[k].y == line) {
+                            p = M.data[k].weight;
+                            h = 1;
+                            break;
+                        }
+                    }
+                    if (h == 0) {
+                        p = 0;}
+                    ch = Integer.toString(p);
+                    if (ch == "") {
+                        ch = "0";
+                    }
+                    s = s + ch + " ";
+                }
+                s = s + "\n";
+            }
+            textArea2.setText(s);
+            JOptionPane.showMessageDialog(addTest, "创建成功");
+        }
+        //废弃的二维数组存储
+            /*int ii, jj;
             int index, index1;
             String s = "";
             int[][] a = new int[M1.m][M1.n];
@@ -189,7 +211,7 @@ public class OperationUI extends JFrame {
             }
             textArea4.setText(s);
             JOptionPane.showMessageDialog(addTest, "创建成功");
-        }
+        }*/
         //执行加法操作
         private void button5(ActionEvent e) {
             String s = "";
@@ -197,10 +219,12 @@ public class OperationUI extends JFrame {
             if (M.m == M1.m && M.n == M1.n) {
 
                 String ch = "";
-                //行和列
+                //按行和列位置进行遍历
                 for (int row = 0; row < M.m; row++) {
                     for (int line = 0; line < M.n; line++) {
+                        //遍历第一个矩阵
                         for (k = 0, h = 0; k < M.num; k++) {
+
                             if (M.data[k].x == row && M.data[k].y == line) {
                                 p = M.data[k].weight;
                                 h = 1;
@@ -209,7 +233,7 @@ public class OperationUI extends JFrame {
                         }
                         if (h == 0) {
                             p = 0;}
-
+                        //遍历第二个矩阵
                         for (k = 0, h = 0; k < M1.num; k++) {
                             if (M1.data[k].x == row && M1.data[k].y == line) {
                                 q = M1.data[k].weight;
@@ -217,7 +241,9 @@ public class OperationUI extends JFrame {
                                 break;
                             }
                         }
-                        if (h == 0) {q = 0;}
+                        if (h == 0) {
+                            q = 0;}
+                        //将结果返回并用字符串拼接起来
                         ch = Integer.toString(p + q);
                         if (ch == "") {
                             ch = "0";
