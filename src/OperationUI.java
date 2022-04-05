@@ -28,8 +28,7 @@ class TripleMatrix {
 
     int m, n;//矩阵的行数和列数
     int num;//非零元个数
-    int[] rops;//各行第一个非零元的在tripls数组里的位置表
-    Triple data[] = new Triple[100];//非零三元组表
+    Triple[] data = new Triple[100];//非零三元组表
 
     public TripleMatrix() {
     }
@@ -71,7 +70,6 @@ public class OperationUI extends JFrame {
             int a2 = Integer.parseInt(Array[2]);
 
             if(a0<=0||a1<=0){
-                //JOptionPane.showMessageDialog(addTest, "输入非法，行数和列数必须为正数,请重新输入");
                 textField1.setText("");
                 throw new Exception("输入非法，行数和列数必须为正数,请重新输入");
             }else {
@@ -134,7 +132,6 @@ public class OperationUI extends JFrame {
             int a1 = Integer.parseInt(Array[1]);
             int a2 = Integer.parseInt(Array[2]);
             if(a0<=0||a1<=0){
-                //JOptionPane.showMessageDialog(addTest, "输入非法，行数和列数必须为正数,请重新输入");
                 textField4.setText("");
                 throw new Exception("输入非法，行数和列数必须为正数,请重新输入");
             }else {
@@ -166,11 +163,11 @@ public class OperationUI extends JFrame {
             String s = "";
             String ch = "";
             int p = 0,k,h;
-            for (int row = 0; row < M.m; row++) {
-                for (int line = 0; line < M.n; line++) {
-                    for (k = 0, h = 0; k < M.num; k++) {
-                        if (M.data[k].x == row && M.data[k].y == line) {
-                            p = M.data[k].weight;
+            for (int row = 0; row < M1.m; row++) {
+                for (int line = 0; line < M1.n; line++) {
+                    for (k = 0, h = 0; k < M1.num; k++) {
+                        if (M1.data[k].x == row && M1.data[k].y == line) {
+                            p = M1.data[k].weight;
                             h = 1;
                             break;
                         }
@@ -185,7 +182,7 @@ public class OperationUI extends JFrame {
                 }
                 s = s + "\n";
             }
-            textArea2.setText(s);
+            textArea4.setText(s);
             JOptionPane.showMessageDialog(addTest, "创建成功");
         }
         //废弃的二维数组存储

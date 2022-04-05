@@ -18,7 +18,7 @@ class TripleMatrix1 {
     int m, n;
     int num;
 
-    Triple data[] = new Triple[100];
+    Triple[] data = new Triple[100];
 
     public TripleMatrix1() {
     }
@@ -65,27 +65,30 @@ public class Trans_Frame extends JFrame {
             int aa2 = Integer.parseInt(Array2[2]);
 
             M.data[i] = new Triple(aa0,aa1,aa2);}
-        int ii, jj;
-        int index;
         String s = "";
-        int[][] a = new int[M.m][M.n];
-        for (index = 0; index < M.num; index++) {
-            for (ii = 0; ii < M.m; ii++) {
-                for (jj = 0; jj < M.n; jj++) {
-                    if (ii == M.data[index].x && jj == M.data[index].y) {
-                        a[ii][jj] = M.data[index].weight;
+        String ch = "";
+        int p = 0,k,h;
+        for (int row = 0; row < M.m; row++) {
+            for (int line = 0; line < M.n; line++) {
+                for (k = 0, h = 0; k < M.num; k++) {
+                    if (M.data[k].x == row && M.data[k].y == line) {
+                        p = M.data[k].weight;
+                        h = 1;
+                        break;
                     }
                 }
+                if (h == 0) {
+                    p = 0;}
+                ch = Integer.toString(p);
+                if (ch == "") {
+                    ch = "0";
+                }
+                s = s + ch + " ";
             }
-        }
-        for (ii = 0; ii < M.m; ii++) {
-            for (jj = 0; jj < M.n; jj++) {
-                s = s + (a[ii][jj]) + " ";
-            }
-            s=s + "\n";
+            s = s + "\n";
         }
         textArea2.setText(s);
-        JOptionPane.showMessageDialog(addTest,"输入成功");
+        JOptionPane.showMessageDialog(addTest, "创建成功");
     }
 
     private void button3(ActionEvent e) {
@@ -97,11 +100,12 @@ public class Trans_Frame extends JFrame {
         for(int ii=0;ii<M1.m;ii++){
             for(int jj=0;jj<M1.n;jj++){
                 String p="";
-                for(int index1=0;index1<M1.num;index1++)
+                for(int index1=0;index1<M1.num;index1++) {
                     if(ii==M1.data[index1].x&&jj==M1.data[index1].y)
                     {
                         p=Integer.toString(M1.data[index1].weight);
                     }
+                }
                 if(p==""){p="0";}
                 s=s+p+" ";
             }
