@@ -7,7 +7,6 @@ import java.util.ResourceBundle;
 /*
  * Created by JFormDesigner on Tue Mar 22 18:49:52 CST 2022
  */
-
 /**
  * @author unknown
  */
@@ -24,21 +23,6 @@ public class Main_Test extends JFrame {
         setVisible(true);
         setResizable(false);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-    }
-    static class Background extends JPanel {
-        Image im;
-
-        public Background(Image im) {
-            this.im = im;
-            this.setOpaque(true);
-        }
-
-        //Draw the back ground.
-        @Override
-        public void paintComponent(Graphics g) {
-            super.paintComponents(g);
-            g.drawImage(im, 0, 0, this.getWidth(), this.getHeight(), this);
-        }
     }
     private void Add(ActionEvent e) {
         new OperationUI().setVisible(true);

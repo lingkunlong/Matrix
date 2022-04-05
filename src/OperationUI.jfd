@@ -153,58 +153,6 @@ new FormModel {
 				"width": 170
 				"height": 195
 			} )
-			add( new FormComponent( "javax.swing.JTextArea" ) {
-				name: "textArea2"
-				"border": #EtchedBorder0
-				"background": new java.awt.Color( 204, 204, 204, 255 )
-				"foreground": new java.awt.Color( 0, 0, 0, 255 )
-				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 6, false )
-				"opaque": false
-			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-				"width": 170
-				"height": 195
-				"x": 315
-				"y": 135
-			} )
-			add( new FormComponent( "javax.swing.JTextArea" ) {
-				name: "textArea3"
-				"border": #EtchedBorder0
-				"background": new java.awt.Color( 204, 204, 204, 255 )
-				"foreground": new java.awt.Color( 0, 0, 0, 255 )
-				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 6, false )
-				"opaque": false
-			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-				"width": 170
-				"height": 195
-				"x": 25
-				"y": 420
-			} )
-			add( new FormComponent( "javax.swing.JTextArea" ) {
-				name: "textArea4"
-				"border": #EtchedBorder0
-				"background": new java.awt.Color( 204, 204, 204, 255 )
-				"foreground": new java.awt.Color( 0, 0, 0, 255 )
-				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 6, false )
-				"opaque": false
-			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-				"width": 170
-				"height": 195
-				"x": 315
-				"y": 420
-			} )
-			add( new FormComponent( "javax.swing.JTextArea" ) {
-				name: "textArea5"
-				"border": #EtchedBorder0
-				"foreground": new java.awt.Color( 0, 0, 0, 255 )
-				"background": new java.awt.Color( 204, 204, 204, 255 )
-				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 6, false )
-				"opaque": false
-			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-				"width": 218
-				"height": 478
-				"x": 520
-				"y": 135
-			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "button6"
 				"text": new FormMessage( null, "button6.text" )
@@ -247,16 +195,80 @@ new FormModel {
 				"height": 40
 				"width": 75
 			} )
+			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+				name: "scrollPane2"
+				add( new FormComponent( "javax.swing.JTextArea" ) {
+					name: "textArea2"
+					"border": #EtchedBorder0
+					"background": new java.awt.Color( 204, 204, 204, 255 )
+					"foreground": new java.awt.Color( 0, 0, 0, 255 )
+					"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 6, false )
+					"opaque": false
+				} )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 315
+				"y": 135
+				"width": 170
+				"height": 195
+			} )
+			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+				name: "scrollPane3"
+				add( new FormComponent( "javax.swing.JTextArea" ) {
+					name: "textArea3"
+					"border": #EtchedBorder0
+					"background": new java.awt.Color( 204, 204, 204, 255 )
+					"foreground": new java.awt.Color( 0, 0, 0, 255 )
+					"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 6, false )
+					"opaque": false
+				} )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 25
+				"y": 420
+				"width": 170
+				"height": 195
+			} )
+			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+				name: "scrollPane4"
+				add( new FormComponent( "javax.swing.JTextArea" ) {
+					name: "textArea4"
+					"border": #EtchedBorder0
+					"background": new java.awt.Color( 204, 204, 204, 255 )
+					"foreground": new java.awt.Color( 0, 0, 0, 255 )
+					"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 6, false )
+					"opaque": false
+				} )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 315
+				"y": 420
+				"width": 170
+				"height": 195
+			} )
+			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+				name: "scrollPane5"
+				add( new FormComponent( "javax.swing.JTextArea" ) {
+					name: "textArea5"
+					"border": #EtchedBorder0
+					"foreground": new java.awt.Color( 0, 0, 0, 255 )
+					"background": new java.awt.Color( 204, 204, 204, 255 )
+					"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 6, false )
+					"opaque": false
+				} )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 520
+				"y": 135
+				"width": 218
+				"height": 478
+			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "label5"
 				"text": new FormMessage( null, "label5.text" )
 				"icon": new com.jformdesigner.model.SwingIcon( 1, "D:\\向日葵\\v2.jpg" )
 				"foreground": new java.awt.Color( 153, 153, 153, 255 )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-				"x": -440
-				"y": 0
 				"width": 1255
 				"height": 865
+				"x": -460
+				"y": 0
 			} )
 			menuBar: new FormContainer( "javax.swing.JMenuBar", new FormLayoutManager( class javax.swing.JMenuBar ) ) {
 				name: "menuBar1"
@@ -278,7 +290,7 @@ new FormModel {
 				} )
 			}
 		}, new FormLayoutConstraints( null ) {
-			"location": new java.awt.Point( 0, 10 )
+			"location": new java.awt.Point( 1235, 20 )
 			"size": new java.awt.Dimension( 780, 755 )
 		} )
 	}

@@ -27,7 +27,6 @@ class Triple{
 }
 class TripleMatrix {
 
-    //Triple[] triples;
     int m, n;//矩阵的行数和列数
     int num;//非零元个数
     int[] rops;//各行第一个非零元的在tripls数组里的位置表
@@ -35,7 +34,6 @@ class TripleMatrix {
 
     public TripleMatrix() {
     }
-
     public TripleMatrix(int m, int n, int num) {
 
         this.m = m;
@@ -43,7 +41,6 @@ class TripleMatrix {
         this.num = num;
     }
 }
-
 public class OperationUI extends JFrame {
         public TripleMatrix M = new TripleMatrix();
         public TripleMatrix M1 = new TripleMatrix();
@@ -313,13 +310,17 @@ public class OperationUI extends JFrame {
             button5 = new JButton();
             scrollPane1 = new JScrollPane();
             textArea1 = new JTextArea();
-            textArea2 = new JTextArea();
-            textArea3 = new JTextArea();
-            textArea4 = new JTextArea();
-            textArea5 = new JTextArea();
             button6 = new JButton();
             button7 = new JButton();
             button8 = new JButton();
+            scrollPane2 = new JScrollPane();
+            textArea2 = new JTextArea();
+            scrollPane3 = new JScrollPane();
+            textArea3 = new JTextArea();
+            scrollPane4 = new JScrollPane();
+            textArea4 = new JTextArea();
+            scrollPane5 = new JScrollPane();
+            textArea5 = new JTextArea();
             label5 = new JLabel();
 
             //======== this ========
@@ -400,13 +401,7 @@ public class OperationUI extends JFrame {
             button2.setBorder(new EtchedBorder());
             button2.setForeground(Color.black);
             button2.setFont(button2.getFont().deriveFont(button2.getFont().getSize() + 4f));
-            button2.addActionListener(e -> {
-                try {
-                    button2(e);
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                }
-            });
+            button2.addActionListener(e -> button2(e));
             contentPane.add(button2);
             button2.setBounds(215, 215, 78, 40);
 
@@ -450,9 +445,9 @@ public class OperationUI extends JFrame {
             button5.setForeground(Color.black);
             button5.setFont(button5.getFont().deriveFont(button5.getFont().getSize() + 4f));
             button5.addActionListener(e -> {
-                ResultA(e);
-                button5(e);
-            });
+			ResultA(e);
+			button5(e);
+		});
             contentPane.add(button5);
             button5.setBounds(60, 630, 75, 40);
 
@@ -471,42 +466,6 @@ public class OperationUI extends JFrame {
             }
             contentPane.add(scrollPane1);
             scrollPane1.setBounds(25, 135, 170, 195);
-
-            //---- textArea2 ----
-            textArea2.setBorder(new EtchedBorder());
-            textArea2.setBackground(new Color(204, 204, 204));
-            textArea2.setForeground(Color.black);
-            textArea2.setFont(textArea2.getFont().deriveFont(textArea2.getFont().getSize() + 6f));
-            textArea2.setOpaque(false);
-            contentPane.add(textArea2);
-            textArea2.setBounds(315, 135, 170, 195);
-
-            //---- textArea3 ----
-            textArea3.setBorder(new EtchedBorder());
-            textArea3.setBackground(new Color(204, 204, 204));
-            textArea3.setForeground(Color.black);
-            textArea3.setFont(textArea3.getFont().deriveFont(textArea3.getFont().getSize() + 6f));
-            textArea3.setOpaque(false);
-            contentPane.add(textArea3);
-            textArea3.setBounds(25, 420, 170, 195);
-
-            //---- textArea4 ----
-            textArea4.setBorder(new EtchedBorder());
-            textArea4.setBackground(new Color(204, 204, 204));
-            textArea4.setForeground(Color.black);
-            textArea4.setFont(textArea4.getFont().deriveFont(textArea4.getFont().getSize() + 6f));
-            textArea4.setOpaque(false);
-            contentPane.add(textArea4);
-            textArea4.setBounds(315, 420, 170, 195);
-
-            //---- textArea5 ----
-            textArea5.setBorder(new EtchedBorder());
-            textArea5.setForeground(Color.black);
-            textArea5.setBackground(new Color(204, 204, 204));
-            textArea5.setFont(textArea5.getFont().deriveFont(textArea5.getFont().getSize() + 6f));
-            textArea5.setOpaque(false);
-            contentPane.add(textArea5);
-            textArea5.setBounds(520, 135, 218, 478);
 
             //---- button6 ----
             button6.setText(bundle.getString("button6.text"));
@@ -538,12 +497,68 @@ public class OperationUI extends JFrame {
             contentPane.add(button8);
             button8.setBounds(615, 630, 75, 40);
 
+            //======== scrollPane2 ========
+            {
+
+                //---- textArea2 ----
+                textArea2.setBorder(new EtchedBorder());
+                textArea2.setBackground(new Color(204, 204, 204));
+                textArea2.setForeground(Color.black);
+                textArea2.setFont(textArea2.getFont().deriveFont(textArea2.getFont().getSize() + 6f));
+                textArea2.setOpaque(false);
+                scrollPane2.setViewportView(textArea2);
+            }
+            contentPane.add(scrollPane2);
+            scrollPane2.setBounds(315, 135, 170, 195);
+
+            //======== scrollPane3 ========
+            {
+
+                //---- textArea3 ----
+                textArea3.setBorder(new EtchedBorder());
+                textArea3.setBackground(new Color(204, 204, 204));
+                textArea3.setForeground(Color.black);
+                textArea3.setFont(textArea3.getFont().deriveFont(textArea3.getFont().getSize() + 6f));
+                textArea3.setOpaque(false);
+                scrollPane3.setViewportView(textArea3);
+            }
+            contentPane.add(scrollPane3);
+            scrollPane3.setBounds(25, 420, 170, 195);
+
+            //======== scrollPane4 ========
+            {
+
+                //---- textArea4 ----
+                textArea4.setBorder(new EtchedBorder());
+                textArea4.setBackground(new Color(204, 204, 204));
+                textArea4.setForeground(Color.black);
+                textArea4.setFont(textArea4.getFont().deriveFont(textArea4.getFont().getSize() + 6f));
+                textArea4.setOpaque(false);
+                scrollPane4.setViewportView(textArea4);
+            }
+            contentPane.add(scrollPane4);
+            scrollPane4.setBounds(315, 420, 170, 195);
+
+            //======== scrollPane5 ========
+            {
+
+                //---- textArea5 ----
+                textArea5.setBorder(new EtchedBorder());
+                textArea5.setForeground(Color.black);
+                textArea5.setBackground(new Color(204, 204, 204));
+                textArea5.setFont(textArea5.getFont().deriveFont(textArea5.getFont().getSize() + 6f));
+                textArea5.setOpaque(false);
+                scrollPane5.setViewportView(textArea5);
+            }
+            contentPane.add(scrollPane5);
+            scrollPane5.setBounds(520, 135, 218, 478);
+
             //---- label5 ----
             label5.setText(bundle.getString("label5.text"));
             label5.setIcon(new ImageIcon("D:\\\u5411\u65e5\u8475\\v2.jpg"));
             label5.setForeground(new Color(153, 153, 153));
             contentPane.add(label5);
-            label5.setBounds(-440, 0, 1255, 865);
+            label5.setBounds(-460, 0, 1255, 865);
 
             contentPane.setPreferredSize(new Dimension(780, 755));
             setSize(780, 755);
@@ -567,13 +582,17 @@ public class OperationUI extends JFrame {
         private JButton button5;
         private JScrollPane scrollPane1;
         private JTextArea textArea1;
-        private JTextArea textArea2;
-        private JTextArea textArea3;
-        private JTextArea textArea4;
-        private JTextArea textArea5;
         private JButton button6;
         private JButton button7;
         private JButton button8;
+        private JScrollPane scrollPane2;
+        private JTextArea textArea2;
+        private JScrollPane scrollPane3;
+        private JTextArea textArea3;
+        private JScrollPane scrollPane4;
+        private JTextArea textArea4;
+        private JScrollPane scrollPane5;
+        private JTextArea textArea5;
         private JLabel label5;
         // JFormDesigner - End of variables declaration  //GEN-END:variables
     }

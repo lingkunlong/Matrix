@@ -9,9 +9,6 @@ import java.util.ResourceBundle;
 /*
  * Created by JFormDesigner on Tue Mar 22 19:12:20 CST 2022
  */
-
-
-
 /**
  * @author unknown
  */
@@ -51,9 +48,8 @@ public class Trans_Frame extends JFrame {
         setTitle("稀疏矩阵转置运算");
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
     }
-
+//创建矩阵并显示
     private void button2(ActionEvent e) {
-
         String[] Array = textField1.getText().split(" ");
         int a0 = Integer.parseInt(Array[0]);
         int a1 = Integer.parseInt(Array[1]);
@@ -73,8 +69,6 @@ public class Trans_Frame extends JFrame {
         int index;
         String s = "";
         int[][] a = new int[M.m][M.n];
-//        int[][] b = new int[M.m][M.n];
-//        int[][] c = new int[M.m][M.n];
         for (index = 0; index < M.num; index++) {
             for (ii = 0; ii < M.m; ii++) {
                 for (jj = 0; jj < M.n; jj++) {
@@ -112,7 +106,6 @@ public class Trans_Frame extends JFrame {
                 s=s+p+" ";
             }
             s=s+"\n";
-
         }
         textArea3.setText(s);
     }
@@ -183,6 +176,7 @@ public class Trans_Frame extends JFrame {
         textField1.setBackground(new Color(204, 204, 204));
         textField1.setOpaque(false);
         textField1.setForeground(Color.black);
+        textField1.setFont(textField1.getFont().deriveFont(textField1.getFont().getSize() + 3f));
         contentPane.add(textField1);
         textField1.setBounds(20, 45, 190, 40);
 
@@ -204,7 +198,7 @@ public class Trans_Frame extends JFrame {
             scrollPane1.setViewportView(textArea1);
         }
         contentPane.add(scrollPane1);
-        scrollPane1.setBounds(25, 115, 185, 145);
+        scrollPane1.setBounds(25, 115, 185, 165);
 
         //======== scrollPane2 ========
         {
@@ -216,7 +210,7 @@ public class Trans_Frame extends JFrame {
             scrollPane2.setViewportView(textArea2);
         }
         contentPane.add(scrollPane2);
-        scrollPane2.setBounds(285, 115, 185, 145);
+        scrollPane2.setBounds(285, 115, 185, 165);
 
         //---- button2 ----
         button2.setText(bundle.getString("button2.text"));
@@ -287,7 +281,7 @@ public class Trans_Frame extends JFrame {
         label4.setText(bundle.getString("label4.text_2"));
         label4.setIcon(new ImageIcon("D:\\\u5411\u65e5\u8475\\\u6781\u7b80\u80cc\u666f\u7684\u641c\u7d22\u7ed3\u679c_\u767e\u5ea6\u56fe\u7247\u641c\u7d22\\src_http___img9.51tietu.net_pic_2019-091121_cr4ljqssqgqcr4ljqssqgq.jpg&refer_http___img9.51tietu.jpg"));
         contentPane.add(label4);
-        label4.setBounds(-115, -10, 620, 565);
+        label4.setBounds(-80, 0, 620, 565);
 
         contentPane.setPreferredSize(new Dimension(490, 550));
         pack();
