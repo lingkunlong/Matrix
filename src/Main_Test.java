@@ -24,6 +24,7 @@ public class Main_Test extends JFrame {
         setResizable(false);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
+    //跳转主界面
     private void Add(ActionEvent e) {
         new OperationUI().setVisible(true);
     }
