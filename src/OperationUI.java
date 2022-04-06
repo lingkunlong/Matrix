@@ -1,4 +1,3 @@
-
 import java.awt.*;
 import java.awt.event.*;
 import java.security.interfaces.RSAKey;
@@ -336,6 +335,22 @@ public class OperationUI extends JFrame {
             new About().setVisible(true);
         }
 
+        private void menu1(ActionEvent e) {
+            // TODO add your code here
+        }
+
+        private void textField1(ActionEvent e) {
+            // TODO add your code here
+        }
+
+        private void ResultA(ActionEvent e) {
+            // TODO add your code here
+        }
+
+        private void textArea1CaretUpdate(CaretEvent e) {
+            // TODO add your code here
+        }
+
 
         //界面
         private void initComponents() {
@@ -382,7 +397,7 @@ public class OperationUI extends JFrame {
                     menu1.setText(bundle.getString("menu1.text"));
                     menu1.setOpaque(false);
                     menu1.setFont(menu1.getFont().deriveFont(menu1.getFont().getSize() + 3f));
-
+                    menu1.addActionListener(e -> menu1(e));
                     menu1.addMouseListener(new MouseAdapter() {
                         @Override
                         public void mouseClicked(MouseEvent e) {
@@ -437,6 +452,7 @@ public class OperationUI extends JFrame {
             textField1.setForeground(Color.black);
             textField1.setFont(textField1.getFont().deriveFont(textField1.getFont().getSize() + 1f));
             textField1.setOpaque(false);
+            textField1.addActionListener(e -> textField1(e));
             contentPane.add(textField1);
             textField1.setBounds(245, 45, 100, 35);
 
@@ -502,7 +518,7 @@ public class OperationUI extends JFrame {
             button5.setForeground(Color.black);
             button5.setFont(button5.getFont().deriveFont(button5.getFont().getSize() + 4f));
             button5.addActionListener(e -> {
-
+			ResultA(e);
 			button5(e);
 		});
             contentPane.add(button5);
@@ -518,7 +534,7 @@ public class OperationUI extends JFrame {
                 textArea1.setForeground(Color.black);
                 textArea1.setFont(textArea1.getFont().deriveFont(textArea1.getFont().getSize() + 6f));
                 textArea1.setOpaque(false);
-
+                textArea1.addCaretListener(e -> textArea1CaretUpdate(e));
                 scrollPane1.setViewportView(textArea1);
             }
             contentPane.add(scrollPane1);
