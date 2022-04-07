@@ -279,6 +279,9 @@ public class Inverse extends JFrame {
 
         //======== scrollPane1 ========
         {
+
+            //---- textArea1 ----
+            textArea1.setFont(textArea1.getFont().deriveFont(textArea1.getFont().getSize() + 6f));
             scrollPane1.setViewportView(textArea1);
         }
         contentPane.add(scrollPane1);
@@ -286,6 +289,9 @@ public class Inverse extends JFrame {
 
         //======== scrollPane2 ========
         {
+
+            //---- textArea2 ----
+            textArea2.setFont(textArea2.getFont().deriveFont(textArea2.getFont().getSize() + 6f));
             scrollPane2.setViewportView(textArea2);
         }
         contentPane.add(scrollPane2);
@@ -298,11 +304,7 @@ public class Inverse extends JFrame {
         label3.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                try {
-                    label3Clicked(e);
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                }
+                label3Clicked(e);
             }
         });
         contentPane.add(label3);
@@ -310,6 +312,9 @@ public class Inverse extends JFrame {
 
         //======== scrollPane3 ========
         {
+
+            //---- textArea3 ----
+            textArea3.setFont(textArea3.getFont().deriveFont(textArea3.getFont().getSize() + 6f));
             scrollPane3.setViewportView(textArea3);
         }
         contentPane.add(scrollPane3);
