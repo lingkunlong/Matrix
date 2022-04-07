@@ -351,6 +351,11 @@ public class OperationUI extends JFrame {
             // TODO add your code here
         }
 
+        private void menu3MouseClicked(MouseEvent e) {
+            // TODO add your code here
+            new Inverse().setVisible(true);
+        }
+
 
         //界面
         private void initComponents() {
@@ -359,6 +364,7 @@ public class OperationUI extends JFrame {
             menuBar1 = new JMenuBar();
             menu1 = new JMenu();
             menu2 = new JMenu();
+            menu3 = new JMenu();
             panel1 = new JPanel();
             label1 = new JLabel();
             label2 = new JLabel();
@@ -420,6 +426,20 @@ public class OperationUI extends JFrame {
                     });
                 }
                 menuBar1.add(menu2);
+
+                //======== menu3 ========
+                {
+                    menu3.setText(bundle.getString("menu3.text"));
+                    menu3.setFont(menu3.getFont().deriveFont(menu3.getFont().getSize() + 3f));
+                    menu3.setOpaque(false);
+                    menu3.addMouseListener(new MouseAdapter() {
+                        @Override
+                        public void mouseClicked(MouseEvent e) {
+                            menu3MouseClicked(e);
+                        }
+                    });
+                }
+                menuBar1.add(menu3);
             }
             setJMenuBar(menuBar1);
 
@@ -643,6 +663,7 @@ public class OperationUI extends JFrame {
         private JMenuBar menuBar1;
         private JMenu menu1;
         private JMenu menu2;
+        private JMenu menu3;
         private JPanel panel1;
         private JLabel label1;
         private JLabel label2;
