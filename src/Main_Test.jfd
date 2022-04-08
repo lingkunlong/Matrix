@@ -9,6 +9,7 @@ new FormModel {
 			"autoSize": false
 		} ) {
 			name: "this"
+			"iconImage": new com.jformdesigner.model.SwingIcon( 1, "C:\\Users\\lyjyyy\\Desktop\\wizard，笔记本电脑.png" )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "button1"
 				"text": new FormMessage( null, "button1.text" )
@@ -18,8 +19,8 @@ new FormModel {
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "Add", true ) )
 				addEvent( new FormEvent( "java.awt.event.KeyListener", "keyPressed", "button1KeyPressed", true ) )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-				"x": 245
-				"y": 40
+				"x": 215
+				"y": 270
 				"height": 50
 				"width": 100
 			} )
@@ -32,17 +33,73 @@ new FormModel {
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "label1"
-				"text": new FormMessage( null, "label1.text_3" )
-				"icon": new com.jformdesigner.model.SwingIcon( 1, "D:\\向日葵\\v2.jpg" )
+				"icon": new com.jformdesigner.model.SwingIcon( 1, "C:\\Users\\lyjyyy\\Desktop\\Vertical symbol.png" )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-				"width": 995
-				"height": 505
-				"x": -605
-				"y": -150
+				"x": 45
+				"y": 15
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label2"
+				"icon": new com.jformdesigner.model.SwingIcon( 1, "C:\\Users\\lyjyyy\\Desktop\\Plus sign.png" )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 190
+				"y": 15
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label3"
+				"icon": new com.jformdesigner.model.SwingIcon( 1, "C:\\Users\\lyjyyy\\Desktop\\minus sign.png" )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 330
+				"y": 20
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label4"
+				"icon": new com.jformdesigner.model.SwingIcon( 1, "C:\\Users\\lyjyyy\\Desktop\\Multiplication.png" )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 455
+				"y": 20
+			} )
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
+				name: "panel2"
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 45
+				"y": -25
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label6"
+				"text": new FormMessage( null, "label6.text" )
+				"alignmentX": 1.0f
+				"alignmentY": 0.0f
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 30
+				"y": 80
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label7"
+				"text": new FormMessage( null, "label7.text" )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 30
+				"y": 120
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label8"
+				"text": new FormMessage( null, "label8.text" )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 190
+				"y": 155
 			} )
 		}, new FormLayoutConstraints( null ) {
-			"location": new java.awt.Point( 365, 60 )
-			"size": new java.awt.Dimension( 370, 355 )
+			"location": new java.awt.Point( 75, 10 )
+			"size": new java.awt.Dimension( 530, 380 )
+		} )
+		add( new FormComponent( "javax.swing.JLabel" ) {
+			name: "label5"
+			"foreground": new java.awt.Color( 153, 180, 209, 140 )
+			"background": new java.awt.Color( 204, 255, 204, 229 )
+			"opaque": true
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 575, 370 )
+			"size": new java.awt.Dimension( 530, 350 )
 		} )
 	}
 }
