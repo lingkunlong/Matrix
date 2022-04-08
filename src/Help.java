@@ -37,7 +37,7 @@ public class Help extends JFrame {
 
         //---- label1 ----
         label1.setText(bundle.getString("label1.text_5"));
-        label1.setFont(label1.getFont().deriveFont(label1.getFont().getSize() + 4f));
+        label1.setFont(label1.getFont().deriveFont(label1.getFont().getSize() + 5f));
         label1.setHorizontalAlignment(SwingConstants.LEFT);
         contentPane.add(label1);
         label1.setBounds(55, 30, 505, 25);

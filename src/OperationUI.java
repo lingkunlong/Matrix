@@ -57,7 +57,7 @@ public class OperationUI extends JFrame {
         public OperationUI() {
             initComponents();
             setTitle("稀疏矩阵运算");
-            setResizable(false);
+            //setResizable(false);
             setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         }
 //创建第一个矩阵

@@ -12,7 +12,7 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "label1"
 				"text": new FormMessage( null, "label1.text_5" )
-				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 4, false )
+				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 5, false )
 				"horizontalAlignment": 2
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"x": 55

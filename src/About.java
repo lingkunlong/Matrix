@@ -5,8 +5,6 @@ import java.util.ResourceBundle;
  * Created by JFormDesigner on Wed Mar 30 21:25:46 CST 2022
  */
 
-
-
 /**
  * @author unknown
  */
@@ -15,8 +13,8 @@ public class About extends JFrame {
         initComponents();
         setVisible(true);
         setTitle("关于");
-        setResizable(false);
-        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(true);
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);//关闭窗体时，释放窗体资源，窗体会消失但是程序不停止
     }
 
     private void initComponents() {
