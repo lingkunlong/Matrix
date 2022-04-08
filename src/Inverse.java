@@ -109,21 +109,28 @@ public class Inverse extends JFrame {
         setVisible(true);
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("求逆矩阵");
+        label1.setFont(new Font("楷体",Font.BOLD,15));
+        label2.setFont(new Font("楷体",Font.BOLD,15));
+        label3.setFont(new Font("楷体",Font.BOLD,30));
+        label4.setFont(new Font("楷体",Font.BOLD,30));
     }
 
-    private void label3Clicked(MouseEvent e) throws Exception {
-        String[] Array = textField1.getText().split(" ");
-        int a0 = Integer.parseInt(Array[0]);
-        int a1 = Integer.parseInt(Array[1]);
-        int a2 = Integer.parseInt(Array[2]);
+    private void label3Clicked(MouseEvent e) {
+        try {
+            String[] Array = textField1.getText().split(" ");
+            int a0 = Integer.parseInt(Array[0]);
+            int a1 = Integer.parseInt(Array[1]);
+            int a2 = Integer.parseInt(Array[2]);
 
-        if(a0<=0||a1<=0){
-            textField1.setText("");
-            throw new Exception("输入非法，行数和列数必须为正数,请重新输入");
-        }else {
-            M = new TripleMatrix(a0, a1, a2);
+            if(a0<=0||a1<=0){
+                textField1.setText("");
+                throw new Exception("输入非法，行数和列数必须为正数,请重新输入");
+            }else {
+                M = new TripleMatrix(a0, a1, a2);
+            }
+        }catch (Exception e1){
+            e1.printStackTrace();
         }
-
         //输入非零元位置
         int i = 0;
         String[] Array1 = textArea1.getText().split("\n");
@@ -308,7 +315,7 @@ public class Inverse extends JFrame {
             }
         });
         contentPane.add(label3);
-        label3.setBounds(267, 185, 50, 35);
+        label3.setBounds(260, 185, 70, 50);
 
         //======== scrollPane3 ========
         {

@@ -13,6 +13,11 @@ import java.util.ResourceBundle;
 public class Help1 extends JFrame {
     public Help1() {
         initComponents();
+        setVisible(true);
+        label1.setFont(new Font("楷体",Font.BOLD,20));
+        label2.setFont(new Font("楷体",Font.BOLD,20));
+        label3.setFont(new Font("楷体",Font.BOLD,20));
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
     }
 
     private void initComponents() {

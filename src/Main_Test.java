@@ -4,7 +4,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ResourceBundle;
-import javax.swing.plaf.*;
 /*
  * Created by JFormDesigner on Tue Mar 22 18:49:52 CST 2022
  */
@@ -23,7 +22,11 @@ public class Main_Test extends JFrame {//创建Main_Test类，使该类继承JFr
         setTitle("稀疏矩阵运算器");
         setVisible(true);
         setResizable(true);
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);//结束窗口所在的程序，退出JVM
+        label6.setFont(new Font("楷体",Font.BOLD,20));
+        label7.setFont(new Font("楷体",Font.BOLD,20));
+        label8.setFont(new Font("楷体",Font.BOLD,20));
+        //结束窗口所在的程序，退出JVM
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
    private void Add(ActionEvent e) {
       new OperationUI().setVisible(true);//下一个界面的监听事件，用作跳转
@@ -31,7 +34,8 @@ public class Main_Test extends JFrame {//创建Main_Test类，使该类继承JFr
 
     private void button1KeyPressed(KeyEvent e) {
         // TODO add your code her
-        if(e.getKeyChar() == '\n'){ //判断输入的是否是回车键
+        //判断输入的是否是回车键
+        if(e.getKeyChar() == '\n'){
             button1.doClick();
         }
     }
@@ -139,18 +143,21 @@ public class Main_Test extends JFrame {//创建Main_Test类，使该类继承JFr
         label6.setText(bundle.getString("label6.text"));
         label6.setAlignmentX(1.0F);
         label6.setAlignmentY(0.0F);
+        label6.setFont(label6.getFont().deriveFont(label6.getFont().getSize() + 4f));
         contentPane.add(label6);
-        label6.setBounds(new Rectangle(new Point(30, 80), label6.getPreferredSize()));
+        label6.setBounds(30, 80, 285, 25);
 
         //---- label7 ----
         label7.setText(bundle.getString("label7.text"));
+        label7.setFont(label7.getFont().deriveFont(label7.getFont().getSize() + 4f));
         contentPane.add(label7);
-        label7.setBounds(new Rectangle(new Point(30, 120), label7.getPreferredSize()));
+        label7.setBounds(30, 120, 495, 30);
 
         //---- label8 ----
         label8.setText(bundle.getString("label8.text"));
+        label8.setFont(label8.getFont().deriveFont(label8.getFont().getSize() + 4f));
         contentPane.add(label8);
-        label8.setBounds(new Rectangle(new Point(190, 155), label8.getPreferredSize()));
+        label8.setBounds(200, 155, 275, 35);
 
         contentPane.setPreferredSize(new Dimension(530, 380));
         pack();

@@ -47,18 +47,28 @@ public class Trans_Frame extends JFrame {
         setResizable(false);
         setTitle("稀疏矩阵转置运算");
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        label1.setFont(new Font("楷体",Font.BOLD,15));
+        label2.setFont(new Font("楷体",Font.BOLD,15));
+        label3.setFont(new Font("楷体",Font.BOLD,15));
+        button2.setFont(new Font("楷体",Font.BOLD,25));
+        button3.setFont(new Font("楷体",Font.BOLD,30));
+        menu1.setFont(new Font("楷体",Font.BOLD,20));
     }
 //创建矩阵并显示
-    private void button2(ActionEvent e) throws Exception{
-        String[] Array = textField1.getText().split(" ");
-        int a0 = Integer.parseInt(Array[0]);
-        int a1 = Integer.parseInt(Array[1]);
-        int a2 = Integer.parseInt(Array[2]);
-        if(a0<=0||a1<=0){
-            textField1.setText("");
-            throw new Exception("输入非法，行数和列数必须为正数,请重新输入");
-        }else {
-            M = new TripleMatrix(a0, a1, a2);
+    private void button2(ActionEvent e){
+        try {
+            String[] Array = textField1.getText().split(" ");
+            int a0 = Integer.parseInt(Array[0]);
+            int a1 = Integer.parseInt(Array[1]);
+            int a2 = Integer.parseInt(Array[2]);
+            if(a0<=0||a1<=0){
+                textField1.setText("");
+                throw new Exception("输入非法，行数和列数必须为正数,请重新输入");
+            }else {
+                M = new TripleMatrix(a0, a1, a2);
+            }
+        }catch (Exception e1){
+            e1.printStackTrace();
         }
         //int i=0;
         String[] Array1 = textArea1.getText().split("\n");
@@ -240,13 +250,7 @@ public class Trans_Frame extends JFrame {
         button2.setBackground(Color.black);
         button2.setForeground(Color.black);
         button2.setFont(button2.getFont().deriveFont(button2.getFont().getSize() + 5f));
-        button2.addActionListener(e -> {
-            try {
-                button2(e);
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
-        });
+        button2.addActionListener(e -> button2(e));
         contentPane.add(button2);
         button2.setBounds(217, 155, 60, 50);
 

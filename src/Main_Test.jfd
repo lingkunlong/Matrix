@@ -70,23 +70,32 @@ new FormModel {
 				"text": new FormMessage( null, "label6.text" )
 				"alignmentX": 1.0f
 				"alignmentY": 0.0f
+				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 4, false )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"x": 30
 				"y": 80
+				"width": 285
+				"height": 25
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "label7"
 				"text": new FormMessage( null, "label7.text" )
+				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 4, false )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"x": 30
 				"y": 120
+				"width": 495
+				"height": 30
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "label8"
 				"text": new FormMessage( null, "label8.text" )
+				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 4, false )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-				"x": 190
+				"x": 200
 				"y": 155
+				"width": 275
+				"height": 35
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 75, 10 )

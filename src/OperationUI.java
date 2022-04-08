@@ -39,6 +39,9 @@ class TripleMatrix {
     }
 }
 public class OperationUI extends JFrame {
+    public static void main(String[] args) {
+        new OperationUI();
+    }
         public TripleMatrix M = new TripleMatrix();
         public TripleMatrix M1 = new TripleMatrix();
         public TripleMatrix M2 = new TripleMatrix();
@@ -57,22 +60,41 @@ public class OperationUI extends JFrame {
         public OperationUI() {
             initComponents();
             setTitle("稀疏矩阵运算");
+            setVisible(true);
+            label1.setFont(new Font("楷体",Font.BOLD,15));
+            label2.setFont(new Font("楷体",Font.BOLD,15));
+            label3.setFont(new Font("楷体",Font.BOLD,15));
+            label4.setFont(new Font("楷体",Font.BOLD,15));
+            button2.setFont(new Font("楷体",Font.BOLD,30));
+            button4.setFont(new Font("楷体",Font.BOLD,30));
+            button5.setFont(new Font("楷体",Font.BOLD,30));
+            button6.setFont(new Font("楷体",Font.BOLD,30));
+            button7.setFont(new Font("楷体",Font.BOLD,30));
+            button8.setFont(new Font("楷体",Font.BOLD,30));
+            menu1.setFont(new Font("楷体",Font.BOLD,20));
+            menu2.setFont(new Font("楷体",Font.BOLD,20));
+            menu3.setFont(new Font("楷体",Font.BOLD,20));
+
             //setResizable(false);
             setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         }
 //创建第一个矩阵
-        private void button2(ActionEvent e) throws Exception {
+        private void button2(ActionEvent e) {
             //输入矩阵行数和列数和非零元个数
-            String[] Array = textField1.getText().split(" ");
-            int a0 = Integer.parseInt(Array[0]);
-            int a1 = Integer.parseInt(Array[1]);
-            int a2 = Integer.parseInt(Array[2]);
+            try {
+                String[] Array = textField1.getText().split(" ");
+                int a0 = Integer.parseInt(Array[0]);
+                int a1 = Integer.parseInt(Array[1]);
+                int a2 = Integer.parseInt(Array[2]);
 
-            if(a0<=0||a1<=0){
-                textField1.setText("");
-                throw new Exception("输入非法，行数和列数必须为正数,请重新输入");
-            }else {
-                M = new TripleMatrix(a0, a1, a2);
+                if(a0<=0||a1<=0){
+                    textField1.setText("");
+                    throw new Exception("输入非法，行数和列数必须为正数,请重新输入");
+                }else {
+                    M = new TripleMatrix(a0, a1, a2);
+                }
+            }catch (Exception e1){
+                e1.printStackTrace();
             }
 
             //输入非零元位置
@@ -125,7 +147,8 @@ public class OperationUI extends JFrame {
             JOptionPane.showMessageDialog(addTest, "创建成功");
         }
 //创建第二个矩阵
-        private void button4(ActionEvent e) throws Exception {
+        private void button4(ActionEvent e){
+            try{
             String[] Array = textField4.getText().split(" ");
             int a0 = Integer.parseInt(Array[0]);
             int a1 = Integer.parseInt(Array[1]);
@@ -135,6 +158,9 @@ public class OperationUI extends JFrame {
                 throw new Exception("输入非法，行数和列数必须为正数,请重新输入");
             }else {
                 M1 = new TripleMatrix(a0, a1, a2);
+            }
+            }catch (Exception e1){
+                e1.printStackTrace();
             }
 
             int i = 0;
@@ -456,7 +482,7 @@ public class OperationUI extends JFrame {
             label1.setForeground(Color.black);
             label1.setFont(label1.getFont().deriveFont(label1.getFont().getSize() + 2f));
             contentPane.add(label1);
-            label1.setBounds(25, 45, 205, 30);
+            label1.setBounds(25, 45, 210, 30);
 
             //---- label2 ----
             label2.setText(bundle.getString("label2.text"));
@@ -464,7 +490,7 @@ public class OperationUI extends JFrame {
             label2.setForeground(Color.black);
             label2.setFont(label2.getFont().deriveFont(label2.getFont().getSize() + 2f));
             contentPane.add(label2);
-            label2.setBounds(25, 90, 105, 30);
+            label2.setBounds(25, 90, 160, 30);
 
             //---- textField1 ----
             textField1.setBorder(new EtchedBorder());
@@ -482,13 +508,7 @@ public class OperationUI extends JFrame {
             button2.setBorder(new EtchedBorder());
             button2.setForeground(Color.black);
             button2.setFont(button2.getFont().deriveFont(button2.getFont().getSize() + 4f));
-            button2.addActionListener(e -> {
-                try {
-                    button2(e);
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                }
-            });
+            button2.addActionListener(e -> button2(e));
             contentPane.add(button2);
             button2.setBounds(215, 215, 78, 40);
 
@@ -504,7 +524,7 @@ public class OperationUI extends JFrame {
             label4.setForeground(Color.black);
             label4.setFont(label4.getFont().deriveFont(label4.getFont().getSize() + 2f));
             contentPane.add(label4);
-            label4.setBounds(25, 385, 105, 30);
+            label4.setBounds(30, 385, 160, 30);
 
             //---- textField4 ----
             textField4.setBorder(new EtchedBorder());
@@ -521,13 +541,7 @@ public class OperationUI extends JFrame {
             button4.setBorder(new EtchedBorder());
             button4.setForeground(Color.black);
             button4.setFont(button4.getFont().deriveFont(button4.getFont().getSize() + 4f));
-            button4.addActionListener(e -> {
-                try {
-                    button4(e);
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                }
-            });
+            button4.addActionListener(e -> button4(e));
             contentPane.add(button4);
             button4.setBounds(215, 505, 78, 40);
 

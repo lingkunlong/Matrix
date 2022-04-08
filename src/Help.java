@@ -19,6 +19,11 @@ public class Help extends JFrame {
         setResizable(false);
         setTitle("帮助");
         setVisible(true);
+        label1.setFont(new Font("楷体",Font.BOLD,20));
+        label2.setFont(new Font("楷体",Font.BOLD,20));
+        label3.setFont(new Font("楷体",Font.BOLD,20));
+        label4.setFont(new Font("楷体",Font.BOLD,20));
+        label5.setFont(new Font("楷体",Font.BOLD,20));
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
     }
 
@@ -40,37 +45,37 @@ public class Help extends JFrame {
         label1.setFont(label1.getFont().deriveFont(label1.getFont().getSize() + 5f));
         label1.setHorizontalAlignment(SwingConstants.LEFT);
         contentPane.add(label1);
-        label1.setBounds(55, 30, 505, 25);
+        label1.setBounds(30, 30, 505, 25);
 
         //---- label2 ----
         label2.setText(bundle.getString("label2.text_3"));
         label2.setFont(label2.getFont().deriveFont(label2.getFont().getSize() + 4f));
         label2.setHorizontalAlignment(SwingConstants.LEFT);
         contentPane.add(label2);
-        label2.setBounds(55, 65, 505, 25);
+        label2.setBounds(30, 65, 505, 25);
 
         //---- label3 ----
         label3.setFont(label3.getFont().deriveFont(label3.getFont().getSize() + 4f));
         label3.setHorizontalAlignment(SwingConstants.LEFT);
         label3.setText(bundle.getString("label3.text_3"));
         contentPane.add(label3);
-        label3.setBounds(55, 100, 505, 25);
+        label3.setBounds(30, 100, 505, 25);
 
         //---- label4 ----
         label4.setText(bundle.getString("label4.text_3"));
         label4.setFont(label4.getFont().deriveFont(label4.getFont().getSize() + 4f));
         label4.setHorizontalAlignment(SwingConstants.LEFT);
         contentPane.add(label4);
-        label4.setBounds(55, 135, 505, 25);
+        label4.setBounds(30, 135, 615, 25);
 
         //---- label5 ----
         label5.setText(bundle.getString("label5.text_2"));
         label5.setFont(label5.getFont().deriveFont(label5.getFont().getSize() + 4f));
         label5.setHorizontalAlignment(SwingConstants.LEFT);
         contentPane.add(label5);
-        label5.setBounds(55, 170, 505, 25);
+        label5.setBounds(30, 170, 505, 25);
 
-        contentPane.setPreferredSize(new Dimension(620, 245));
+        contentPane.setPreferredSize(new Dimension(650, 245));
         pack();
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
