@@ -13,7 +13,7 @@ import java.util.ResourceBundle;
  * @author unknown
  */
 
-class TripleMatrix1 {
+/*class TripleMatrix1 {
 
     int m, n;
     int num;
@@ -29,13 +29,13 @@ class TripleMatrix1 {
         this.n = n;
         this.num = num;
     }
-}
+}*/
 /**
  * @author 86188
  */
 public class Trans_Frame extends JFrame {
-    public TripleMatrix1 M=new TripleMatrix1();
-    public TripleMatrix1 M1=new TripleMatrix1();
+    public TripleMatrix M=new TripleMatrix();
+    public TripleMatrix M1=new TripleMatrix();
     private Component addTest;
 
     public static void main(String[] args) {
@@ -49,22 +49,38 @@ public class Trans_Frame extends JFrame {
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
     }
 //创建矩阵并显示
-    private void button2(ActionEvent e) {
+    private void button2(ActionEvent e) throws Exception{
         String[] Array = textField1.getText().split(" ");
         int a0 = Integer.parseInt(Array[0]);
         int a1 = Integer.parseInt(Array[1]);
         int a2 = Integer.parseInt(Array[2]);
-        M = new TripleMatrix1(a0,a1,a2);
+        if(a0<=0||a1<=0){
+            textField1.setText("");
+            throw new Exception("输入非法，行数和列数必须为正数,请重新输入");
+        }else {
+            M = new TripleMatrix(a0, a1, a2);
+        }
         //int i=0;
         String[] Array1 = textArea1.getText().split("\n");
         String[] Array2;
         for(int i=0;i<M.num;i++){
-            Array2=Array1[i].split(" ");
+            Array2 = Array1[i].split(" ");
             int aa0 = Integer.parseInt(Array2[0]);
             int aa1 = Integer.parseInt(Array2[1]);
             int aa2 = Integer.parseInt(Array2[2]);
-
-            M.data[i] = new Triple(aa0,aa1,aa2);}
+            if((aa0>M.m-1||aa0<0)||(aa1>M.n-1||aa1<0)){
+                JOptionPane.showMessageDialog(addTest, "输入非法，行数和列数不能越界,请重新输入");
+                textArea1.setText("");
+                break;
+            }
+            else if (aa2 ==0){
+                JOptionPane.showMessageDialog(addTest, "输入非法，非零元不能为零,请重新输入");
+                textArea1.setText("");
+                break;
+            }
+            else{
+                M.data[i] = new Triple(aa0, aa1, aa2);}
+        }
         String s = "";
         String ch = "";
         int p = 0,k,h;
@@ -93,7 +109,7 @@ public class Trans_Frame extends JFrame {
 
     private void button3(ActionEvent e) {
         String s = "";
-        M1 = new TripleMatrix1(M.n,M.m,M.num);
+        M1 = new TripleMatrix(M.n,M.m,M.num);
         for (int i = 0;i<M.num;i++){
             M1.data[i] =  new Triple(M.data[i].y,M.data[i].x,M.data[i].weight);
         }
@@ -224,7 +240,13 @@ public class Trans_Frame extends JFrame {
         button2.setBackground(Color.black);
         button2.setForeground(Color.black);
         button2.setFont(button2.getFont().deriveFont(button2.getFont().getSize() + 5f));
-        button2.addActionListener(e -> button2(e));
+        button2.addActionListener(e -> {
+            try {
+                button2(e);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        });
         contentPane.add(button2);
         button2.setBounds(217, 155, 60, 50);
 

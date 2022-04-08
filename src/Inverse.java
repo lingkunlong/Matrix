@@ -304,7 +304,11 @@ public class Inverse extends JFrame {
         label3.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                label3Clicked(e);
+                try {
+                    label3Clicked(e);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
             }
         });
         contentPane.add(label3);
