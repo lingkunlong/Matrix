@@ -1,8 +1,10 @@
+import java.awt.event.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ResourceBundle;
+import javax.swing.border.*;
 /*
  * Created by JFormDesigner on Thu Apr 07 21:58:43 CST 2022
  */
@@ -11,10 +13,14 @@ import java.util.ResourceBundle;
  * @author unknown
  */
 public class Inverse extends JFrame {
-    public TripleMatrix M = new TripleMatrix();
-    public TripleMatrix M1 = new TripleMatrix();
-    public TripleMatrix M2 = new TripleMatrix();
+    public Matrix M = new Matrix();
+    public Matrix M1 = new Matrix();
+    public Matrix M2 = new Matrix();
     private Component addTest;
+
+    public static void main(String[] args) {
+        new Inverse();
+    }
     public static double Det(double[][] Matrix,int N)//计算n阶行列式（N=n-1）
     {
         int T0;
@@ -110,39 +116,25 @@ public class Inverse extends JFrame {
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("求逆矩阵");
         label1.setFont(new Font("楷体",Font.BOLD,15));
+        button1.setFont(new Font("楷体",Font.BOLD,25));
         label2.setFont(new Font("楷体",Font.BOLD,15));
         label3.setFont(new Font("楷体",Font.BOLD,30));
         label4.setFont(new Font("楷体",Font.BOLD,30));
     }
 
     private void label3Clicked(MouseEvent e) {
-        try {
-            String[] Array = textField1.getText().split(" ");
-            int a0 = Integer.parseInt(Array[0]);
-            int a1 = Integer.parseInt(Array[1]);
-            int a2 = Integer.parseInt(Array[2]);
-
-            if(a0<=0||a1<=0){
-                textField1.setText("");
-                throw new Exception("输入非法，行数和列数必须为正数,请重新输入");
-            }else {
-                M = new TripleMatrix(a0, a1, a2);
-            }
-        }catch (Exception e1){
-            e1.printStackTrace();
-        }
         //输入非零元位置
         int i = 0;
         String[] Array1 = textArea1.getText().split("\n");
         String[] Array2;
-        for (i = 0; i < M.num; i++) {
+        for (i = 0; i < M.vnum; i++) {
             //按照空格来拆分此字符串
             Array2 = Array1[i].split(" ");
             //将字符串参数解析返回十进制
             int aa0 = Integer.parseInt(Array2[0]);
             int aa1 = Integer.parseInt(Array2[1]);
             int aa2 = Integer.parseInt(Array2[2]);
-            if((aa0>M.m-1||aa0<0)||(aa1>M.n-1||aa1<0)){
+            if((aa0>M.rnum-1||aa0<0)||(aa1>M.lnum-1||aa1<0)){
                 JOptionPane.showMessageDialog(addTest, "输入非法，行数和列数不能越界,请重新输入");
                 textArea1.setText("");
                 break;
@@ -158,11 +150,11 @@ public class Inverse extends JFrame {
         String s = "";
         String ch = "";
         int p = 0,k,h;
-        for (int row = 0; row < M.m; row++) {
-            for (int line = 0; line < M.n; line++) {
-                for (k = 0, h = 0; k < M.num; k++) {
-                    if (M.data[k].x == row && M.data[k].y == line) {
-                        p = M.data[k].weight;
+        for (int row = 0; row < M.rnum; row++) {
+            for (int line = 0; line < M.lnum; line++) {
+                for (k = 0, h = 0; k < M.vnum; k++) {
+                    if (M.data[k].rows == row && M.data[k].line == line) {
+                        p = M.data[k].value;
                         h = 1;
                         break;
                     }
@@ -186,16 +178,16 @@ public class Inverse extends JFrame {
         String s = "";
         int index;
         int jj,ii;
-        double[][] Array = new double[M.m][M.n];
+        double[][] Array = new double[M.rnum][M.lnum];
 
-        for(index=0;index<M.num;index++){
-        for(ii=0;ii<M.m;ii++){
-        for(jj=0;jj<M.n;jj++){
-        if(ii==M.data[index].x&&jj==M.data[index].y){
-        Array[ii][jj]=M.data[index].weight;}}}}
+        for(index=0;index<M.vnum;index++){
+        for(ii=0;ii<M.rnum;ii++){
+        for(jj=0;jj<M.lnum;jj++){
+        if(ii==M.data[index].rows&&jj==M.data[index].line){
+        Array[ii][jj]=M.data[index].value;}}}}
 
         int p=0, q=0, k, h;
-        if (M.m == M.n) {
+        if (M.rnum == M.lnum) {
             String ch = "";
             double[][]InMatrix=new double[3][3];
             Inverse(Array,2,InMatrix);
@@ -214,6 +206,29 @@ public class Inverse extends JFrame {
         }else {
             JOptionPane.showMessageDialog(addTest, "运算不合法，终止运算");
         }
+    }
+
+    private void button1(ActionEvent e) {
+        try {
+            String[] Array = textField1.getText().split(" ");
+            int a0 = Integer.parseInt(Array[0]);
+            int a1 = Integer.parseInt(Array[1]);
+            int a2 = Integer.parseInt(Array[2]);
+
+            if(a0<=0||a1<=0){
+                textField1.setText("");
+                JOptionPane.showMessageDialog(addTest, "输入非法，行数和列数必须为正数,请重新输入");
+                //throw new Exception("输入非法，行数和列数必须为正数,请重新输入");
+            }
+            else {
+                M = new Matrix(a0, a1, a2);
+                JOptionPane.showMessageDialog(addTest, "输入成功");
+            }
+        }
+        catch (Exception e1){
+            e1.printStackTrace();
+        }
+
     }
     //按行和列位置进行遍历
             /*for (int row = 0; row < M.m; row++) {
@@ -250,7 +265,6 @@ public class Inverse extends JFrame {
             }*/
 
 
-
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         ResourceBundle bundle = ResourceBundle.getBundle("form");
@@ -265,8 +279,10 @@ public class Inverse extends JFrame {
         scrollPane3 = new JScrollPane();
         textArea3 = new JTextArea();
         label4 = new JLabel();
+        button1 = new JButton();
 
         //======== this ========
+        setIconImage(new ImageIcon("C:\\Users\\lyjyyy\\Desktop\\wizard\uff0c\u7b14\u8bb0\u672c\u7535\u8111.png").getImage());
         Container contentPane = getContentPane();
         contentPane.setLayout(null);
 
@@ -280,9 +296,9 @@ public class Inverse extends JFrame {
         label2.setText(bundle.getString("label2.text_6"));
         label2.setFont(label2.getFont().deriveFont(label2.getFont().getSize() + 2f));
         contentPane.add(label2);
-        label2.setBounds(25, 60, 210, 30);
+        label2.setBounds(30, 65, 210, 30);
         contentPane.add(textField1);
-        textField1.setBounds(295, 20, 185, 35);
+        textField1.setBounds(225, 20, 185, 35);
 
         //======== scrollPane1 ========
         {
@@ -308,6 +324,7 @@ public class Inverse extends JFrame {
         label3.setText(bundle.getString("label3.text_6"));
         label3.setFont(label3.getFont().deriveFont(label3.getFont().getSize() + 2f));
         label3.setHorizontalAlignment(SwingConstants.CENTER);
+        label3.setBorder(new EtchedBorder());
         label3.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -315,7 +332,7 @@ public class Inverse extends JFrame {
             }
         });
         contentPane.add(label3);
-        label3.setBounds(260, 185, 70, 50);
+        label3.setBounds(255, 185, 78, 40);
 
         //======== scrollPane3 ========
         {
@@ -331,6 +348,7 @@ public class Inverse extends JFrame {
         label4.setText(bundle.getString("label4.text_4"));
         label4.setHorizontalAlignment(SwingConstants.CENTER);
         label4.setFont(label4.getFont().deriveFont(label4.getFont().getSize() + 3f));
+        label4.setBorder(new EtchedBorder());
         label4.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -338,7 +356,16 @@ public class Inverse extends JFrame {
             }
         });
         contentPane.add(label4);
-        label4.setBounds(230, 305, 145, 35);
+        label4.setBounds(255, 305, 78, 40);
+
+        //---- button1 ----
+        button1.setText(bundle.getString("button1.text_3"));
+        button1.setBorder(new EtchedBorder());
+        button1.setOpaque(false);
+        button1.setContentAreaFilled(false);
+        button1.addActionListener(e -> button1(e));
+        contentPane.add(button1);
+        button1.setBounds(435, 15, 78, 40);
 
         contentPane.setPreferredSize(new Dimension(575, 595));
         pack();
@@ -358,5 +385,6 @@ public class Inverse extends JFrame {
     private JScrollPane scrollPane3;
     private JTextArea textArea3;
     private JLabel label4;
+    private JButton button1;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ResourceBundle;
+import javax.swing.plaf.*;
 /*
  * Created by JFormDesigner on Tue Mar 22 18:49:52 CST 2022
  */
@@ -23,10 +24,12 @@ public class Main_Test extends JFrame {//创建Main_Test类，使该类继承JFr
         setVisible(true);
         setResizable(true);
         label6.setFont(new Font("楷体",Font.BOLD,20));
-        label7.setFont(new Font("楷体",Font.BOLD,20));
-        label8.setFont(new Font("楷体",Font.BOLD,20));
-        //结束窗口所在的程序，退出JVM
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        label7.setFont(new Font("楷体",Font.BOLD,19));
+        label8.setFont(new Font("楷体",Font.BOLD,19));
+        label9.setFont(new Font("楷体",Font.BOLD,19));
+        label10.setFont(new Font("楷体",Font.BOLD,19));
+        label11.setFont(new Font("楷体",Font.BOLD,19));
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);//结束窗口所在的程序，退出JVM
     }
    private void Add(ActionEvent e) {
       new OperationUI().setVisible(true);//下一个界面的监听事件，用作跳转
@@ -34,8 +37,7 @@ public class Main_Test extends JFrame {//创建Main_Test类，使该类继承JFr
 
     private void button1KeyPressed(KeyEvent e) {
         // TODO add your code her
-        //判断输入的是否是回车键
-        if(e.getKeyChar() == '\n'){
+        if(e.getKeyChar() == '\n'){ //判断输入的是否是回车键
             button1.doClick();
         }
     }
@@ -53,7 +55,11 @@ public class Main_Test extends JFrame {//创建Main_Test类，使该类继承JFr
         label6 = new JLabel();
         label7 = new JLabel();
         label8 = new JLabel();
-        label5 = new JLabel();
+        label9 = new JLabel();
+        label10 = new JLabel();
+        label11 = new JLabel();
+        label12 = new JLabel();
+        label13 = new JLabel();
 
         //======== this ========
         setIconImage(new ImageIcon("C:\\Users\\lyjyyy\\Desktop\\wizard\uff0c\u7b14\u8bb0\u672c\u7535\u8111.png").getImage());
@@ -73,7 +79,7 @@ public class Main_Test extends JFrame {//创建Main_Test类，使该类继承JFr
             }
         });
         contentPane.add(button1);
-        button1.setBounds(215, 270, 100, 50);
+        button1.setBounds(205, 260, 100, 50);
 
         //======== panel1 ========
         {
@@ -140,33 +146,52 @@ public class Main_Test extends JFrame {//创建Main_Test类，使该类继承JFr
         panel2.setBounds(new Rectangle(new Point(45, -25), panel2.getPreferredSize()));
 
         //---- label6 ----
-        label6.setText(bundle.getString("label6.text"));
         label6.setAlignmentX(1.0F);
         label6.setAlignmentY(0.0F);
         label6.setFont(label6.getFont().deriveFont(label6.getFont().getSize() + 4f));
+        label6.setText(bundle.getString("label6.text"));
         contentPane.add(label6);
-        label6.setBounds(30, 80, 285, 25);
+        label6.setBounds(30, 65, 285, 25);
 
         //---- label7 ----
         label7.setText(bundle.getString("label7.text"));
         label7.setFont(label7.getFont().deriveFont(label7.getFont().getSize() + 4f));
         contentPane.add(label7);
-        label7.setBounds(30, 120, 495, 30);
+        label7.setBounds(30, 100, 495, 30);
 
         //---- label8 ----
         label8.setText(bundle.getString("label8.text"));
-        label8.setFont(label8.getFont().deriveFont(label8.getFont().getSize() + 4f));
         contentPane.add(label8);
-        label8.setBounds(200, 155, 275, 35);
+        label8.setBounds(325, 95, 135, 40);
+
+        //---- label9 ----
+        label9.setText(bundle.getString("label9.text"));
+        contentPane.add(label9);
+        label9.setBounds(210, 145, 125, 30);
+
+        //---- label10 ----
+        label10.setText(bundle.getString("label10.text"));
+        contentPane.add(label10);
+        label10.setBounds(325, 130, 135, 55);
+
+        //---- label11 ----
+        label11.setText(bundle.getString("label11.text"));
+        contentPane.add(label11);
+        label11.setBounds(210, 185, 110, 40);
+
+        //---- label12 ----
+        label12.setIcon(null);
+        contentPane.add(label12);
+        label12.setBounds(new Rectangle(new Point(10, 135), label12.getPreferredSize()));
+
+        //---- label13 ----
+        label13.setIcon(new ImageIcon("C:\\Users\\lyjyyy\\Desktop\\v2.jpg"));
+        contentPane.add(label13);
+        label13.setBounds(new Rectangle(new Point(-505, -375), label13.getPreferredSize()));
 
         contentPane.setPreferredSize(new Dimension(530, 380));
         pack();
         setLocationRelativeTo(getOwner());
-
-        //---- label5 ----
-        label5.setForeground(new Color(153, 180, 209, 140));
-        label5.setBackground(new Color(204, 255, 204, 229));
-        label5.setOpaque(true);
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 
@@ -181,6 +206,10 @@ public class Main_Test extends JFrame {//创建Main_Test类，使该类继承JFr
     private JLabel label6;
     private JLabel label7;
     private JLabel label8;
-    private JLabel label5;
+    private JLabel label9;
+    private JLabel label10;
+    private JLabel label11;
+    private JLabel label12;
+    private JLabel label13;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

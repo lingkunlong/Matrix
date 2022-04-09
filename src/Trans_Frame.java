@@ -13,29 +13,13 @@ import java.util.ResourceBundle;
  * @author unknown
  */
 
-/*class TripleMatrix1 {
-
-    int m, n;
-    int num;
-
-    Triple[] data = new Triple[100];
-
-    public TripleMatrix1() {
-    }
-
-    public TripleMatrix1(int m, int n, int num) {
-
-        this.m = m;
-        this.n = n;
-        this.num = num;
-    }
-}*/
+/*
 /**
  * @author 86188
  */
 public class Trans_Frame extends JFrame {
-    public TripleMatrix M=new TripleMatrix();
-    public TripleMatrix M1=new TripleMatrix();
+    public Matrix M=new Matrix();
+    public Matrix M1=new Matrix();
     private Component addTest;
 
     public static void main(String[] args) {
@@ -51,7 +35,6 @@ public class Trans_Frame extends JFrame {
         label2.setFont(new Font("楷体",Font.BOLD,15));
         label3.setFont(new Font("楷体",Font.BOLD,15));
         button2.setFont(new Font("楷体",Font.BOLD,25));
-        button3.setFont(new Font("楷体",Font.BOLD,30));
         menu1.setFont(new Font("楷体",Font.BOLD,20));
     }
 //创建矩阵并显示
@@ -65,7 +48,7 @@ public class Trans_Frame extends JFrame {
                 textField1.setText("");
                 throw new Exception("输入非法，行数和列数必须为正数,请重新输入");
             }else {
-                M = new TripleMatrix(a0, a1, a2);
+                M = new Matrix(a0, a1, a2);
             }
         }catch (Exception e1){
             e1.printStackTrace();
@@ -73,71 +56,71 @@ public class Trans_Frame extends JFrame {
         //int i=0;
         String[] Array1 = textArea1.getText().split("\n");
         String[] Array2;
-        for(int i=0;i<M.num;i++){
+        for(int i=0;i<M.vnum;i++){
             Array2 = Array1[i].split(" ");
-            int aa0 = Integer.parseInt(Array2[0]);
-            int aa1 = Integer.parseInt(Array2[1]);
-            int aa2 = Integer.parseInt(Array2[2]);
-            if((aa0>M.m-1||aa0<0)||(aa1>M.n-1||aa1<0)){
+            int b0 = Integer.parseInt(Array2[0]);
+            int b1 = Integer.parseInt(Array2[1]);
+            int b2 = Integer.parseInt(Array2[2]);
+            if((b0>M.rnum-1||b0<0)||(b1>M.lnum-1||b1<0)){
                 JOptionPane.showMessageDialog(addTest, "输入非法，行数和列数不能越界,请重新输入");
                 textArea1.setText("");
                 break;
             }
-            else if (aa2 ==0){
+            else if (b2 ==0){
                 JOptionPane.showMessageDialog(addTest, "输入非法，非零元不能为零,请重新输入");
                 textArea1.setText("");
                 break;
             }
             else{
-                M.data[i] = new Triple(aa0, aa1, aa2);}
+                M.data[i] = new Triple(b0, b1, b2);}
         }
-        String s = "";
-        String ch = "";
+        String str = "";
+        String str1 = "";
         int p = 0,k,h;
-        for (int row = 0; row < M.m; row++) {
-            for (int line = 0; line < M.n; line++) {
-                for (k = 0, h = 0; k < M.num; k++) {
-                    if (M.data[k].x == row && M.data[k].y == line) {
-                        p = M.data[k].weight;
+        for (int row = 0; row < M.rnum; row++) {
+            for (int line = 0; line < M.lnum; line++) {
+                for (k = 0, h = 0; k < M.vnum; k++) {
+                    if (M.data[k].rows == row && M.data[k].line == line) {
+                        p = M.data[k].value;
                         h = 1;
                         break;
                     }
                 }
                 if (h == 0) {
                     p = 0;}
-                ch = Integer.toString(p);
-                if (ch == "") {
-                    ch = "0";
-                }
-                s = s + ch + " ";
+                str1 = Integer.toString(p);
+//                if (str1 == "") {
+//                    str1 = "0";
+//                }
+                str = str + str1 + " ";
             }
-            s = s + "\n";
+            str = str + "\n";
         }
-        textArea2.setText(s);
+        textArea2.setText(str);
         JOptionPane.showMessageDialog(addTest, "创建成功");
     }
 
     private void button3(ActionEvent e) {
-        String s = "";
-        M1 = new TripleMatrix(M.n,M.m,M.num);
-        for (int i = 0;i<M.num;i++){
-            M1.data[i] =  new Triple(M.data[i].y,M.data[i].x,M.data[i].weight);
+        String str = "";
+        M1 = new Matrix(M.lnum,M.rnum,M.vnum);
+        for (int i = 0;i<M.vnum;i++){
+            M1.data[i] =  new Triple(M.data[i].line,M.data[i].rows,M.data[i].value);
         }
-        for(int ii=0;ii<M1.m;ii++){
-            for(int jj=0;jj<M1.n;jj++){
+        for(int ii=0;ii<M1.rnum;ii++){
+            for(int jj=0;jj<M1.lnum;jj++){
                 String p="";
-                for(int index1=0;index1<M1.num;index1++) {
-                    if(ii==M1.data[index1].x&&jj==M1.data[index1].y)
+                for(int index1=0;index1<M1.vnum;index1++) {
+                    if(ii==M1.data[index1].rows&&jj==M1.data[index1].line)
                     {
-                        p=Integer.toString(M1.data[index1].weight);
+                        p=Integer.toString(M1.data[index1].value);
                     }
                 }
                 if(p==""){p="0";}
-                s=s+p+" ";
+                str = str+p+" ";
             }
-            s=s+"\n";
+            str=str+"\n";
         }
-        textArea3.setText(s);
+        textArea3.setText(str);
     }
 
     private void menu1(ActionEvent e) {
@@ -164,13 +147,13 @@ public class Trans_Frame extends JFrame {
         textArea2 = new JTextArea();
         button2 = new JButton();
         label3 = new JLabel();
-        button3 = new JButton();
         scrollPane3 = new JScrollPane();
         textArea3 = new JTextArea();
         panel1 = new JPanel();
         label4 = new JLabel();
 
         //======== this ========
+        setIconImage(new ImageIcon("C:\\Users\\lyjyyy\\Desktop\\wizard\uff0c\u7b14\u8bb0\u672c\u7535\u8111.png").getImage());
         Container contentPane = getContentPane();
         contentPane.setLayout(null);
 
@@ -261,17 +244,6 @@ public class Trans_Frame extends JFrame {
         contentPane.add(label3);
         label3.setBounds(35, 285, 80, 20);
 
-        //---- button3 ----
-        button3.setText(bundle.getString("button3.text"));
-        button3.setOpaque(false);
-        button3.setBorder(null);
-        button3.setContentAreaFilled(false);
-        button3.setForeground(Color.black);
-        button3.setFont(button3.getFont().deriveFont(button3.getFont().getSize() + 5f));
-        button3.addActionListener(e -> button3(e));
-        contentPane.add(button3);
-        button3.setBounds(30, 310, 75, 45);
-
         //======== scrollPane3 ========
         {
 
@@ -331,7 +303,6 @@ public class Trans_Frame extends JFrame {
     private JTextArea textArea2;
     private JButton button2;
     private JLabel label3;
-    private JButton button3;
     private JScrollPane scrollPane3;
     private JTextArea textArea3;
     private JPanel panel1;

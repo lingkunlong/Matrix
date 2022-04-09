@@ -1,6 +1,9 @@
+import com.sun.org.apache.bcel.internal.generic.LNEG;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.security.interfaces.RSAKey;
+import java.text.BreakIterator;
 import java.util.*;
 import javax.swing.*;
 import javax.swing.border.*;
@@ -12,46 +15,45 @@ import javax.swing.plaf.*;
  */
 //定义三元组
 class Triple{
-
-    int x,y;//非零元的行下标和列下标
-    int weight;//非零元的值
+    int rows,line;//非零元的行下标和列下标
+    int value;//非零元的值
     public Triple(){}
-    public Triple(int x,int y,int weight){
-
-        this.x=x;
-        this.y=y;
-        this.weight=weight;
+    public Triple(int rows,int line ,int value)
+    {
+        this.rows=rows;
+        this.line=line;
+        this.value=value;
     }
 }
-class TripleMatrix {
 
-    int m, n;//矩阵的行数和列数
-    int num;//非零元个数
+class Matrix{
+    int rnum, lnum;//矩阵的行数和列数
+    int vnum ;//非零元个数
     Triple[] data = new Triple[100];//非零三元组表
 
-    public TripleMatrix() {
+    public Matrix() {
     }
-    public TripleMatrix(int m, int n, int num) {
+    public Matrix(int rnum, int lnum, int vnum) {
 
-        this.m = m;
-        this.n = n;
-        this.num = num;
+        this.rnum = rnum;
+        this.lnum = lnum;
+        this.vnum = vnum;
     }
 }
+
 public class OperationUI extends JFrame {
     public static void main(String[] args) {
         new OperationUI();
     }
-        public TripleMatrix M = new TripleMatrix();
-        public TripleMatrix M1 = new TripleMatrix();
-        public TripleMatrix M2 = new TripleMatrix();
+        public Matrix M = new Matrix();
+        public Matrix M1 = new Matrix();
         private Component addTest;
         //构造方法
-        public int Find(TripleMatrix M, int i, int j) {
+        public int Find(Matrix M, int i, int j) {
             //查找三元组内的非零元
-            for (int t = 0; t < M.num; t++) {
-                if (M.data[t].x == i && M.data[t].y == j)
-                    return M.data[t].weight;
+            for (int t = 0; t < M.vnum; t++) {
+                if (M.data[t].rows == i && M.data[t].line == j)
+                    return M.data[t].value;
             }
             return 0;
         }
@@ -65,7 +67,10 @@ public class OperationUI extends JFrame {
             label2.setFont(new Font("楷体",Font.BOLD,15));
             label3.setFont(new Font("楷体",Font.BOLD,15));
             label4.setFont(new Font("楷体",Font.BOLD,15));
+            button10.setFont(new Font("楷体",Font.BOLD,30));
+            button1.setFont(new Font("楷体",Font.BOLD,25));
             button2.setFont(new Font("楷体",Font.BOLD,30));
+            button3.setFont(new Font("楷体",Font.BOLD,25));
             button4.setFont(new Font("楷体",Font.BOLD,30));
             button5.setFont(new Font("楷体",Font.BOLD,30));
             button6.setFont(new Font("楷体",Font.BOLD,30));
@@ -73,13 +78,10 @@ public class OperationUI extends JFrame {
             button8.setFont(new Font("楷体",Font.BOLD,30));
             menu1.setFont(new Font("楷体",Font.BOLD,20));
             menu2.setFont(new Font("楷体",Font.BOLD,20));
-            menu3.setFont(new Font("楷体",Font.BOLD,20));
-
-            //setResizable(false);
+                   //setResizable(false);
             setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         }
-//创建第一个矩阵
-        private void button2(ActionEvent e) {
+        private void button1(ActionEvent e) {
             //输入矩阵行数和列数和非零元个数
             try {
                 String[] Array = textField1.getText().split(" ");
@@ -89,131 +91,127 @@ public class OperationUI extends JFrame {
 
                 if(a0<=0||a1<=0){
                     textField1.setText("");
-                    throw new Exception("输入非法，行数和列数必须为正数,请重新输入");
-                }else {
-                    M = new TripleMatrix(a0, a1, a2);
+                    JOptionPane.showMessageDialog(addTest, "输入非法，行数和列数必须为正数,请重新输入");
+                    //throw new Exception("输入非法，行数和列数必须为正数,请重新输入");
                 }
-            }catch (Exception e1){
+                else {
+                    M = new Matrix(a0, a1, a2);
+                    JOptionPane.showMessageDialog(addTest, "输入成功");
+                }
+            }
+            catch (Exception e1){
                 e1.printStackTrace();
             }
+
+        }
+//创建第一个矩阵
+        private void button2(ActionEvent e) {
 
             //输入非零元位置
             int i = 0;
             String[] Array1 = textArea1.getText().split("\n");
             String[] Array2;
-            for (i = 0; i < M.num; i++) {
+            for (i = 0; i < M.vnum; i++) {
                 //按照空格来拆分此字符串
                 Array2 = Array1[i].split(" ");
                 //将字符串参数解析返回十进制
-                int aa0 = Integer.parseInt(Array2[0]);
-                int aa1 = Integer.parseInt(Array2[1]);
-                int aa2 = Integer.parseInt(Array2[2]);
-                if((aa0>M.m-1||aa0<0)||(aa1>M.n-1||aa1<0)){
-                    JOptionPane.showMessageDialog(addTest, "输入非法，行数和列数不能越界,请重新输入");
+                int b0 = Integer.parseInt(Array2[0]);
+                int b1 = Integer.parseInt(Array2[1]);
+                int b2 = Integer.parseInt(Array2[2]);
+                if((b0>M.rnum-1||b0<0)||(b1>M.lnum-1||b1<0)){
                     textArea1.setText("");
+                    JOptionPane.showMessageDialog(addTest, "输入非法，行数和列数不能越界,请重新输入");
+
                     break;
                 }
-                else if (aa2 ==0){
-                    JOptionPane.showMessageDialog(addTest, "输入非法，非零元不能为零,请重新输入");
+                else if (b2 ==0){
                     textArea1.setText("");
+                    JOptionPane.showMessageDialog(addTest, "输入非法，非零元不能为零,请重新输入");
                     break;
                 }
                 else{
-                M.data[i] = new Triple(aa0, aa1, aa2);}
+                M.data[i] = new Triple(b0, b1, b2);}
             }
-            String s = "";
-            String ch = "";
+            String str = "";
+            String str1 = "";
             int p = 0,k,h;
-            for (int row = 0; row < M.m; row++) {
-                for (int line = 0; line < M.n; line++) {
-                    for (k = 0, h = 0; k < M.num; k++) {
-                        if (M.data[k].x == row && M.data[k].y == line) {
-                            p = M.data[k].weight;
+            for (int row = 0; row < M.rnum; row++) {
+                for (int line = 0; line < M.lnum; line++) {
+                    for (k = 0, h = 0; k < M.vnum; k++) {
+                        if (M.data[k].rows == row && M.data[k].line == line) {
+                            p = M.data[k].value;
                             h = 1;
                             break;
                         }
                     }
                     if (h == 0) {
-                        p = 0;}
-                    ch = Integer.toString(p);
-                    if (ch == "") {
-                        ch = "0";
+                        p = 0;
                     }
-                    s = s + ch + " ";
+                    str1 = Integer.toString(p);
+//                    if (ch == "") {
+//                        ch = "0";
+//                    }
+                    str = str + str1 + " ";
                 }
-                s = s + "\n";
+                str = str + "\n";
             }
-            textArea2.setText(s);
+            textArea2.setText(str);
             JOptionPane.showMessageDialog(addTest, "创建成功");
         }
 //创建第二个矩阵
         private void button4(ActionEvent e){
-            try{
-            String[] Array = textField4.getText().split(" ");
-            int a0 = Integer.parseInt(Array[0]);
-            int a1 = Integer.parseInt(Array[1]);
-            int a2 = Integer.parseInt(Array[2]);
-            if(a0<=0||a1<=0){
-                textField4.setText("");
-                throw new Exception("输入非法，行数和列数必须为正数,请重新输入");
-            }else {
-                M1 = new TripleMatrix(a0, a1, a2);
-            }
-            }catch (Exception e1){
-                e1.printStackTrace();
-            }
 
             int i = 0;
             String[] Array1 = textArea3.getText().split("\n");
 
             String[] Array2;
-            for (i = 0; i < M1.num; i++) {
+            for (i = 0; i < M1.vnum; i++) {
                 Array2 = Array1[i].split(" ");
-                int aa0 = Integer.parseInt(Array2[0]);
-                int aa1 = Integer.parseInt(Array2[1]);
-                int aa2 = Integer.parseInt(Array2[2]);
-                if((aa0>M1.m-1||aa0<0)||(aa1>M1.n-1||aa1<0)){
+                int b0 = Integer.parseInt(Array2[0]);
+                int b1 = Integer.parseInt(Array2[1]);
+                int b2 = Integer.parseInt(Array2[2]);
+                if((b0>M1.rnum-1||b0<0)||(b1>M1.lnum-1||b1<0)){
                     JOptionPane.showMessageDialog(addTest, "输入非法，行数和列数不能越界,请重新输入");
                     textArea3.setText("");
                     break;
                 }
-                else if (aa2 ==0){
+                else if (b2 ==0){
                     JOptionPane.showMessageDialog(addTest, "输入非法，非零元不能为零,请重新输入");
                     textArea3.setText("");
                     break;
                 }
                 else{
-                    M1.data[i] = new Triple(aa0, aa1, aa2);}
+                    M1.data[i] = new Triple(b0, b1, b2);}
             }
-            String s = "";
-            String ch = "";
+            String str = "";
+            String str1 = "";
             int p = 0,k,h;
-            for (int row = 0; row < M1.m; row++) {
-                for (int line = 0; line < M1.n; line++) {
-                    for (k = 0, h = 0; k < M1.num; k++) {
-                        if (M1.data[k].x == row && M1.data[k].y == line) {
-                            p = M1.data[k].weight;
+            for (int row = 0; row < M1.rnum; row++) {
+                for (int line = 0; line < M1.lnum; line++) {
+                    for (k = 0, h = 0; k < M1.vnum; k++) {
+                        if (M1.data[k].rows == row && M1.data[k].line == line) {
+                            p = M1.data[k].value;
                             h = 1;
                             break;
                         }
                     }
                     if (h == 0) {
                         p = 0;}
-                    ch = Integer.toString(p);
-                    if (ch == "") {
-                        ch = "0";
-                    }
-                    s = s + ch + " ";
+                    str1 = Integer.toString(p);
+//                    if (ch == "") {
+//                        ch = "0";
+//                    }
+                    str = str + str1 + " ";
                 }
-                s = s + "\n";
+                str = str + "\n";
             }
-            textArea4.setText(s);
+            textArea4.setText(str);
             JOptionPane.showMessageDialog(addTest, "创建成功");
         }
         //废弃的二维数组存储
             /*int ii, jj;
             int index, index1;
-            String s = "";
+            String str = "";
             int[][] a = new int[M1.m][M1.n];
 
             for (index = 0; index < M1.num; index++) {
@@ -236,19 +234,19 @@ public class OperationUI extends JFrame {
         }*/
         //执行加法操作
         private void button5(ActionEvent e) {
-            String s = "";
+            String str = "";
             int p=0, q=0, k, h;
-            if (M.m == M1.m && M.n == M1.n) {
+            if (M.rnum == M1.rnum && M.lnum == M1.lnum) {
 
-                String ch = "";
+                String str1 = "";
                 //按行和列位置进行遍历
-                for (int row = 0; row < M.m; row++) {
-                    for (int line = 0; line < M.n; line++) {
+                for (int row = 0; row < M.rnum; row++) {
+                    for (int line = 0; line < M.lnum; line++) {
                         //遍历第一个矩阵
-                        for (k = 0, h = 0; k < M.num; k++) {
+                        for (k = 0, h = 0; k < M.vnum; k++) {
 
-                            if (M.data[k].x == row && M.data[k].y == line) {
-                                p = M.data[k].weight;
+                            if (M.data[k].rows == row && M.data[k].line == line) {
+                                p = M.data[k].value;
                                 h = 1;
                                 break;
                             }
@@ -256,9 +254,9 @@ public class OperationUI extends JFrame {
                         if (h == 0) {
                             p = 0;}
                         //遍历第二个矩阵
-                        for (k = 0, h = 0; k < M1.num; k++) {
-                            if (M1.data[k].x == row && M1.data[k].y == line) {
-                                q = M1.data[k].weight;
+                        for (k = 0, h = 0; k < M1.vnum; k++) {
+                            if (M1.data[k].rows == row && M1.data[k].line == line) {
+                                q = M1.data[k].value;
                                 h = 1;
                                 break;
                             }
@@ -266,83 +264,86 @@ public class OperationUI extends JFrame {
                         if (h == 0) {
                             q = 0;}
                         //将结果返回并用字符串拼接起来
-                        ch = Integer.toString(p + q);
-                        if (ch == "") {
-                            ch = "0";
-                        }
-                        s = s + ch + " ";
+                        str1 = Integer.toString(p + q);
+//                        if (str1 == "") {
+//                            str1 = "0";
+//                        }
+                        str = str + str1 + " ";
                     }
-                    s = s + "\n";
+                    str = str + "\n";
                 }
-                textArea5.setText(s);
+                textArea5.setText(str);
             }else {
                 JOptionPane.showMessageDialog(addTest, "运算不合法，终止运算");
             }
         }
         //执行减法操作
         private void button6(ActionEvent e) {
+            String str = "";
             int p=0, q=0, k, h;
-            String s = "";
-            //两个矩阵的行数和列数要相同才能进行操作
-            if (M.m == M1.m && M.n == M1.n) {
+            if (M.rnum == M1.rnum && M.lnum == M1.lnum) {
 
-                String ch = "";
-                //行和列
-                for (int row = 0; row < M.m; row++) {
-                    for (int line = 0; line < M.n; line++) {
-                        for (k = 0, h = 0; k < M.num; k++) {
-                            if (M.data[k].x == row && M.data[k].y == line) {
-                                p = M.data[k].weight;
+                String str1 = "";
+                //按行和列位置进行遍历
+                for (int row = 0; row < M.rnum; row++) {
+                    for (int line = 0; line < M.lnum; line++) {
+                        //遍历第一个矩阵
+                        for (k = 0, h = 0; k < M.vnum; k++) {
+
+                            if (M.data[k].rows == row && M.data[k].line == line) {
+                                p = M.data[k].value;
                                 h = 1;
                                 break;
                             }
                         }
                         if (h == 0) {
                             p = 0;}
-
-                        for (k = 0, h = 0; k < M1.num; k++) {
-                            if (M1.data[k].x == row && M1.data[k].y == line) {
-                                q = M1.data[k].weight;
+                        //遍历第二个矩阵
+                        for (k = 0, h = 0; k < M1.vnum; k++) {
+                            if (M1.data[k].rows == row && M1.data[k].line == line) {
+                                q = M1.data[k].value;
                                 h = 1;
                                 break;
                             }
                         }
-                        if (h == 0) {q = 0;}
-                        ch = Integer.toString(p - q);
-                        if (ch == "") {
-                            ch = "0";
-                        }
-                        s = s + ch + " ";
+                        if (h == 0) {
+                            q = 0;}
+                        //将结果返回并用字符串拼接起来
+                        str1 = Integer.toString(p + q);
+//                        if (ch == "") {
+//                            ch = "0";
+//                        }
+                        str = str + str1 + " ";
                     }
-                    s = s + "\n";
+                    str = str + "\n";
                 }
-                textArea5.setText(s);
-            } else {
+                textArea5.setText(str);
+            }else {
                 JOptionPane.showMessageDialog(addTest, "运算不合法，终止运算");
             }
         }
         //执行乘法操作
         private void button7(ActionEvent e) {
-            String s = "";
-            if (M.n == M1.m) {
-                for(int row=0;row<M.m;row++){
-                    for(int line=0;line<M1.n;line++){
+            String str = "";
+            if (M.lnum == M1.rnum) {
+                for(int row=0;row<M.rnum;row++){
+                    for(int line=0;line<M1.lnum;line++){
                         int L=0;
-                        String ch="";
+                        String str1="";
 
-                        for(int k=0;k<M.n;k++){
+                        for(int k=0;k<M.lnum;k++){
 
                             int p=Find(M,row,k);
                             int q=Find(M1,k,line);
                             L=L+p*q;
-                            ch=Integer.toString(L);}
+                            str1=Integer.toString(L);}
 
-                        if(ch==""){ch="0";}
-                        s=s+ch+" ";
+                        //if(ch==""){ch="0";}
+                        str=str+str1+" ";
                     }
-                    s=s+"\n";
+                    str=str+"\n";
                 }
-                textArea5.setText(s);
+                textArea5.setText(str);
             }
             else {
                 JOptionPane.showMessageDialog(addTest, "运算不合法，终止运算");
@@ -382,6 +383,34 @@ public class OperationUI extends JFrame {
             new Inverse().setVisible(true);
         }
 
+        private void button3MouseClicked(MouseEvent e) {
+            new Inverse().setVisible(true);
+        }
+
+        private void button10MouseClicked(MouseEvent e) {
+            new Inverse().setVisible(true);
+        }
+
+        private void button3(ActionEvent e) {
+            // TODO add your code here
+            try{
+                String[] Array = textField4.getText().split(" ");
+                int a0 = Integer.parseInt(Array[0]);
+                int a1 = Integer.parseInt(Array[1]);
+                int a2 = Integer.parseInt(Array[2]);
+                if(a0<=0||a1<=0){
+                    textField4.setText("");
+                    JOptionPane.showMessageDialog(addTest, "输入非法，行数和列数必须为正数,请重新输入");                    throw new Exception("输入非法，行数和列数必须为正数,请重新输入");
+                }else {
+                    M1 = new Matrix(a0, a1, a2);
+                    JOptionPane.showMessageDialog(addTest, "输入成功");
+                }
+            }catch (Exception e1){
+                e1.printStackTrace();
+            }
+
+        }
+
 
         //界面
         private void initComponents() {
@@ -390,8 +419,6 @@ public class OperationUI extends JFrame {
             menuBar1 = new JMenuBar();
             menu1 = new JMenu();
             menu2 = new JMenu();
-            menu3 = new JMenu();
-            panel1 = new JPanel();
             label1 = new JLabel();
             label2 = new JLabel();
             textField1 = new JTextField();
@@ -414,9 +441,14 @@ public class OperationUI extends JFrame {
             textArea4 = new JTextArea();
             scrollPane5 = new JScrollPane();
             textArea5 = new JTextArea();
+            button9 = new JButton();
+            button10 = new JButton();
+            button1 = new JButton();
+            button3 = new JButton();
             label5 = new JLabel();
 
             //======== this ========
+            setIconImage(new ImageIcon("C:\\Users\\lyjyyy\\Desktop\\wizard\uff0c\u7b14\u8bb0\u672c\u7535\u8111.png").getImage());
             Container contentPane = getContentPane();
             contentPane.setLayout(null);
 
@@ -452,29 +484,8 @@ public class OperationUI extends JFrame {
                     });
                 }
                 menuBar1.add(menu2);
-
-                //======== menu3 ========
-                {
-                    menu3.setText(bundle.getString("menu3.text"));
-                    menu3.setFont(menu3.getFont().deriveFont(menu3.getFont().getSize() + 3f));
-                    menu3.setOpaque(false);
-                    menu3.addMouseListener(new MouseAdapter() {
-                        @Override
-                        public void mouseClicked(MouseEvent e) {
-                            menu3MouseClicked(e);
-                        }
-                    });
-                }
-                menuBar1.add(menu3);
             }
             setJMenuBar(menuBar1);
-
-            //======== panel1 ========
-            {
-                panel1.setLayout(null);
-            }
-            contentPane.add(panel1);
-            panel1.setBounds(new Rectangle(new Point(0, 675), panel1.getPreferredSize()));
 
             //---- label1 ----
             label1.setText(bundle.getString("label1.text"));
@@ -556,7 +567,7 @@ public class OperationUI extends JFrame {
 			button5(e);
 		});
             contentPane.add(button5);
-            button5.setBounds(60, 630, 75, 40);
+            button5.setBounds(45, 630, 75, 40);
 
             //======== scrollPane1 ========
             {
@@ -582,7 +593,7 @@ public class OperationUI extends JFrame {
             button6.setFont(button6.getFont().deriveFont(button6.getFont().getSize() + 4f));
             button6.addActionListener(e -> button6(e));
             contentPane.add(button6);
-            button6.setBounds(245, 630, 75, 40);
+            button6.setBounds(185, 630, 75, 40);
 
             //---- button7 ----
             button7.setText(bundle.getString("button7.text"));
@@ -592,7 +603,7 @@ public class OperationUI extends JFrame {
             button7.setFont(button7.getFont().deriveFont(button7.getFont().getSize() + 4f));
             button7.addActionListener(e -> button7(e));
             contentPane.add(button7);
-            button7.setBounds(440, 630, 75, 40);
+            button7.setBounds(325, 630, 75, 40);
 
             //---- button8 ----
             button8.setText(bundle.getString("button8.text"));
@@ -602,7 +613,7 @@ public class OperationUI extends JFrame {
             button8.setFont(button8.getFont().deriveFont(button8.getFont().getSize() + 4f));
             button8.addActionListener(e -> button8(e));
             contentPane.add(button8);
-            button8.setBounds(615, 630, 75, 40);
+            button8.setBounds(475, 630, 75, 40);
 
             //======== scrollPane2 ========
             {
@@ -660,12 +671,53 @@ public class OperationUI extends JFrame {
             contentPane.add(scrollPane5);
             scrollPane5.setBounds(520, 135, 218, 478);
 
+            //---- button9 ----
+            button9.setText(bundle.getString("button9.text"));
+            contentPane.add(button9);
+            button9.setBounds(new Rectangle(new Point(0, 870), button9.getPreferredSize()));
+
+            //---- button10 ----
+            button10.setText(bundle.getString("button10.text"));
+            button10.setOpaque(false);
+            button10.setContentAreaFilled(false);
+            button10.setForeground(Color.black);
+            button10.setFont(button10.getFont().deriveFont(button10.getFont().getSize() + 4f));
+            button10.setBorder(new EtchedBorder());
+            button10.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    button10MouseClicked(e);
+                }
+            });
+            contentPane.add(button10);
+            button10.setBounds(615, 630, 75, 40);
+
+            //---- button1 ----
+            button1.setText(bundle.getString("button1.text_2"));
+            button1.setForeground(Color.black);
+            button1.setFont(button1.getFont().deriveFont(button1.getFont().getSize() + 3f));
+            button1.setOpaque(false);
+            button1.setContentAreaFilled(false);
+            button1.setBorder(new EtchedBorder());
+            button1.addActionListener(e -> button1(e));
+            contentPane.add(button1);
+            button1.setBounds(395, 40, 78, 40);
+
+            //---- button3 ----
+            button3.setText(bundle.getString("button3.text"));
+            button3.setOpaque(false);
+            button3.setContentAreaFilled(false);
+            button3.setBorder(new EtchedBorder());
+            button3.setForeground(Color.black);
+            button3.setFont(button3.getFont().deriveFont(button3.getFont().getSize() + 3f));
+            button3.addActionListener(e -> button3(e));
+            contentPane.add(button3);
+            button3.setBounds(395, 345, 78, 40);
+
             //---- label5 ----
-            label5.setText(bundle.getString("label5.text"));
-            label5.setIcon(new ImageIcon("D:\\\u5411\u65e5\u8475\\v2.jpg"));
-            label5.setForeground(new Color(153, 153, 153));
+            label5.setIcon(new ImageIcon("C:\\Users\\lyjyyy\\Desktop\\v2.jpg"));
             contentPane.add(label5);
-            label5.setBounds(-460, 0, 1255, 865);
+            label5.setBounds(new Rectangle(new Point(-475, -110), label5.getPreferredSize()));
 
             contentPane.setPreferredSize(new Dimension(780, 755));
             setSize(780, 755);
@@ -677,8 +729,6 @@ public class OperationUI extends JFrame {
         private JMenuBar menuBar1;
         private JMenu menu1;
         private JMenu menu2;
-        private JMenu menu3;
-        private JPanel panel1;
         private JLabel label1;
         private JLabel label2;
         private JTextField textField1;
@@ -701,6 +751,10 @@ public class OperationUI extends JFrame {
         private JTextArea textArea4;
         private JScrollPane scrollPane5;
         private JTextArea textArea5;
+        private JButton button9;
+        private JButton button10;
+        private JButton button1;
+        private JButton button3;
         private JLabel label5;
         // JFormDesigner - End of variables declaration  //GEN-END:variables
     }

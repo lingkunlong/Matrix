@@ -9,6 +9,7 @@ new FormModel {
 			"autoSize": false
 		} ) {
 			name: "this"
+			"iconImage": new com.jformdesigner.model.SwingIcon( 1, "C:\\Users\\lyjyyy\\Desktop\\wizard，笔记本电脑.png" )
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "label1"
 				"text": new FormMessage( null, "label1.text_6" )

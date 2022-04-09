@@ -28,6 +28,7 @@ public class Help1 extends JFrame {
         label3 = new JLabel();
 
         //======== this ========
+        setIconImage(new ImageIcon("C:\\Users\\lyjyyy\\Desktop\\wizard\uff0c\u7b14\u8bb0\u672c\u7535\u8111.png").getImage());
         Container contentPane = getContentPane();
         contentPane.setLayout(null);
 

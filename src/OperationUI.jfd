@@ -11,14 +11,7 @@ new FormModel {
 			name: "this"
 			"$locationPolicy": 1
 			"$sizePolicy": 1
-			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) {
-				"autoSize": false
-			} ) {
-				name: "panel1"
-			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-				"x": 0
-				"y": 675
-			} )
+			"iconImage": new com.jformdesigner.model.SwingIcon( 1, "C:\\Users\\lyjyyy\\Desktop\\wizard，笔记本电脑.png" )
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "label1"
 				"text": new FormMessage( null, "label1.text" )
@@ -130,7 +123,7 @@ new FormModel {
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "ResultA", true ) )
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "button5", true ) )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-				"x": 60
+				"x": 45
 				"y": 630
 				"height": 40
 				"width": 75
@@ -162,7 +155,7 @@ new FormModel {
 				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 4, false )
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "button6", true ) )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-				"x": 245
+				"x": 185
 				"y": 630
 				"height": 40
 				"width": 75
@@ -176,7 +169,7 @@ new FormModel {
 				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 4, false )
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "button7", true ) )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-				"x": 440
+				"x": 325
 				"y": 630
 				"height": 40
 				"width": 75
@@ -190,7 +183,7 @@ new FormModel {
 				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 4, false )
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "button8", true ) )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-				"x": 615
+				"x": 475
 				"y": 630
 				"height": 40
 				"width": 75
@@ -259,16 +252,64 @@ new FormModel {
 				"width": 218
 				"height": 478
 			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "button9"
+				"text": new FormMessage( null, "button9.text" )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 0
+				"y": 870
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "button10"
+				"text": new FormMessage( null, "button10.text" )
+				"opaque": false
+				"contentAreaFilled": false
+				"foreground": sfield java.awt.Color black
+				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 4, false )
+				"border": new javax.swing.border.EtchedBorder( 1, null, null )
+				addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "button10MouseClicked", true ) )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 615
+				"y": 630
+				"width": 75
+				"height": 40
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "button1"
+				"text": new FormMessage( null, "button1.text_2" )
+				"foreground": new java.awt.Color( 0, 0, 0, 255 )
+				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 3, false )
+				"opaque": false
+				"contentAreaFilled": false
+				"border": &EtchedBorder2 new javax.swing.border.EtchedBorder( 1, null, null )
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "button1", true ) )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 395
+				"y": 40
+				"width": 78
+				"height": 40
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "button3"
+				"text": new FormMessage( null, "button3.text" )
+				"opaque": false
+				"contentAreaFilled": false
+				"border": #EtchedBorder2
+				"foreground": new java.awt.Color( 0, 0, 0, 255 )
+				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 3, false )
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "button3", true ) )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 395
+				"y": 345
+				"width": 78
+				"height": 40
+			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "label5"
-				"text": new FormMessage( null, "label5.text" )
-				"icon": new com.jformdesigner.model.SwingIcon( 1, "D:\\向日葵\\v2.jpg" )
-				"foreground": new java.awt.Color( 153, 153, 153, 255 )
+				"icon": new com.jformdesigner.model.SwingIcon( 1, "C:\\Users\\lyjyyy\\Desktop\\v2.jpg" )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-				"width": 1255
-				"height": 865
-				"x": -460
-				"y": 0
+				"x": -475
+				"y": -110
 			} )
 			menuBar: new FormContainer( "javax.swing.JMenuBar", new FormLayoutManager( class javax.swing.JMenuBar ) ) {
 				name: "menuBar1"
@@ -288,16 +329,9 @@ new FormModel {
 					"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 3, false )
 					addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "menu2MouseClicked", true ) )
 				} )
-				add( new FormContainer( "javax.swing.JMenu", new FormLayoutManager( class javax.swing.JMenu ) ) {
-					name: "menu3"
-					"text": new FormMessage( null, "menu3.text" )
-					"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 3, false )
-					"opaque": false
-					addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "menu3MouseClicked", true ) )
-				} )
 			}
 		}, new FormLayoutConstraints( null ) {
-			"location": new java.awt.Point( 1235, 20 )
+			"location": new java.awt.Point( 965, 70 )
 			"size": new java.awt.Dimension( 780, 755 )
 		} )
 	}
