@@ -28,32 +28,21 @@ public class Trans_Frame extends JFrame {
     public Trans_Frame() {
         initComponents();
         setVisible(true);
-        setResizable(false);
+        setResizable(true);
         setTitle("稀疏矩阵转置运算");
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         label1.setFont(new Font("楷体",Font.BOLD,15));
         label2.setFont(new Font("楷体",Font.BOLD,15));
         label3.setFont(new Font("楷体",Font.BOLD,15));
         button2.setFont(new Font("楷体",Font.BOLD,25));
+        button1.setFont(new Font("楷体",Font.BOLD,25));
+        button3.setFont(new Font("楷体",Font.BOLD,25));
+
         menu1.setFont(new Font("楷体",Font.BOLD,20));
     }
 //创建矩阵并显示
     private void button2(ActionEvent e){
-        try {
-            String[] Array = textField1.getText().split(" ");
-            int a0 = Integer.parseInt(Array[0]);
-            int a1 = Integer.parseInt(Array[1]);
-            int a2 = Integer.parseInt(Array[2]);
-            if(a0<=0||a1<=0){
-                textField1.setText("");
-                throw new Exception("输入非法，行数和列数必须为正数,请重新输入");
-            }else {
-                M = new Matrix(a0, a1, a2);
-            }
-        }catch (Exception e1){
-            e1.printStackTrace();
-        }
-        //int i=0;
+
         String[] Array1 = textArea1.getText().split("\n");
         String[] Array2;
         for(int i=0;i<M.vnum;i++){
@@ -89,9 +78,6 @@ public class Trans_Frame extends JFrame {
                 if (h == 0) {
                     p = 0;}
                 str1 = Integer.toString(p);
-//                if (str1 == "") {
-//                    str1 = "0";
-//                }
                 str = str + str1 + " ";
             }
             str = str + "\n";
@@ -102,20 +88,27 @@ public class Trans_Frame extends JFrame {
 
     private void button3(ActionEvent e) {
         String str = "";
+        //将转置值放入转置矩阵
         M1 = new Matrix(M.lnum,M.rnum,M.vnum);
-        for (int i = 0;i<M.vnum;i++){
+        for (int i = 0;i<M.vnum;i++)
+        {
             M1.data[i] =  new Triple(M.data[i].line,M.data[i].rows,M.data[i].value);
         }
+
         for(int ii=0;ii<M1.rnum;ii++){
             for(int jj=0;jj<M1.lnum;jj++){
                 String p="";
-                for(int index1=0;index1<M1.vnum;index1++) {
+                for(int index1=0;index1<M1.vnum;index1++)
+                {
                     if(ii==M1.data[index1].rows&&jj==M1.data[index1].line)
                     {
                         p=Integer.toString(M1.data[index1].value);
                     }
                 }
-                if(p==""){p="0";}
+                if(p=="")
+                {
+                    p="0";
+                }
                 str = str+p+" ";
             }
             str=str+"\n";
@@ -131,6 +124,30 @@ public class Trans_Frame extends JFrame {
     private void menu1MouseClicked(MouseEvent e) {
         // TODO add your code here
         new Help1().setVisible(true);
+    }
+
+    private void button1(ActionEvent e) {
+        // TODO add your code here
+        try {
+            String[] Array = textField1.getText().split(" ");//split用于分割
+            int a0 = Integer.parseInt(Array[0]);
+            int a1 = Integer.parseInt(Array[1]);
+            int a2 = Integer.parseInt(Array[2]);
+
+            if(a0<=0||a1<=0||a2<=0){
+                textField1.setText("");
+                JOptionPane.showMessageDialog(addTest, "输入非法，行数、列数、非零元个数必须为正数,请重新输入");
+                //throw new Exception("输入非法，行数和列数必须为正数,请重新输入");
+            }
+            else {
+                M = new Matrix(a0, a1, a2);
+                JOptionPane.showMessageDialog(addTest, "输入成功");
+            }
+        }
+        catch (Exception e1){
+            e1.printStackTrace();
+        }
+
     }
 
     private void initComponents() {
@@ -150,7 +167,8 @@ public class Trans_Frame extends JFrame {
         scrollPane3 = new JScrollPane();
         textArea3 = new JTextArea();
         panel1 = new JPanel();
-        label4 = new JLabel();
+        button1 = new JButton();
+        button3 = new JButton();
 
         //======== this ========
         setIconImage(new ImageIcon("C:\\Users\\lyjyyy\\Desktop\\wizard\uff0c\u7b14\u8bb0\u672c\u7535\u8111.png").getImage());
@@ -186,7 +204,6 @@ public class Trans_Frame extends JFrame {
         label1.setBounds(15, 15, 215, 30);
 
         //---- textField1 ----
-        textField1.setBackground(new Color(204, 204, 204));
         textField1.setOpaque(false);
         textField1.setForeground(Color.black);
         textField1.setFont(textField1.getFont().deriveFont(textField1.getFont().getSize() + 3f));
@@ -279,11 +296,17 @@ public class Trans_Frame extends JFrame {
         contentPane.add(panel1);
         panel1.setBounds(new Rectangle(new Point(0, 505), panel1.getPreferredSize()));
 
-        //---- label4 ----
-        label4.setText(bundle.getString("label4.text_2"));
-        label4.setIcon(new ImageIcon("D:\\\u5411\u65e5\u8475\\\u6781\u7b80\u80cc\u666f\u7684\u641c\u7d22\u7ed3\u679c_\u767e\u5ea6\u56fe\u7247\u641c\u7d22\\src_http___img9.51tietu.net_pic_2019-091121_cr4ljqssqgqcr4ljqssqgq.jpg&refer_http___img9.51tietu.jpg"));
-        contentPane.add(label4);
-        label4.setBounds(-80, 0, 620, 565);
+        //---- button1 ----
+        button1.setText(bundle.getString("button1.text_4"));
+        button1.addActionListener(e -> button1(e));
+        contentPane.add(button1);
+        button1.setBounds(290, 40, 90, 50);
+
+        //---- button3 ----
+        button3.setText(bundle.getString("button3.text_2"));
+        button3.addActionListener(e -> button3(e));
+        contentPane.add(button3);
+        button3.setBounds(35, 325, 90, 45);
 
         contentPane.setPreferredSize(new Dimension(490, 550));
         pack();
@@ -306,6 +329,7 @@ public class Trans_Frame extends JFrame {
     private JScrollPane scrollPane3;
     private JTextArea textArea3;
     private JPanel panel1;
-    private JLabel label4;
+    private JButton button1;
+    private JButton button3;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

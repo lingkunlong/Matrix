@@ -3,6 +3,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.Array;
 import java.util.ResourceBundle;
 import javax.swing.border.*;
 /*
@@ -17,107 +18,59 @@ public class Inverse extends JFrame {
     public Matrix M1 = new Matrix();
     public Matrix M2 = new Matrix();
     private Component addTest;
+    public int Fvalues(Matrix M, int i, int j) {
+        //查找三元组内的非零元
+        for (int t = 0; t < M.vnum; t++) {
+            if (M.data[t].rows == i && M.data[t].line == j)
+                return M.data[t].value;
+        }
+        return 0;
+    }
+    public long[][] mut(int k, int n, long[][] A) {
+        long[][] res = new long[n][n];
+        for (int i = 0; i < res.length; i++) {
+            for (int j = 0; j < res[i].length; j++) {
+                if (i == j) {
+                    res[i][j] = 1;
+                } else {
+                    res[i][j] = 0;
+                }
+            }
+        }
+        while (k != 0) {
+            if ((k & 1) == 1) res = f(res, A);
+            k >>= 1;
+            A = f(A, A);
+        }
+        return res;
+    }
+
+    public long[][] f(long[][] A, long[][] B) {
+        long res[][] = new long[A.length][B.length];
+        for (int i = 0; i < res.length; i++) {
+            for (int j = 0; j < res[i].length; j++) {
+                for (int k = 0; k < A[0].length; k++) {
+                    res[i][j] += A[i][k] * B[k][j];
+                }
+            }
+        }
+        return res;
+    }
 
     public static void main(String[] args) {
         new Inverse();
     }
-    public static double Det(double[][] Matrix,int N)//计算n阶行列式（N=n-1）
-    {
-        int T0;
-        int T1;
-        int T2;
-        double Num;
-        int Cha;
-        double [][] B;
-        if(N>0)
-        {
-            Cha=0;
-            B=new double[N][N];
-            Num=0;
-            if(N==1)
-            {
-                return Matrix[0][0]*Matrix[1][1]-Matrix[0][1]*Matrix[1][0];
-            }
-            //T0循环
-            for (T0=0;T0<=N;T0++)
-            {
-                //T1循环
-                for (T1=1;T1<=N;T1++)
-                {
-                    //T2循环
-                    for (T2=0;T2<=N-1;T2++)
-                    {
-                        if(T2==T0)
-                        {
-                            Cha=1;
-                        }
-                        B[T1-1][T2]=Matrix[T1][T2+Cha];
-                    }
-                    //T2循环
-                    Cha=0;
-                }
-                //T1循环
-                Num=Num+Matrix[0][T0]*Det(B,N-1)*Math.pow((-1),T0);
-            }
-            //T0循环
-            return Num;
-        } else if(N==0)
-        {
-            return Matrix[0][0];
-        }
-        return 0;
-    }
-    public static double Inverse(double[][]Matrix,int N,double[][]MatrixC){
-        int T0;
-        int T1;
-        int T2;
-        int T3;
-        double [][]B;
-        int Chay;
-        int Chax;
-        B=new double[N][N];
-        double add;
-        add=1/Det(Matrix,N);
-        for ( T0=0;T0<=N;T0++)
-        {
-            for (T3=0;T3<=N;T3++)
-            {
-                for (T1=0;T1<=N-1;T1++)
-                {
-                    if(T1<T0)
-                    {
-                        Chax=0;
-                    } else
-                    {
-                        Chax=1;
-                    }
-                    for (T2=0;T2<=N-1;T2++)
-                    {
-                        if(T2<T3)
-                        {
-                            Chay=0;
-                        } else
-                        {
-                            Chay=1;
-                        }
-                        B[T1][T2]=Matrix[T1+Chax][T2+Chay];
-                    }
-                    //T2循环
-                }//T1循环
-                Det(B,N-1);
-                MatrixC[T3][T0]=Det(B,N-1)*add*(Math.pow(-1, T0+T3));
-            }
-        }
-        return 0;
-    }
+
     public Inverse() {
         initComponents();
         setVisible(true);
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("求逆矩阵");
+        setTitle("求矩阵幂");
         label1.setFont(new Font("楷体",Font.BOLD,15));
         button1.setFont(new Font("楷体",Font.BOLD,25));
+        button2.setFont(new Font("楷体",Font.BOLD,25));
         label2.setFont(new Font("楷体",Font.BOLD,15));
+        label5.setFont(new Font("楷体",Font.BOLD,15));
         label3.setFont(new Font("楷体",Font.BOLD,30));
         label4.setFont(new Font("楷体",Font.BOLD,30));
     }
@@ -150,7 +103,7 @@ public class Inverse extends JFrame {
         String s = "";
         String ch = "";
         int p = 0,k,h;
-        for (int row = 0; row < M.rnum; row++) {
+        /*for (int row = 0; row < M.rnum; row++) {
             for (int line = 0; line < M.lnum; line++) {
                 for (k = 0, h = 0; k < M.vnum; k++) {
                     if (M.data[k].rows == row && M.data[k].line == line) {
@@ -168,46 +121,96 @@ public class Inverse extends JFrame {
                 s = s + ch + " ";
             }
             s = s + "\n";
+        }*/
+        int ii, jj;
+        int index, index1;
+        String str = "";
+        int[][] a = new int[M.rnum][M.lnum];
+
+        for (index = 0; index < M.vnum; index++) {
+            for (ii = 0; ii < M.rnum; ii++) {
+                for (jj = 0; jj < M.lnum; jj++) {
+                    if (ii == M.data[index].rows && jj == M.data[index].line) {
+                        a[ii][jj] = M.data[index].value;
+                    }
+                }
+            }
+        }
+        for (ii = 0; ii < M.rnum; ii++) {
+            for (jj = 0; jj < M.lnum; jj++) {
+                s = s + Integer.toString(a[ii][jj]) + " ";
+            }
+            s = s + "\n";
+
         }
         textArea2.setText(s);
         JOptionPane.showMessageDialog(addTest, "创建成功");
     }
-//求逆矩阵
+
     private void label4Clicked(MouseEvent e) {
         // TODO add your code here
-        String s = "";
-        int index;
-        int jj,ii;
-        double[][] Array = new double[M.rnum][M.lnum];
+//        String str = "";
+//        if (sum == 1) {
+//            textArea3.setText(str);
+//        }
+//        else {
+//            for (int low = 0; low < sum; low++) {
+//                for (int row = 0; row < M.rnum; row++) {
+//                    for (int line = 0; line < M1.lnum; line++) {
+//                        int L = 0;
+//                        String str1 = "";
+//                        for (int k = 0; k < M.lnum; k++) {
+//
+//                            int p = Fvalues(M, row, k);
+//                            int q = Fvalues(M1, k, line);
+//                            L = L + p * q;
+//                            str1 = Integer.toString(L);
+//                        }
+//
+//                        //if(ch==""){ch="0";}
+//                        str = str + str1 + " ";
+//                    }
+//                    str = str + "\n";
+//                }
 
-        for(index=0;index<M.vnum;index++){
-        for(ii=0;ii<M.rnum;ii++){
-        for(jj=0;jj<M.lnum;jj++){
-        if(ii==M.data[index].rows&&jj==M.data[index].line){
-        Array[ii][jj]=M.data[index].value;}}}}
-
-        int p=0, q=0, k, h;
-        if (M.rnum == M.lnum) {
-            String ch = "";
-            double[][]InMatrix=new double[3][3];
-            Inverse(Array,2,InMatrix);
-            String str=new String("");
-            for (int i=0;i<3;i++)
-            {
-                for (int j=0;j<3;j++)
-                {
-                    String strr=String.valueOf(InMatrix[i][j]);
-                    str+=strr;
-                    str+=" ";
-                }
-                str+="\n";
+        int a0 = 0;
+        try {
+            String[] Array = textField2.getText().split(" ");
+            a0 = Integer.parseInt(Array[0]);
+            if (a0 <= 0) {
+                textField1.setText("");
+                JOptionPane.showMessageDialog(addTest, "幂数必须为正数,请重新输入");
+                //throw new Exception("输入非法，行数和列数必须为正数,请重新输入");
+            } else {
+                JOptionPane.showMessageDialog(addTest, "输入成功");
             }
-            textArea3.setText(str);
-        }else {
-            JOptionPane.showMessageDialog(addTest, "运算不合法，终止运算");
+        } catch (Exception e1) {
+            e1.printStackTrace();
         }
-    }
+        int index;
+        int ii, jj;
+        String s = "";
+        long[][] Array;
+        long[][] a = new long[M.rnum][M.lnum];
 
+        for (index = 0; index < M.vnum; index++) {
+            for (ii = 0; ii < M.rnum; ii++) {
+                for (jj = 0; jj < M.vnum; jj++) {
+                    if (ii == M.data[index].rows && jj == M.data[index].line) {
+                        a[ii][jj] = M.data[index].value;
+                    }
+                }
+            }
+        }
+        mut(a0, M.rnum, a);
+        for (int i = 0; i < M.rnum; i++) {
+            for (int j = 0; i < M.lnum; j++) {
+                s = s + a[i][j] + " ";
+            }
+            s = s + "\n";
+        }
+        textArea3.setText((s));
+    }
     private void button1(ActionEvent e) {
         try {
             String[] Array = textField1.getText().split(" ");
@@ -220,6 +223,16 @@ public class Inverse extends JFrame {
                 JOptionPane.showMessageDialog(addTest, "输入非法，行数和列数必须为正数,请重新输入");
                 //throw new Exception("输入非法，行数和列数必须为正数,请重新输入");
             }
+            else if (a0!=a1)
+            {
+                textField1.setText("");
+                JOptionPane.showMessageDialog(addTest, "输入非法，行数和列数必须相同,请重新输入");
+            }
+            else if(a2 == 0)
+            {
+                textField1.setText("");
+                JOptionPane.showMessageDialog(addTest, "输入非法,非零元个数需为正数,请重新输入");
+            }
             else {
                 M = new Matrix(a0, a1, a2);
                 JOptionPane.showMessageDialog(addTest, "输入成功");
@@ -230,40 +243,48 @@ public class Inverse extends JFrame {
         }
 
     }
-    //按行和列位置进行遍历
-            /*for (int row = 0; row < M.m; row++) {
-                for (int line = 0; line < M.n; line++) {
-                    //遍历第一个矩阵
-                    for (k = 0, h = 0; k < M.num; k++) {
 
-                        if (M.data[k].x == row && M.data[k].y == line) {
-                            p = M.data[k].weight;
-                            h = 1;
-                            break;
-                        }
-                    }
-                    if (h == 0) {
-                        p = 0;}
-                    //遍历第二个矩阵
-                    for (k = 0, h = 0; k < M1.num; k++) {
-                        if (M1.data[k].x == row && M1.data[k].y == line) {
-                            q = M1.data[k].weight;
-                            h = 1;
-                            break;
-                        }
-                    }
-                    if (h == 0) {
-                        q = 0;}
-                    //将结果返回并用字符串拼接起来
-                    ch = Integer.toString(p + q);
-                    if (ch == "") {
-                        ch = "0";
-                    }
-                    s = s + ch + " ";
-                }
-                s = s + "\n";
-            }*/
+    private void button2(ActionEvent e) {
+        // TODO add your code here
+        int sum;
+        try {
+            String[] Array = textField2.getText().split(" ");
+            int a0 = Integer.parseInt(Array[0]);
+            sum = a0;
+            if(sum<=0)
+            {
+                textField1.setText("");
+                JOptionPane.showMessageDialog(addTest, "幂数必须为正数,请重新输入");
+                //throw new Exception("输入非法，行数和列数必须为正数,请重新输入");
+            }
+            else {
+                JOptionPane.showMessageDialog(addTest, "输入成功");
+            }
+        }
+        catch (Exception e1){
+            e1.printStackTrace();
+        }
+        
 
+    }
+
+    // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
+    private JLabel label1;
+    private JLabel label2;
+    private JTextField textField1;
+    private JScrollPane scrollPane1;
+    private JTextArea textArea1;
+    private JScrollPane scrollPane2;
+    private JTextArea textArea2;
+    private JLabel label3;
+    private JScrollPane scrollPane3;
+    private JTextArea textArea3;
+    private JLabel label4;
+    private JButton button1;
+    private JLabel label5;
+    private JTextField textField2;
+    private JButton button2;
+    // JFormDesigner - End of variables declaration  //GEN-END:variables
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
@@ -280,6 +301,9 @@ public class Inverse extends JFrame {
         textArea3 = new JTextArea();
         label4 = new JLabel();
         button1 = new JButton();
+        label5 = new JLabel();
+        textField2 = new JTextField();
+        button2 = new JButton();
 
         //======== this ========
         setIconImage(new ImageIcon("C:\\Users\\lyjyyy\\Desktop\\wizard\uff0c\u7b14\u8bb0\u672c\u7535\u8111.png").getImage());
@@ -308,7 +332,7 @@ public class Inverse extends JFrame {
             scrollPane1.setViewportView(textArea1);
         }
         contentPane.add(scrollPane1);
-        scrollPane1.setBounds(40, 110, 195, 175);
+        scrollPane1.setBounds(40, 110, 195, 155);
 
         //======== scrollPane2 ========
         {
@@ -318,7 +342,7 @@ public class Inverse extends JFrame {
             scrollPane2.setViewportView(textArea2);
         }
         contentPane.add(scrollPane2);
-        scrollPane2.setBounds(350, 110, 205, 175);
+        scrollPane2.setBounds(350, 110, 195, 155);
 
         //---- label3 ----
         label3.setText(bundle.getString("label3.text_6"));
@@ -342,7 +366,7 @@ public class Inverse extends JFrame {
             scrollPane3.setViewportView(textArea3);
         }
         contentPane.add(scrollPane3);
-        scrollPane3.setBounds(80, 350, 445, 195);
+        scrollPane3.setBounds(80, 370, 445, 175);
 
         //---- label4 ----
         label4.setText(bundle.getString("label4.text_4"));
@@ -356,7 +380,7 @@ public class Inverse extends JFrame {
             }
         });
         contentPane.add(label4);
-        label4.setBounds(255, 305, 78, 40);
+        label4.setBounds(255, 320, 78, 40);
 
         //---- button1 ----
         button1.setText(bundle.getString("button1.text_3"));
@@ -367,24 +391,25 @@ public class Inverse extends JFrame {
         contentPane.add(button1);
         button1.setBounds(435, 15, 78, 40);
 
+        //---- label5 ----
+        label5.setText(bundle.getString("label5.text"));
+        contentPane.add(label5);
+        label5.setBounds(30, 280, 210, 30);
+        contentPane.add(textField2);
+        textField2.setBounds(230, 275, 180, 40);
+
+        //---- button2 ----
+        button2.setText(bundle.getString("button2.text_3"));
+        button2.setBackground(new Color(153, 153, 153));
+        button2.setOpaque(false);
+        button2.setContentAreaFilled(false);
+        button2.addActionListener(e -> button2(e));
+        contentPane.add(button2);
+        button2.setBounds(445, 275, 105, 45);
+
         contentPane.setPreferredSize(new Dimension(575, 595));
         pack();
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
-
-    // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    private JLabel label1;
-    private JLabel label2;
-    private JTextField textField1;
-    private JScrollPane scrollPane1;
-    private JTextArea textArea1;
-    private JScrollPane scrollPane2;
-    private JTextArea textArea2;
-    private JLabel label3;
-    private JScrollPane scrollPane3;
-    private JTextArea textArea3;
-    private JLabel label4;
-    private JButton button1;
-    // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

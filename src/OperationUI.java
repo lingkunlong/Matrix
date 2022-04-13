@@ -1,26 +1,21 @@
-import com.sun.org.apache.bcel.internal.generic.LNEG;
-
 import java.awt.*;
 import java.awt.event.*;
-import java.security.interfaces.RSAKey;
-import java.text.BreakIterator;
 import java.util.*;
 import javax.swing.*;
 import javax.swing.border.*;
 import javax.swing.event.*;
-import javax.swing.plaf.*;
-
 /*
  * Created by JFormDesigner on Tue Mar 22 19:10:17 CST 2022
  */
 //定义三元组
 class Triple{
-    int rows,line;//非零元的行下标和列下标
+    static int rows;
+    int line;//非零元的行下标和列下标
     int value;//非零元的值
     public Triple(){}
     public Triple(int rows,int line ,int value)
     {
-        this.rows=rows;
+        this.rows=rows;//this?
         this.line=line;
         this.value=value;
     }
@@ -29,8 +24,7 @@ class Triple{
 class Matrix{
     int rnum, lnum;//矩阵的行数和列数
     int vnum ;//非零元个数
-    Triple[] data = new Triple[100];//非零三元组表
-
+    Triple[] data = new Triple[10000];//非零三元组表
     public Matrix() {
     }
     public Matrix(int rnum, int lnum, int vnum) {
@@ -49,7 +43,7 @@ public class OperationUI extends JFrame {
         public Matrix M1 = new Matrix();
         private Component addTest;
         //构造方法
-        public int Find(Matrix M, int i, int j) {
+        public int Fvalues(Matrix M, int i, int j) {
             //查找三元组内的非零元
             for (int t = 0; t < M.vnum; t++) {
                 if (M.data[t].rows == i && M.data[t].line == j)
@@ -84,14 +78,14 @@ public class OperationUI extends JFrame {
         private void button1(ActionEvent e) {
             //输入矩阵行数和列数和非零元个数
             try {
-                String[] Array = textField1.getText().split(" ");
+                String[] Array = textField1.getText().split(" ");//split用于分割
                 int a0 = Integer.parseInt(Array[0]);
                 int a1 = Integer.parseInt(Array[1]);
                 int a2 = Integer.parseInt(Array[2]);
 
-                if(a0<=0||a1<=0){
+                if(a0<=0||a1<=0||a2<=0){
                     textField1.setText("");
-                    JOptionPane.showMessageDialog(addTest, "输入非法，行数和列数必须为正数,请重新输入");
+                    JOptionPane.showMessageDialog(addTest, "输入非法，行数、列数、非零元个数必须为正数,请重新输入");
                     //throw new Exception("输入非法，行数和列数必须为正数,请重新输入");
                 }
                 else {
@@ -147,10 +141,10 @@ public class OperationUI extends JFrame {
                     if (h == 0) {
                         p = 0;
                     }
+                    //往矩阵里填非零元素,运用的基本原理他每次是加入一个新的非零元，如果上次那个非零元找到了
+                    // p已经变化了，然后下次再加非零元的时候，找不到就置零，不然还是会被拼接，就会出现例子里那种情况
+                    // 有些元素会重复出现，直到找到那个非零元应该在的正确位置
                     str1 = Integer.toString(p);
-//                    if (ch == "") {
-//                        ch = "0";
-//                    }
                     str = str + str1 + " ";
                 }
                 str = str + "\n";
@@ -158,12 +152,30 @@ public class OperationUI extends JFrame {
             textArea2.setText(str);
             JOptionPane.showMessageDialog(addTest, "创建成功");
         }
+    private void button3(ActionEvent e) {
+        // TODO add your code here
+        try{
+            String[] Array = textField4.getText().split(" ");
+            int a0 = Integer.parseInt(Array[0]);
+            int a1 = Integer.parseInt(Array[1]);
+            int a2 = Integer.parseInt(Array[2]);
+            if(a0<=0||a1<=0||a2<=0){
+                textField4.setText("");
+                JOptionPane.showMessageDialog(addTest, "输入非法，行数、列数、非零元个数必须为正数,请重新输入");                throw new Exception("输入非法，行数和列数必须为正数,请重新输入");
+            }else {
+                M1 = new Matrix(a0, a1, a2);
+                JOptionPane.showMessageDialog(addTest, "输入成功");
+            }
+        }catch (Exception e1){
+            e1.printStackTrace();
+        }
+
+    }
 //创建第二个矩阵
         private void button4(ActionEvent e){
 
             int i = 0;
             String[] Array1 = textArea3.getText().split("\n");
-
             String[] Array2;
             for (i = 0; i < M1.vnum; i++) {
                 Array2 = Array1[i].split(" ");
@@ -180,8 +192,10 @@ public class OperationUI extends JFrame {
                     textArea3.setText("");
                     break;
                 }
-                else{
-                    M1.data[i] = new Triple(b0, b1, b2);}
+                else
+                {
+                    M1.data[i] = new Triple(b0, b1, b2);
+                }
             }
             String str = "";
             String str1 = "";
@@ -198,9 +212,6 @@ public class OperationUI extends JFrame {
                     if (h == 0) {
                         p = 0;}
                     str1 = Integer.toString(p);
-//                    if (ch == "") {
-//                        ch = "0";
-//                    }
                     str = str + str1 + " ";
                 }
                 str = str + "\n";
@@ -235,25 +246,25 @@ public class OperationUI extends JFrame {
         //执行加法操作
         private void button5(ActionEvent e) {
             String str = "";
-            int p=0, q=0, k, h;
+            int p=0, q=0, k, h,j;
+
             if (M.rnum == M1.rnum && M.lnum == M1.lnum) {
 
                 String str1 = "";
-                //按行和列位置进行遍历
-                for (int row = 0; row < M.rnum; row++) {
-                    for (int line = 0; line < M.lnum; line++) {
+                int x=M.rnum=M1.rnum;
+                int y=M.lnum=M1.lnum;
+                //按行和列位置进行遍历两个矩阵
+                for (int row = 0; row < x ; row++) {
+                    for (int line = 0; line < y; line++) {
                         //遍历第一个矩阵
-                        for (k = 0, h = 0; k < M.vnum; k++) {
+                        for (k = 0, j = 0; k < M.vnum; k++) {
 
                             if (M.data[k].rows == row && M.data[k].line == line) {
                                 p = M.data[k].value;
-                                h = 1;
+                                j = 1;
                                 break;
                             }
                         }
-                        if (h == 0) {
-                            p = 0;}
-                        //遍历第二个矩阵
                         for (k = 0, h = 0; k < M1.vnum; k++) {
                             if (M1.data[k].rows == row && M1.data[k].line == line) {
                                 q = M1.data[k].value;
@@ -261,44 +272,44 @@ public class OperationUI extends JFrame {
                                 break;
                             }
                         }
+                        if (j == 0) {
+                            p = 0;}
                         if (h == 0) {
                             q = 0;}
                         //将结果返回并用字符串拼接起来
                         str1 = Integer.toString(p + q);
-//                        if (str1 == "") {
-//                            str1 = "0";
-//                        }
                         str = str + str1 + " ";
                     }
                     str = str + "\n";
                 }
                 textArea5.setText(str);
-            }else {
+            }
+            else
+            {
                 JOptionPane.showMessageDialog(addTest, "运算不合法，终止运算");
             }
         }
         //执行减法操作
         private void button6(ActionEvent e) {
             String str = "";
-            int p=0, q=0, k, h;
+            int p=0, q=0, k, h,j;
             if (M.rnum == M1.rnum && M.lnum == M1.lnum) {
 
                 String str1 = "";
+                int x=M.rnum=M1.rnum;
+                int y=M.lnum=M1.lnum;
                 //按行和列位置进行遍历
-                for (int row = 0; row < M.rnum; row++) {
-                    for (int line = 0; line < M.lnum; line++) {
+                for (int row = 0; row < x; row++) {
+                    for (int line = 0; line < y; line++) {
                         //遍历第一个矩阵
-                        for (k = 0, h = 0; k < M.vnum; k++) {
+                        for (k = 0, j = 0; k < M.vnum; k++) {
 
                             if (M.data[k].rows == row && M.data[k].line == line) {
                                 p = M.data[k].value;
-                                h = 1;
+                                j = 1;
                                 break;
                             }
                         }
-                        if (h == 0) {
-                            p = 0;}
-                        //遍历第二个矩阵
                         for (k = 0, h = 0; k < M1.vnum; k++) {
                             if (M1.data[k].rows == row && M1.data[k].line == line) {
                                 q = M1.data[k].value;
@@ -306,23 +317,24 @@ public class OperationUI extends JFrame {
                                 break;
                             }
                         }
+                        if (j == 0) {
+                            p = 0;}
                         if (h == 0) {
                             q = 0;}
                         //将结果返回并用字符串拼接起来
-                        str1 = Integer.toString(p + q);
-//                        if (ch == "") {
-//                            ch = "0";
-//                        }
+                        str1 = Integer.toString(p - q);
                         str = str + str1 + " ";
                     }
                     str = str + "\n";
                 }
                 textArea5.setText(str);
-            }else {
+            }
+            else
+            {
                 JOptionPane.showMessageDialog(addTest, "运算不合法，终止运算");
             }
         }
-        //执行乘法操作
+        //执行乘法操作，执行的要求是矩阵1的列数量和矩阵2的行数量相等
         private void button7(ActionEvent e) {
             String str = "";
             if (M.lnum == M1.rnum) {
@@ -330,13 +342,14 @@ public class OperationUI extends JFrame {
                     for(int line=0;line<M1.lnum;line++){
                         int L=0;
                         String str1="";
+                        for(int k=0;k<M.lnum;k++)
+                        {
 
-                        for(int k=0;k<M.lnum;k++){
-
-                            int p=Find(M,row,k);
-                            int q=Find(M1,k,line);
+                            int p=Fvalues(M,row,k);
+                            int q=Fvalues(M1,k,line);
                             L=L+p*q;
-                            str1=Integer.toString(L);}
+                            str1=Integer.toString(L);
+                        }
 
                         //if(ch==""){ch="0";}
                         str=str+str1+" ";
@@ -389,26 +402,6 @@ public class OperationUI extends JFrame {
 
         private void button10MouseClicked(MouseEvent e) {
             new Inverse().setVisible(true);
-        }
-
-        private void button3(ActionEvent e) {
-            // TODO add your code here
-            try{
-                String[] Array = textField4.getText().split(" ");
-                int a0 = Integer.parseInt(Array[0]);
-                int a1 = Integer.parseInt(Array[1]);
-                int a2 = Integer.parseInt(Array[2]);
-                if(a0<=0||a1<=0){
-                    textField4.setText("");
-                    JOptionPane.showMessageDialog(addTest, "输入非法，行数和列数必须为正数,请重新输入");                    throw new Exception("输入非法，行数和列数必须为正数,请重新输入");
-                }else {
-                    M1 = new Matrix(a0, a1, a2);
-                    JOptionPane.showMessageDialog(addTest, "输入成功");
-                }
-            }catch (Exception e1){
-                e1.printStackTrace();
-            }
-
         }
 
 
